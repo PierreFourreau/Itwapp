@@ -1,11 +1,16 @@
 package com.fourreau.itwapp.activity;
 
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fourreau.itwapp.R;
+
+import java.util.HashMap;
+
+import io.itwapp.Itwapp;
+import io.itwapp.models.Interview;
 
 public class LoginActivity extends ActionBarActivity {
 
@@ -13,6 +18,12 @@ public class LoginActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        Itwapp.apiKey = "YOUR-API-KEY";
+        Itwapp.secretKey = "YOUR-SECRET-KEY";
+
+        Interview[] res = Interview.findAll(new HashMap<String, Object>());
+        System.out.println(res.toString());
     }
 
 
