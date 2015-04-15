@@ -2,28 +2,31 @@ package com.fourreau.itwapp.activity;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fourreau.itwapp.R;
-
-import java.util.HashMap;
+import com.fourreau.itwapp.sync.AllInterviews;
 
 import io.itwapp.Itwapp;
-import io.itwapp.models.Interview;
 
 public class LoginActivity extends ActionBarActivity {
+
+    private static final String TAG = LoginActivity.class.getName();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        Itwapp.apiKey = "YOUR-API-KEY";
-        Itwapp.secretKey = "YOUR-SECRET-KEY";
+        Itwapp.apiKey = "3bf8bce4b8b0ac18a0a4669ec58ed03f";
+        Itwapp.secretKey = "450425436db428e7d04288d592c1e771c82f9747";
 
-        Interview[] res = Interview.findAll(new HashMap<String, Object>());
-        System.out.println(res.toString());
+        //get all interviews
+        new AllInterviews().execute();
+
+        Log.d(TAG, "foo");
     }
 
 

@@ -91,9 +91,9 @@
     <orderEntry type="library" exported="" name="netty-3.9.2.Final" level="project" />
     <orderEntry type="library" exported="" name="support-v4-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="slf4j-api-1.7.5" level="project" />
-    <orderEntry type="library" exported="" name="itwapp-java-1.0-SNAPSHOT" level="project" />
-    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
     <orderEntry type="library" exported="" name="commons-codec-1.9" level="project" />
+    <orderEntry type="library" exported="" name="support-annotations-22.0.0" level="project" />
+    <orderEntry type="library" exported="" name="itwapp-java-1.0-SNAPSHOT" level="project" />
   </component>
 </module>
 
