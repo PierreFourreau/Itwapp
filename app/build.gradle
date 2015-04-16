@@ -10,7 +10,8 @@ repositories {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile 'com.android.support:appcompat-v7:22.0.0'
-    compile "io.itwapp:itwapp-java:1.0-SNAPSHOT"
+    compile 'io.itwapp:itwapp-java:1.0-SNAPSHOT'
+    compile 'com.google.android.gms:play-services:7.0.0'
 }
 
 android {
@@ -32,12 +33,14 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/LICENSE.txt'
-            exclude 'META-INF/LICENSE'
-            exclude 'META-INF/NOTICE'
-            exclude 'META-INF/NOTICE.txt'
-        
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
+
 
     }
 
 }
+
+
 
