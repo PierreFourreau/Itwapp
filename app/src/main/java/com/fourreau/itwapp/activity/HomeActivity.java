@@ -18,6 +18,8 @@ import com.fourreau.itwapp.R;
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
+    private static final String TAG = HomeActivity.class.getName();
+
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
