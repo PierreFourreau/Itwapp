@@ -15,6 +15,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -26,14 +27,19 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.core.ItwAppBaseActivity;
+import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.service.AuthenticationService;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+
 /**
  * A login screen that offers login via email/password.
  */
-public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
+public class LoginActivity extends ItwAppBaseActivity implements LoaderCallbacks<Cursor> {
 
     private static final String TAG = LoginActivity.class.getName();
 
@@ -48,8 +54,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
-//    @Inject
-//    AuthenticationService authenticationService;
+    @Inject
+    AuthenticationService authenticationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +89,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
 
-//        ((ItwApplication)getApplication()).inject(this);
+        ((ItwApplication)getApplication()).inject(this);
 
     }
 
@@ -271,8 +277,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
 
             //calling api
-//            authenticationService.login(mEmail, mPassword);
-
+            authenticationService.login(mEmail, mPassword);
+            Log.d(TAG, "User retrieved");
             // TODO: register the new account here.
             return true;
         }
