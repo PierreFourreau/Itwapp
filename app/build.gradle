@@ -12,6 +12,11 @@ dependencies {
     compile 'com.android.support:appcompat-v7:22.0.0'
     compile 'io.itwapp:itwapp-java:1.0-SNAPSHOT'
     compile 'com.google.android.gms:play-services:7.0.0'
+    //dagger
+    compile 'com.squareup.dagger:dagger:1.2.+'
+    provided 'com.squareup.dagger:dagger-compiler:1.2.+'
+    //timber
+    compile 'com.jakewharton.timber:timber:2.7.1'
 }
 
 android {
@@ -36,8 +41,6 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
-
-
     }
 
 }
