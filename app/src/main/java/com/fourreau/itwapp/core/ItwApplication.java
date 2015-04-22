@@ -13,24 +13,39 @@ import dagger.ObjectGraph;
 /**
 * Created by Pierre on 22/04/2015.
 */
-public class ItwApplication extends Application {
+public class ItwApplication extends Application implements Injector {
 
-    private ObjectGraph graph;
+    private ObjectGraph mObjectGraph;
 
-    @Override public void onCreate() {
+    @Override
+    public void onCreate() {
         super.onCreate();
 
-        graph = ObjectGraph.create(getModules().toArray());
+        AndroidAppModule sharedAppModule = new AndroidAppModule();
+
+        // bootstrap. So that it allows no-arg constructor in AndroidAppModule
+        sharedAppModule.sApplicationContext = this.getApplicationContext();
+
+        List<Object> modules = new ArrayList<Object>();
+        modules.add(sharedAppModule);
+        //modules.add(new UserAccountModule());
+        //modules.add(new ThreadingModule());
+        modules.addAll(getAppModules());
+
+        mObjectGraph = ObjectGraph.create(modules.toArray());
+
+        mObjectGraph.inject(this);
     }
 
-    protected List<Object> getModules() {
-        return Arrays.asList(
-                new AndroidModule(this),
-                new AuthenticationModule()
-        );
-    }
+    protected abstract List<Object> getAppModules();
 
+    @Override
     public void inject(Object object) {
-        graph.inject(object);
+        mObjectGraph.inject(object);
+    }
+
+    @Override
+    public ObjectGraph getObjectGraph() {
+        return mObjectGraph;
     }
 }

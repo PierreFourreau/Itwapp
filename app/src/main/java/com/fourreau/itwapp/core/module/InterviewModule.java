@@ -1,8 +1,8 @@
 package com.fourreau.itwapp.core.module;
 
-import com.fourreau.itwapp.activity.LoginActivity;
-import com.fourreau.itwapp.service.AuthenticationService;
-import com.fourreau.itwapp.service.impl.AuthenticationServiceImpl;
+import com.fourreau.itwapp.fragment.Fragment1;
+import com.fourreau.itwapp.service.InterviewService;
+import com.fourreau.itwapp.service.impl.InterviewServiceImpl;
 
 import dagger.Module;
 import dagger.Provides;
@@ -10,10 +10,10 @@ import dagger.Provides;
 /**
 * Created by Pierre on 22/04/2015.
 */
-@Module(injects = LoginActivity.class)
+@Module(injects = Fragment1.class)
 public class InterviewModule {
     @Provides
-    public AuthenticationService providesAuthenticationService() {
-        return new AuthenticationServiceImpl();
+    public InterviewService providesAuthenticationService() {
+        return new InterviewServiceImpl();
     }
 }

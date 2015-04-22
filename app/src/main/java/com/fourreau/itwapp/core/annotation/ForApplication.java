@@ -9,7 +9,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 /**
  * Created by Pierre on 22/04/2015.
  */
-@Qualifier
-@Retention(RUNTIME)
-    public @interface ForApplication {
+@Qualifier @Retention(RUNTIME)
+public @interface ForApplication {
 }
