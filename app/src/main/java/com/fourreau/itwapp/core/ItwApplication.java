@@ -3,7 +3,6 @@ package com.fourreau.itwapp.core;
 import android.app.Application;
 
 import com.fourreau.itwapp.core.module.AndroidModule;
-import com.fourreau.itwapp.core.module.AuthenticationModule;
 
 import java.util.Arrays;
 import java.util.List;
@@ -13,39 +12,29 @@ import dagger.ObjectGraph;
 /**
 * Created by Pierre on 22/04/2015.
 */
-public class ItwApplication extends Application implements Injector {
+public class ItwApplication extends Application {
 
-    private ObjectGraph mObjectGraph;
+    private ObjectGraph applicationGraph;
 
-    @Override
-    public void onCreate() {
+    @Override public void onCreate() {
         super.onCreate();
 
-        AndroidAppModule sharedAppModule = new AndroidAppModule();
-
-        // bootstrap. So that it allows no-arg constructor in AndroidAppModule
-        sharedAppModule.sApplicationContext = this.getApplicationContext();
-
-        List<Object> modules = new ArrayList<Object>();
-        modules.add(sharedAppModule);
-        //modules.add(new UserAccountModule());
-        //modules.add(new ThreadingModule());
-        modules.addAll(getAppModules());
-
-        mObjectGraph = ObjectGraph.create(modules.toArray());
-
-        mObjectGraph.inject(this);
+        applicationGraph = ObjectGraph.create(getModules().toArray());
     }
 
-    protected abstract List<Object> getAppModules();
-
-    @Override
-    public void inject(Object object) {
-        mObjectGraph.inject(object);
+    /**
+     * A list of modules to use for the application graph. Subclasses can override this method to
+     * provide additional modules provided they call {@code super.getModules()}.
+     */
+    protected List<Object> getModules() {
+        return Arrays.<Object>asList(new AndroidModule(this));
     }
 
-    @Override
-    public ObjectGraph getObjectGraph() {
-        return mObjectGraph;
+    ObjectGraph getApplicationGraph() {
+        return applicationGraph;
+    }
+
+    public void inject(Object target) {
+        applicationGraph.inject(target);
     }
 }
