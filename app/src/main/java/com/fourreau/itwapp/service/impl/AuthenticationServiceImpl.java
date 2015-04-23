@@ -13,7 +13,6 @@ import io.itwapp.Itwapp;
 /**
  * Created by Pierre on 15/04/2015.
  */
-@Singleton
 public class AuthenticationServiceImpl implements AuthenticationService{
 
     @Inject
@@ -26,8 +25,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         Itwapp.apiKey = "3bf8bce4b8b0ac18a0a4669ec58ed03f";
         Itwapp.secretKey = "450425436db428e7d04288d592c1e771c82f9747";
 
-Log.d("aaa", "bbb");
-//        user = Interview.login(email, password);
+        //        user = Interview.login(email, password);
+
         return user;
     }
 
