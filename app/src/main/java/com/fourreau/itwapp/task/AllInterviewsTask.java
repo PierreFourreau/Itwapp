@@ -1,14 +1,9 @@
 package com.fourreau.itwapp.task;
 
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.InterviewService;
-
-import javax.inject.Inject;
 
 import io.itwapp.models.Interview;
 

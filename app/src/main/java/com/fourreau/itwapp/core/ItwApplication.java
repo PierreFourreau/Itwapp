@@ -30,10 +30,6 @@ public class ItwApplication extends Application {
         return Arrays.<Object>asList(new AndroidModule(this));
     }
 
-    public ObjectGraph getApplicationGraph() {
-        return applicationGraph;
-    }
-
     public void inject(Object target) {
         applicationGraph.inject(target);
     }

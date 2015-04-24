@@ -30,10 +30,6 @@ public class HomeActivity extends ActionBarActivity
 
     private static final String TAG = HomeActivity.class.getName();
 
-
-//    @Inject
-//    InterviewService interviewService;
-
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -49,17 +45,6 @@ public class HomeActivity extends ActionBarActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-//        ((ItwApplication)getApplication()).inject(this);
-
-
-
-
-//        Interview[] interviews = interviewService.getAllInterviews();
-//        Log.d("", "interviews retrieved" + interviews.toString());
-
-
-
-
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
@@ -72,14 +57,6 @@ public class HomeActivity extends ActionBarActivity
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        // update the main content by replacing fragments
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.container, PlaceholderFragment.newInstance(position + 1))
-//                .commit();
-
-
-
         // update the main content by replacing fragments
         Fragment fragment;
         FragmentManager fragmentManager = getSupportFragmentManager(); // For AppCompat use getSupportFragmentManager
