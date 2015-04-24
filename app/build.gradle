@@ -17,6 +17,8 @@ dependencies {
     provided 'com.squareup.dagger:dagger-compiler:1.2.+'
     //timber
     compile 'com.jakewharton.timber:timber:2.7.1'
+    //Butter knife
+    compile 'com.jakewharton:butterknife:6.1.0'
 }
 
 android {
@@ -41,6 +43,11 @@ android {
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
     }
 
 }
