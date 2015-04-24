@@ -1,8 +1,14 @@
 package com.fourreau.itwapp.task;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 
-import com.fourreau.itwapp.service.impl.InterviewServiceImpl;
+import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.service.InterviewService;
+
+import javax.inject.Inject;
 
 import io.itwapp.models.Interview;
 
@@ -11,21 +17,28 @@ import io.itwapp.models.Interview;
  */
 public class AllInterviewsTask extends AsyncTask<String, Void, Interview[]> {
 
+    private InterviewService interviewService;
+
+    public AllInterviewsTask(InterviewService interviewService){
+        this.interviewService = interviewService;
+    }
+
     @Override
     protected void onPreExecute() {
-
+        super.onPreExecute();
     }
 
     @Override
     protected Interview[] doInBackground(String... params) {
-        //TODO : inject service
-        InterviewServiceImpl interviewService = new InterviewServiceImpl();
-
-        return interviewService.getAllInterviews();
+        Interview[] interviews = interviewService.getAllInterviews();
+        for(int i = 0; i < interviews.length; i++) {
+            Log.d("", "interview" + interviews[i].name);
+        }
+        return interviews;
     }
 
     @Override
     protected void onPostExecute(Interview[] interviews) {
-
+        Log.d("","Number of interviews retrieved : " + interviews.length);
     }
 }

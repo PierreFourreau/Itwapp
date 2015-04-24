@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,13 +15,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.fragment.Fragment1;
 import com.fourreau.itwapp.fragment.Fragment2;
+import com.fourreau.itwapp.service.InterviewService;
+import com.fourreau.itwapp.task.AllInterviewsTask;
+
+import javax.inject.Inject;
+
+import io.itwapp.models.Interview;
 
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
 
     private static final String TAG = HomeActivity.class.getName();
+
+
+//    @Inject
+//    InterviewService interviewService;
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -36,6 +48,17 @@ public class HomeActivity extends ActionBarActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+//        ((ItwApplication)getApplication()).inject(this);
+
+
+
+
+//        Interview[] interviews = interviewService.getAllInterviews();
+//        Log.d("", "interviews retrieved" + interviews.toString());
+
+
+
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getSupportFragmentManager().findFragmentById(R.id.navigation_drawer);
