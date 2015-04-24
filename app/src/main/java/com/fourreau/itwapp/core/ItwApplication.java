@@ -2,6 +2,7 @@ package com.fourreau.itwapp.core;
 
 import android.app.Application;
 
+import com.fourreau.itwapp.BuildConfig;
 import com.fourreau.itwapp.core.module.AndroidModule;
 import com.fourreau.itwapp.core.module.AuthenticationModule;
 import com.fourreau.itwapp.core.module.InterviewModule;
@@ -10,8 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
+import timber.log.Timber;
 
 /**
+ *
+ * Application class.
+ *
 * Created by Pierre on 22/04/2015.
 */
 public class ItwApplication extends Application {
@@ -20,6 +25,13 @@ public class ItwApplication extends Application {
 
     @Override public void onCreate() {
         super.onCreate();
+
+        //init logger
+        if (BuildConfig.DEBUG) {
+            Timber.plant(new Timber.DebugTree());
+        } else {
+            Timber.plant(new CrashReportingTree());
+        }
 
         applicationGraph = ObjectGraph.create(getModules().toArray());
     }
@@ -34,5 +46,26 @@ public class ItwApplication extends Application {
 
     public void inject(Object target) {
         applicationGraph.inject(target);
+    }
+
+    /** A tree which logs important information for crash reporting. */
+    private static class CrashReportingTree extends Timber.HollowTree {
+        @Override public void i(String message, Object... args) {
+            // TODO e.g., Crashlytics.log(String.format(message, args));
+        }
+
+        @Override public void i(Throwable t, String message, Object... args) {
+            i(message, args); // Just add to the log.
+        }
+
+        @Override public void e(String message, Object... args) {
+            i("ERROR: " + message, args); // Just add to the log.
+        }
+
+        @Override public void e(Throwable t, String message, Object... args) {
+            e(message, args);
+
+            // TODO e.g., Crashlytics.logException(t);
+        }
     }
 }

@@ -1,12 +1,9 @@
 package com.fourreau.itwapp.service.impl;
 
-import android.util.Log;
-
 import com.fourreau.itwapp.model.User;
 import com.fourreau.itwapp.service.AuthenticationService;
 
 import javax.inject.Inject;
-import javax.inject.Singleton;
 
 import io.itwapp.Itwapp;
 

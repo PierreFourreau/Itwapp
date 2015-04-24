@@ -28,6 +28,7 @@ public class Fragment1 extends Fragment {
 
         ((ItwApplication)getActivity().getApplication()).inject(this);
 
+        //launch task which retrieve all interviews
         AllInterviewsTask mTask = new AllInterviewsTask(getActivity().getApplicationContext(), interviewService);
         mTask.execute();
 
