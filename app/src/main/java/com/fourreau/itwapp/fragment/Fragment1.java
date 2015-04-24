@@ -28,7 +28,7 @@ public class Fragment1 extends Fragment {
 
         ((ItwApplication)getActivity().getApplication()).inject(this);
 
-        AllInterviewsTask mTask = new AllInterviewsTask(interviewService);
+        AllInterviewsTask mTask = new AllInterviewsTask(getActivity().getApplicationContext(), interviewService);
         mTask.execute();
 
         // Inflate the layout for this fragment

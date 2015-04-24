@@ -1,21 +1,23 @@
 package com.fourreau.itwapp.core.module;
 
 import android.content.Context;
+import android.location.LocationManager;
 
-import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.activity.LoginActivity;
 import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.core.annotation.ForApplication;
 import com.fourreau.itwapp.fragment.Fragment1;
 import com.fourreau.itwapp.service.AuthenticationService;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.service.impl.AuthenticationServiceImpl;
 import com.fourreau.itwapp.service.impl.InterviewServiceImpl;
-import com.fourreau.itwapp.task.AllInterviewsTask;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+
+import static android.content.Context.LOCATION_SERVICE;
 
 /**
 *
@@ -26,7 +28,7 @@ import dagger.Provides;
  *
 */
 @Module(
-        injects = { LoginActivity.class, Fragment1.class},
+        injects = { LoginActivity.class},
         complete = false,
         library = true
 )
@@ -38,11 +40,15 @@ public class AndroidModule {
         this.application = application;
     }
 
-    @Provides @Singleton public AuthenticationService provideAuthenticationService(AuthenticationServiceImpl impl) {
-        return impl;
+    /**
+     * Allow the application context to be injected but require that it be annotated with
+     * {@link ForApplication @Annotation} to explicitly differentiate it from an activity context.
+     */
+    @Provides @Singleton @ForApplication Context provideApplicationContext() {
+        return application;
     }
 
-    @Provides @Singleton public InterviewService provideInterviewService(InterviewServiceImpl impl) {
-        return impl;
+    @Provides @Singleton LocationManager provideLocationManager() {
+        return (LocationManager) application.getSystemService(LOCATION_SERVICE);
     }
 }

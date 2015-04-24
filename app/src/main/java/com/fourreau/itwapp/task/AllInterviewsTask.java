@@ -1,7 +1,9 @@
 package com.fourreau.itwapp.task;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fourreau.itwapp.service.InterviewService;
 
@@ -12,9 +14,11 @@ import io.itwapp.models.Interview;
  */
 public class AllInterviewsTask extends AsyncTask<String, Void, Interview[]> {
 
+    private Context mContext;
     private InterviewService interviewService;
 
-    public AllInterviewsTask(InterviewService interviewService){
+    public AllInterviewsTask(Context context, InterviewService interviewService){
+        this.mContext = context;
         this.interviewService = interviewService;
     }
 
@@ -35,5 +39,6 @@ public class AllInterviewsTask extends AsyncTask<String, Void, Interview[]> {
     @Override
     protected void onPostExecute(Interview[] interviews) {
         Log.d("","Number of interviews retrieved : " + interviews.length);
+        Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
     }
 }
