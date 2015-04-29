@@ -51,7 +51,7 @@ public class ItwApplication extends Application {
     /** A tree which logs important information for crash reporting. */
     private static class CrashReportingTree extends Timber.HollowTree {
         @Override public void i(String message, Object... args) {
-            // TODO e.g., Crashlytics.log(String.format(message, args));
+//            Crashlytics.log(message);
         }
 
         @Override public void i(Throwable t, String message, Object... args) {
@@ -66,6 +66,7 @@ public class ItwApplication extends Application {
             e(message, args);
 
             // TODO e.g., Crashlytics.logException(t);
+//            Crashlytics.logException(t);
         }
     }
 }

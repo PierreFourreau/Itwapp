@@ -1,6 +1,7 @@
 package com.fourreau.itwapp.fragment;
 
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
@@ -34,6 +36,12 @@ public class Fragment1 extends Fragment {
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment1, container, false);
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        ((HomeActivity) activity).onSectionAttached(1);
     }
 
     @Override public void onResume() {

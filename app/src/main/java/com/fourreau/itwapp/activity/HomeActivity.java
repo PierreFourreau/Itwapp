@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.fragment.Fragment1;
 import com.fourreau.itwapp.fragment.Fragment2;
+import com.fourreau.itwapp.fragment.NavigationDrawerFragment;
 
 public class HomeActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -64,9 +65,6 @@ public class HomeActivity extends ActionBarActivity
         fragmentManager.beginTransaction()
                 .replace(R.id.container, fragment)
                 .commit();
-
-
-
     }
 
     public void onSectionAttached(int number) {

@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import com.fourreau.itwapp.service.InterviewService;
 
+import io.itwapp.exception.APIException;
 import io.itwapp.models.Interview;
 import timber.log.Timber;
 
@@ -29,7 +30,13 @@ public class AllInterviewsTask extends AsyncTask<String, Void, Interview[]> {
 
     @Override
     protected Interview[] doInBackground(String... params) {
-        Interview[] interviews = interviewService.getAllInterviews();
+        Interview[] interviews = null;
+        try {
+            interviews = interviewService.getAllInterviews();
+        }
+        catch (APIException e) {
+            Timber.e("AllInterviewsTask:getAllInterviews:" + e.toString());
+        }
         for(int i = 0; i < interviews.length; i++) {
             Timber.d("Interview : " + interviews[i].name);
         }

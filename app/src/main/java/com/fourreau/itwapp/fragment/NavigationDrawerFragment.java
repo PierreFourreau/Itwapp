@@ -1,4 +1,4 @@
-package com.fourreau.itwapp.activity;
+package com.fourreau.itwapp.fragment;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -23,6 +23,11 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.adapter.CustomDrawerAdapter;
+import com.fourreau.itwapp.model.DrawerItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Fragment used for managing interactions for and presentation of a navigation drawer.
@@ -60,6 +65,9 @@ public class NavigationDrawerFragment extends Fragment {
     private boolean mFromSavedInstanceState;
     private boolean mUserLearnedDrawer;
 
+    private List dataList;
+    private CustomDrawerAdapter mDrawerAdapter;
+
     public NavigationDrawerFragment() {
     }
 
@@ -88,9 +96,18 @@ public class NavigationDrawerFragment extends Fragment {
         setHasOptionsMenu(true);
     }
 
+    private void addItemsToDataList() {
+        dataList.add(new DrawerItem(getString(R.string.title_section1), R.drawable.ic_drawer));
+        dataList.add(new DrawerItem(getString(R.string.title_section2), R.drawable.ic_drawer));
+        dataList.add(new DrawerItem(getString(R.string.title_section3), R.drawable.ic_drawer));
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        dataList = new ArrayList();
+        addItemsToDataList();
+
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
         mDrawerListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -99,15 +116,8 @@ public class NavigationDrawerFragment extends Fragment {
                 selectItem(position);
             }
         });
-        mDrawerListView.setAdapter(new ArrayAdapter<String>(
-                getActionBar().getThemedContext(),
-                android.R.layout.simple_list_item_activated_1,
-                android.R.id.text1,
-                new String[]{
-                        getString(R.string.title_section1),
-                        getString(R.string.title_section2),
-                        getString(R.string.title_section3),
-                }));
+        mDrawerAdapter = new CustomDrawerAdapter(getActivity(), R.layout.custom_drawer_item, dataList);
+        mDrawerListView.setAdapter(mDrawerAdapter);
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
         return mDrawerListView;
     }
