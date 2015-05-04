@@ -30,8 +30,10 @@ public class Fragment1 extends Fragment {
 
         ((ItwApplication)getActivity().getApplication()).inject(this);
 
+//        setRetainInstance(true);
+
         //launch task which retrieve all interviews
-        AllInterviewsTask mTask = new AllInterviewsTask(getActivity().getApplicationContext(), interviewService);
+        AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
         mTask.execute();
 
         // Inflate the layout for this fragment

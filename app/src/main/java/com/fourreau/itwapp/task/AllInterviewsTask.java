@@ -1,9 +1,15 @@
 package com.fourreau.itwapp.task;
 
+import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.widget.Toast;
 
+import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.model.AsyncTaskResult;
 import com.fourreau.itwapp.service.InterviewService;
 
 import io.itwapp.exception.APIException;
@@ -13,39 +19,76 @@ import timber.log.Timber;
 /**
  * Created by Pierre on 15/04/2015.
  */
-public class AllInterviewsTask extends AsyncTask<String, Void, Interview[]> {
+public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<Interview[]>> {
 
     private Context mContext;
+    private Activity mActivity;
     private InterviewService interviewService;
 
-    public AllInterviewsTask(Context context, InterviewService interviewService){
-        this.mContext = context;
+    private ProgressDialog mProgressDialog;
+
+    public AllInterviewsTask(Activity activity, InterviewService interviewService){
+        this.mContext = activity.getApplicationContext();
+        this.mActivity = activity;
         this.interviewService = interviewService;
+        mProgressDialog = new ProgressDialog(mActivity);
+
+        mProgressDialog.setMessage("Loading");
+        mProgressDialog.setCancelable(true);
+
     }
 
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
+        mProgressDialog.show();
     }
 
     @Override
-    protected Interview[] doInBackground(String... params) {
+    protected AsyncTaskResult<Interview[]> doInBackground(String... params) {
         Interview[] interviews = null;
         try {
             interviews = interviewService.getAllInterviews();
+            return new AsyncTaskResult<Interview[]>(interviews);
+
         }
         catch (APIException e) {
             Timber.e("AllInterviewsTask:getAllInterviews:" + e.toString());
+            return new AsyncTaskResult<Interview[]>(e);
         }
-        for(int i = 0; i < interviews.length; i++) {
-            Timber.d("Interview : " + interviews[i].name);
-        }
-        return interviews;
     }
 
     @Override
-    protected void onPostExecute(Interview[] interviews) {
-        Timber.d("Number of interviews retrieved : " + interviews.length);
-        Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
+    protected void onPostExecute(AsyncTaskResult<Interview[]> result) {
+        if(result.getError() != null ) {
+            // error handling here
+            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_generic_error_server);
+        }  else if (isCancelled()) {
+            // cancel handling here
+            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_cancellation);
+        } else {
+            Interview[] interviews = result.getResult();
+
+            if(interviews != null) {
+                for(int i = 0; i < interviews.length; i++) {
+                    Timber.d("Interview : " + interviews[i].name);
+                }
+
+                Timber.d("Number of interviews retrieved : " + interviews.length);
+                Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
+            }
+        }
+        mProgressDialog.dismiss();
+    }
+
+    private void showAlertDialog(int title, int content) {
+        new AlertDialog.Builder(mActivity).setTitle(title).setMessage(content)
+                .setIcon(android.R.drawable.ic_dialog_alert).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Nothing to do
+            }
+        }).show();
     }
 }
