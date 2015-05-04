@@ -19,11 +19,12 @@
 
 
     <!--Alert dialog-->
+    <string name="dialog_loading">Loading</string>
+
     <string name="dialog_title_generic_error">Erreur</string>
     <string name="dialog_content_generic_error_server">Problème de connexion au serveur</string>
     <string name="dialog_content_cancellation">Annulation de la récupération des données effectuée</string>
     <string name="alert_dialog_ok">OK</string>
-
 
 
 </resources>

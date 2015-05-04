@@ -33,8 +33,8 @@ public class Fragment1 extends Fragment {
 //        setRetainInstance(true);
 
         //launch task which retrieve all interviews
-        AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
-        mTask.execute();
+//        AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
+//        mTask.execute();
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment1, container, false);

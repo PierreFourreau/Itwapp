@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.fragment.AllInterviewsFragment;
 import com.fourreau.itwapp.fragment.Fragment1;
 import com.fourreau.itwapp.fragment.Fragment2;
 import com.fourreau.itwapp.fragment.NavigationDrawerFragment;
@@ -56,7 +57,7 @@ public class HomeActivity extends ActionBarActivity
         switch(position) {
             default:
             case 0:
-                fragment = new Fragment1();
+                fragment = new AllInterviewsFragment();
                 break;
             case 1:
                 fragment = new Fragment2();

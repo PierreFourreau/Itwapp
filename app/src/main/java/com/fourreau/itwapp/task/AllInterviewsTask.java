@@ -9,6 +9,7 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.model.InterviewResponse;
 import com.fourreau.itwapp.model.AsyncTaskResult;
 import com.fourreau.itwapp.service.InterviewService;
 
@@ -27,15 +28,16 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
 
     private ProgressDialog mProgressDialog;
 
+    public InterviewResponse delegate = null;
+
     public AllInterviewsTask(Activity activity, InterviewService interviewService){
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
         this.interviewService = interviewService;
+
         mProgressDialog = new ProgressDialog(mActivity);
-
-        mProgressDialog.setMessage("Loading");
+        mProgressDialog.setMessage(mActivity.getString(R.string.dialog_loading));
         mProgressDialog.setCancelable(true);
-
     }
 
     @Override
@@ -73,6 +75,8 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
                 for(int i = 0; i < interviews.length; i++) {
                     Timber.d("Interview : " + interviews[i].name);
                 }
+
+                delegate.processFinish(interviews);
 
                 Timber.d("Number of interviews retrieved : " + interviews.length);
                 Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
