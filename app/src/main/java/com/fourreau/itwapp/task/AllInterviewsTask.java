@@ -72,9 +72,9 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
             Interview[] interviews = result.getResult();
 
             if(interviews != null) {
-                for(int i = 0; i < interviews.length; i++) {
-                    Timber.d("Interview : " + interviews[i].name);
-                }
+//                for(int i = 0; i < interviews.length; i++) {
+//                    Timber.d("Interview : " + interviews[i].name);
+//                }
 
                 delegate.processFinish(interviews);
 

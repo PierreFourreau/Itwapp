@@ -21,14 +21,14 @@ import javax.inject.Inject;
  */
 public class Fragment1 extends Fragment {
 
-    @Inject
-    InterviewService interviewService;
+//    @Inject
+//    InterviewService interviewService;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        ((ItwApplication)getActivity().getApplication()).inject(this);
+//        ((ItwApplication)getActivity().getApplication()).inject(this);
 
 //        setRetainInstance(true);
 

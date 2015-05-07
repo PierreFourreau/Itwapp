@@ -28,6 +28,7 @@ import android.widget.TextView;
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.AuthenticationService;
+import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,7 +77,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
             }
         });
 
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
+        ButtonRectangle mEmailSignInButton = (ButtonRectangle) findViewById(R.id.email_sign_in_button);
         mEmailSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

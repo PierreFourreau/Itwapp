@@ -7,10 +7,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.adapter.ListViewAllInterviewsAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
@@ -39,6 +42,13 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
     private List<ListViewInterviewItem> mItems = new ArrayList<ListViewInterviewItem>();
 
     @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
+    {
+        View view = inflater.inflate(R.layout.listview_interviews, container, false);
+        return view;
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
@@ -49,7 +59,7 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
         mTask.delegate = this;
         mTask.execute();
 
-        fetchContacts();
+        //fetchContacts();
 
     }
 
