@@ -97,9 +97,9 @@ public class NavigationDrawerFragment extends Fragment {
     }
 
     private void addItemsToDataList() {
-        dataList.add(new DrawerItem(getString(R.string.title_section1), R.drawable.ic_drawer));
-        dataList.add(new DrawerItem(getString(R.string.title_section2), R.drawable.ic_drawer));
-        dataList.add(new DrawerItem(getString(R.string.title_section3), R.drawable.ic_drawer));
+        dataList.add(new DrawerItem(getString(R.string.title_section1), R.drawable.ic_action_view_as_list));
+        dataList.add(new DrawerItem(getString(R.string.title_section2), R.drawable.ic_action_help));
+        dataList.add(new DrawerItem(getString(R.string.title_section3), R.drawable.ic_action_undo));
     }
 
     @Override
@@ -107,8 +107,6 @@ public class NavigationDrawerFragment extends Fragment {
                              Bundle savedInstanceState) {
         dataList = new ArrayList();
         addItemsToDataList();
-
-
 
         mDrawerListView = (ListView) inflater.inflate(
                 R.layout.fragment_navigation_drawer, container, false);
@@ -147,7 +145,7 @@ public class NavigationDrawerFragment extends Fragment {
         // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
-        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.navigation)));
+//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.navigation)));
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 

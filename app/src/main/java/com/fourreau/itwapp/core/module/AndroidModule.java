@@ -6,11 +6,6 @@ import android.location.LocationManager;
 import com.fourreau.itwapp.activity.LoginActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.core.annotation.ForApplication;
-import com.fourreau.itwapp.fragment.Fragment1;
-import com.fourreau.itwapp.service.AuthenticationService;
-import com.fourreau.itwapp.service.InterviewService;
-import com.fourreau.itwapp.service.impl.AuthenticationServiceImpl;
-import com.fourreau.itwapp.service.impl.InterviewServiceImpl;
 
 import javax.inject.Singleton;
 

@@ -10,11 +10,11 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
+        android:name=".core.ItwApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:name=".core.ItwApplication"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
@@ -28,6 +28,46 @@
         <activity
             android:name=".activity.HomeActivity"
             android:label="@string/title_activity_home" >
+        </activity>
+        <activity
+            android:name=".activity.AddInterviewActivity"
+            android:label="@string/title_activity_add_interview"
+            android:parentActivityName=".activity.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activity.InterviewActivity"
+            android:label="@string/title_activity_interview"
+            android:parentActivityName=".activity.HomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.HomeActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ApplicantsActivity"
+            android:label="@string/title_activity_applicants"
+            android:parentActivityName=".activity.InterviewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.InterviewActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ApplicantDetailsActivity"
+            android:label="@string/title_activity_applicant_details"
+            android:parentActivityName=".activity.ApplicantsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.ApplicantsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.AddApplicantActivity"
+            android:label="@string/title_activity_add_applicant"
+            android:parentActivityName=".activity.ApplicantsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.ApplicantsActivity" />
         </activity>
     </application>
 

@@ -23,6 +23,8 @@ public class ItwApplication extends Application {
 
     private ObjectGraph applicationGraph;
 
+    public final static String EXTRA_ID_INTERVIEW = "com.fourreau.itwapp.idInterview";
+
     @Override public void onCreate() {
         super.onCreate();
 

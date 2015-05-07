@@ -5,24 +5,31 @@
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:gravity="center_vertical"
-    android:background="@color/frame_background"
-    android:padding="5dp" >
+    android:padding="10dp" >
 
-    <!-- the innner view - provides the white rectangle -->
-    <RelativeLayout android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/frame" >
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
 
         <!-- the container view for the title and description -->
         <RelativeLayout android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true" >
 
+            <!-- the hidden id view -->
+            <TextView android:id="@+id/tvId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
             <!-- the title view -->
             <TextView android:id="@+id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/material_deep_teal_500"
+                android:textSize="30sp"
                 android:textAppearance="@android:style/TextAppearance.Medium" />
 
             <!-- the description view -->
@@ -30,10 +37,9 @@
                 android:layout_below="@id/tvTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="25sp"
                 android:textColor="@color/material_deep_teal_500"
                 android:textAppearance="@android:style/TextAppearance.Small" />
         </RelativeLayout>
-
-    </RelativeLayout>
-
+    </android.support.v7.widget.CardView>
 </RelativeLayout>

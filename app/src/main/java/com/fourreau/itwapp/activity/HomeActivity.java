@@ -15,8 +15,8 @@ import android.view.ViewGroup;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.fragment.AllInterviewsFragment;
-import com.fourreau.itwapp.fragment.Fragment1;
-import com.fourreau.itwapp.fragment.Fragment2;
+import com.fourreau.itwapp.fragment.HelpFragment;
+import com.fourreau.itwapp.fragment.LogoutFragment;
 import com.fourreau.itwapp.fragment.NavigationDrawerFragment;
 
 public class HomeActivity extends ActionBarActivity
@@ -60,10 +60,10 @@ public class HomeActivity extends ActionBarActivity
                 fragment = new AllInterviewsFragment();
                 break;
             case 2:
-                fragment = new Fragment2();
+                fragment = new HelpFragment();
                 break;
             case 3:
-                fragment = new Fragment2();
+                fragment = new LogoutFragment();
                 break;
         }
         fragmentManager.beginTransaction()

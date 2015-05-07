@@ -2,6 +2,7 @@ package com.fourreau.itwapp.fragment;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
@@ -11,10 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.activity.AddInterviewActivity;
 import com.fourreau.itwapp.activity.HomeActivity;
+import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.adapter.ListViewAllInterviewsAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.Contact;
@@ -22,6 +24,7 @@ import com.fourreau.itwapp.model.InterviewResponse;
 import com.fourreau.itwapp.model.ListViewInterviewItem;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
+import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,11 +43,22 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
     InterviewService interviewService;
 
     private List<ListViewInterviewItem> mItems = new ArrayList<ListViewInterviewItem>();
+    private ButtonFloat addInterviewButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.listview_interviews, container, false);
+        addInterviewButton = (ButtonFloat) view.findViewById(R.id.addInterviewButton);
+        addInterviewButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(getActivity(), AddInterviewActivity.class);
+                startActivity(intent);
+            }
+        });
+
         return view;
     }
 
@@ -62,7 +76,6 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
         //fetchContacts();
 
     }
-
 
     public void fetchContacts() {
 
@@ -116,7 +129,9 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
     @Override
     public void onListItemClick(ListView l, View v, int position, long id) {
         ListViewInterviewItem item = mItems.get(position);
-        Toast.makeText(getActivity(), item.title, Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getActivity(), InterviewActivity.class);
+        intent.putExtra(ItwApplication.EXTRA_ID_INTERVIEW, item.id);
+        startActivity(intent);
     }
 
     @Override
@@ -134,7 +149,7 @@ public class AllInterviewsFragment extends ListFragment implements InterviewResp
 
     public void processFinish(Interview[] interviews){
         for(int i = 0; i < interviews.length; i++) {
-            mItems.add(new ListViewInterviewItem(interviews[i].name, interviews[i].text));
+            mItems.add(new ListViewInterviewItem(interviews[i].id, interviews[i].name, interviews[i].text));
         }
         setListAdapter(new ListViewAllInterviewsAdapter(getActivity(), mItems));
     }
