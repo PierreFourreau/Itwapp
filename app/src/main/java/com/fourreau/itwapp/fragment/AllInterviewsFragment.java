@@ -20,7 +20,7 @@ import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.adapter.ListViewAllInterviewsAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.Contact;
-import com.fourreau.itwapp.model.InterviewResponse;
+import com.fourreau.itwapp.model.InterviewAllResponse;
 import com.fourreau.itwapp.model.ListViewInterviewItem;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
@@ -37,7 +37,7 @@ import timber.log.Timber;
 /**
  * Created by Pierre on 04/05/2015.
  */
-public class AllInterviewsFragment extends ListFragment implements InterviewResponse {
+public class AllInterviewsFragment extends ListFragment implements InterviewAllResponse {
 
     @Inject
     InterviewService interviewService;

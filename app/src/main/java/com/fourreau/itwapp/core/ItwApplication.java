@@ -4,6 +4,7 @@ import android.app.Application;
 
 import com.fourreau.itwapp.BuildConfig;
 import com.fourreau.itwapp.core.module.AndroidModule;
+import com.fourreau.itwapp.core.module.ApplicantModule;
 import com.fourreau.itwapp.core.module.AuthenticationModule;
 import com.fourreau.itwapp.core.module.InterviewModule;
 
@@ -43,7 +44,7 @@ public class ItwApplication extends Application {
      * provide additional modules provided they call {@code super.getModules()}.
      */
     protected List<Object> getModules() {
-        return Arrays.<Object>asList(new AndroidModule(this), new InterviewModule(this), new AuthenticationModule(this));
+        return Arrays.<Object>asList(new AndroidModule(this), new InterviewModule(this), new ApplicantModule(this), new AuthenticationModule(this));
     }
 
     public void inject(Object target) {

@@ -9,32 +9,39 @@ import android.os.AsyncTask;
 import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
-import com.fourreau.itwapp.model.InterviewAllResponse;
-import com.fourreau.itwapp.model.InterviewOneResponse;
+import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.AsyncTaskResult;
+import com.fourreau.itwapp.model.InterviewAllResponse;
+import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.service.InterviewService;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import io.itwapp.exception.APIException;
+import io.itwapp.models.Applicant;
 import io.itwapp.models.Interview;
 import timber.log.Timber;
 
 /**
  * Created by Pierre on 15/04/2015.
  */
-public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<Interview[]>> {
+public class AllApplicantsTask extends AsyncTask<String, Void, AsyncTaskResult<Applicant[]>> {
 
     private Context mContext;
     private Activity mActivity;
-    private InterviewService interviewService;
+    private ApplicantService applicantService;
+    private String interviewId;
 
     private ProgressDialog mProgressDialog;
 
-    public InterviewAllResponse delegate = null;
+    public ApplicantAllResponse delegate = null;
 
-    public AllInterviewsTask(Activity activity, InterviewService interviewService){
+    public AllApplicantsTask(Activity activity, ApplicantService applicantService, String interviewId){
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
-        this.interviewService = interviewService;
+        this.applicantService = applicantService;
+        this.interviewId = interviewId;
 
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setMessage(mActivity.getString(R.string.dialog_loading));
@@ -48,21 +55,21 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
     }
 
     @Override
-    protected AsyncTaskResult<Interview[]> doInBackground(String... params) {
-        Interview[] interviews = null;
+    protected AsyncTaskResult<Applicant[]> doInBackground(String... params) {
+        Applicant[] applicants = null;
         try {
-            interviews = interviewService.getAllInterviews();
-            return new AsyncTaskResult<Interview[]>(interviews);
+            applicants = applicantService.getAllApplicantsByInterview(interviewId, new HashMap<String, Object>());
+            return new AsyncTaskResult<Applicant[]>(applicants);
 
         }
         catch (APIException e) {
-            Timber.e("AllInterviewsTask:getAllInterviews:" + e.toString());
-            return new AsyncTaskResult<Interview[]>(e);
+            Timber.e("AllApplicantsTask:getAllApplicants:" + e.toString());
+            return new AsyncTaskResult<Applicant[]>(e);
         }
     }
 
     @Override
-    protected void onPostExecute(AsyncTaskResult<Interview[]> result) {
+    protected void onPostExecute(AsyncTaskResult<Applicant[]> result) {
         if(result.getError() != null ) {
             // error handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_generic_error_server);
@@ -70,17 +77,17 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
             // cancel handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_cancellation);
         } else {
-            Interview[] interviews = result.getResult();
+            Applicant[] applicants = result.getResult();
 
-            if(interviews != null) {
-//                for(int i = 0; i < interviews.length; i++) {
-//                    Timber.d("Interview : " + interviews[i].name);
-//                }
+            if(applicants != null) {
+                for(int i = 0; i < applicants.length; i++) {
+                    Timber.d("Applicant : " + applicants[i].firstname);
+                }
 
-                delegate.processFinish(interviews);
+                delegate.processFinish(applicants);
 
-                Timber.d("Number of interviews retrieved : " + interviews.length);
-                Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
+                Timber.d("Number of applicants retrieved : " + applicants.length);
+                Toast.makeText(mContext, "Number of applicants retrieved : " + applicants.length, Toast.LENGTH_LONG).show();
             }
         }
         mProgressDialog.dismiss();

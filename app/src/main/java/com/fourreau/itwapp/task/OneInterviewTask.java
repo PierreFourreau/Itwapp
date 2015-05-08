@@ -6,12 +6,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.AsyncTask;
-import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
-import com.fourreau.itwapp.model.InterviewAllResponse;
-import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.model.AsyncTaskResult;
+import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.service.InterviewService;
 
 import io.itwapp.exception.APIException;
@@ -21,20 +19,22 @@ import timber.log.Timber;
 /**
  * Created by Pierre on 15/04/2015.
  */
-public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<Interview[]>> {
+public class OneInterviewTask extends AsyncTask<String, Void, AsyncTaskResult<Interview>> {
 
     private Context mContext;
     private Activity mActivity;
     private InterviewService interviewService;
+    private String interviewId;
 
     private ProgressDialog mProgressDialog;
 
-    public InterviewAllResponse delegate = null;
+    public InterviewOneResponse delegate = null;
 
-    public AllInterviewsTask(Activity activity, InterviewService interviewService){
+    public OneInterviewTask(Activity activity, InterviewService interviewService, String interviewId){
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
         this.interviewService = interviewService;
+        this.interviewId = interviewId;
 
         mProgressDialog = new ProgressDialog(mActivity);
         mProgressDialog.setMessage(mActivity.getString(R.string.dialog_loading));
@@ -48,21 +48,20 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
     }
 
     @Override
-    protected AsyncTaskResult<Interview[]> doInBackground(String... params) {
-        Interview[] interviews = null;
+    protected AsyncTaskResult<Interview> doInBackground(String... params) {
+        Interview interview = null;
         try {
-            interviews = interviewService.getAllInterviews();
-            return new AsyncTaskResult<Interview[]>(interviews);
-
+            interview = interviewService.findOne(interviewId);
+            return new AsyncTaskResult<Interview>(interview);
         }
         catch (APIException e) {
-            Timber.e("AllInterviewsTask:getAllInterviews:" + e.toString());
-            return new AsyncTaskResult<Interview[]>(e);
+            Timber.e("InterviewActivity:findOne:" + e.toString());
+            return new AsyncTaskResult<Interview>(e);
         }
     }
 
     @Override
-    protected void onPostExecute(AsyncTaskResult<Interview[]> result) {
+    protected void onPostExecute(AsyncTaskResult<Interview> result) {
         if(result.getError() != null ) {
             // error handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_generic_error_server);
@@ -70,17 +69,10 @@ public class AllInterviewsTask extends AsyncTask<String, Void, AsyncTaskResult<I
             // cancel handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_cancellation);
         } else {
-            Interview[] interviews = result.getResult();
+            Interview interview = result.getResult();
 
-            if(interviews != null) {
-//                for(int i = 0; i < interviews.length; i++) {
-//                    Timber.d("Interview : " + interviews[i].name);
-//                }
-
-                delegate.processFinish(interviews);
-
-                Timber.d("Number of interviews retrieved : " + interviews.length);
-                Toast.makeText(mContext, "Number of interviews retrieved : " + interviews.length, Toast.LENGTH_LONG).show();
+            if(interview != null) {
+                delegate.processFinish(interview);
             }
         }
         mProgressDialog.dismiss();

@@ -1,18 +1,48 @@
 package com.fourreau.itwapp.activity;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.model.ApplicantAllResponse;
+import com.fourreau.itwapp.service.ApplicantService;
+import com.fourreau.itwapp.service.InterviewService;
+import com.fourreau.itwapp.task.AllApplicantsTask;
+import com.fourreau.itwapp.task.OneInterviewTask;
 
-public class ApplicantsActivity extends ActionBarActivity {
+import java.util.HashMap;
+
+import javax.inject.Inject;
+
+import io.itwapp.models.Applicant;
+import io.itwapp.models.Interview;
+import timber.log.Timber;
+
+public class ApplicantsActivity extends ActionBarActivity implements ApplicantAllResponse {
+
+    @Inject
+    ApplicantService applicantService;
+
+    private String idInterview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicants);
+
+        ((ItwApplication) getApplication()).inject(this);
+
+        Intent intent = getIntent();
+        idInterview = intent.getStringExtra(ItwApplication.EXTRA_ID_INTERVIEW);
+
+        //launch task which retrieve one interview
+        AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
     }
 
 
@@ -24,5 +54,12 @@ public class ApplicantsActivity extends ActionBarActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
+    }
+
+    public void processFinish(Applicant[] applicants){
+        for(int i = 0; i < applicants.length; i++) {
+            Timber.d(applicants[i].firstname);
+        }
+//        Timber.d("ApplicantsActivity:applicants retrieved : " + applicants.toString());
     }
 }

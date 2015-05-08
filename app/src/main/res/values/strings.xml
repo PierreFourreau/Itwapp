@@ -35,6 +35,11 @@
     <string name="title_activity_interview">Interview</string>
     <string name="activity_interview_name">Name</string>
     <string name="activity_interview_description">Description</string>
+    <string name="activity_interview_see_applicants_button">See applicants</string>
+
+
+
+
     <string name="title_activity_applicants">ApplicantsActivity</string>
     <string name="title_activity_applicant_details">ApplicantDetailsActivity</string>
     <string name="title_activity_add_applicant">AddApplicantActivity</string>

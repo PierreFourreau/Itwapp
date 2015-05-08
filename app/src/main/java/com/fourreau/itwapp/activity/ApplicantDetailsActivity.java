@@ -6,6 +6,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.core.ItwApplication;
 
 public class ApplicantDetailsActivity extends ActionBarActivity {
 
@@ -13,6 +14,8 @@ public class ApplicantDetailsActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_details);
+
+        ((ItwApplication) getApplication()).inject(this);
     }
 
 
