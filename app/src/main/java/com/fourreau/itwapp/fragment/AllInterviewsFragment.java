@@ -1,12 +1,8 @@
 package com.fourreau.itwapp.fragment;
 
 import android.app.Activity;
-import android.content.ContentResolver;
 import android.content.Intent;
-import android.database.Cursor;
-import android.net.Uri;
 import android.os.Bundle;
-import android.provider.ContactsContract;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,7 +15,6 @@ import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.adapter.ListViewAllInterviewsAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
-import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.model.InterviewAllResponse;
 import com.fourreau.itwapp.model.ListViewInterviewItem;
 import com.fourreau.itwapp.service.InterviewService;
@@ -32,7 +27,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.itwapp.models.Interview;
-import timber.log.Timber;
 
 /**
  * Created by Pierre on 04/05/2015.

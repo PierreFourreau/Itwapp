@@ -14,6 +14,8 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
+    <string name="none">None</string>
+
     <!--Alert dialog-->
     <string name="dialog_loading">Loading</string>
 
@@ -32,6 +34,7 @@
     <string name="title_activity_interview">Interview</string>
     <string name="activity_interview_name">Name</string>
     <string name="activity_interview_description">Description</string>
+    <string name="activity_interview_video">Video</string>
     <string name="activity_interview_see_applicants_button">See applicants</string>
 
     <!--Applicants activity-->

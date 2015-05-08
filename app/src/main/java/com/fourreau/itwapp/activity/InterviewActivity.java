@@ -6,6 +6,7 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
@@ -13,6 +14,7 @@ import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.OneInterviewTask;
+import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import javax.inject.Inject;
@@ -27,6 +29,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private String idInterview;
 
+    private TextView textViewName, textViewDescription, textViewVideo;
     private ButtonRectangle seeApplicantsButton;
 
     @Override
@@ -37,6 +40,10 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         setContentView(R.layout.activity_interview);
 
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
+
+        textViewName = (TextView) findViewById(R.id.activity_interview_name);
+        textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
+        textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
 
         Timber.d("InterviewActivity: id interview " + idInterview);
         Toast.makeText(this, idInterview, Toast.LENGTH_SHORT).show();
@@ -77,6 +84,21 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     public void processFinish(Interview interview){
         Timber.d("InterviewActivity:interview retrieved : " + interview.name);
+        textViewName.setText(interview.name);
+        //description
+        if(!interview.text.isEmpty()) {
+            textViewDescription.setText(interview.text);
+        }
+        else {
+            textViewDescription.setText(R.string.none);
+        }
+        //video
+        if(!interview.video.isEmpty()) {
+            textViewVideo.setText(interview.video);
+        }
+        else {
+            textViewVideo.setText(R.string.none);
+        }
     }
 
 }

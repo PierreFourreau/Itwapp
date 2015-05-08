@@ -4,21 +4,21 @@ package com.fourreau.itwapp.model;
  * Created by Pierre on 06/05/2015.
  */
 public class Contact {
-    private Integer id;
+    private String id;
     private String name;
     private String email;
 
-    public Contact(Integer id, String name, String email) {
+    public Contact(String id, String name, String email) {
         this.id = id;
         this.name = name;
         this.email = email;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
