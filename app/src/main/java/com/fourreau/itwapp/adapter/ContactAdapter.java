@@ -45,6 +45,8 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         return new ContactViewHolder(itemView);
     }
 
+    
+
     public static class ContactViewHolder extends RecyclerView.ViewHolder {
         protected TextView vName;
         protected TextView vSurname;

@@ -1,11 +1,13 @@
 package com.fourreau.itwapp.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.adapter.ContactAdapter;
@@ -14,6 +16,7 @@ import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
+import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +35,8 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     private LinearLayoutManager llm;
     private ContactAdapter ca;
 
+    private ButtonFloat addApplicationButton;
+
     private String idInterview;
 
     @Override
@@ -47,6 +52,17 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         llm = new LinearLayoutManager(this);
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recList.setLayoutManager(llm);
+
+        //add applicant button
+        addApplicationButton = (ButtonFloat) findViewById(R.id.addApplicantButton);
+        addApplicationButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(ApplicantsActivity.this, AddApplicantActivity.class);
+                startActivity(intent);
+            }
+        });
 
         //get interview id
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
@@ -69,14 +85,13 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     }
 
     public void processFinish(Applicant[] applicants){
+        //fill contact list
         List<Contact> contactList = new ArrayList<Contact>();
         for(int i = 0; i < applicants.length; i++) {
-            Timber.d(applicants[i].firstname);
             contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail));
         }
+        //set adapter
         ca = new ContactAdapter(contactList);
         recList.setAdapter(ca);
-
-//        Timber.d("ApplicantsActivity:applicants retrieved : " + applicants.toString());
     }
 }
