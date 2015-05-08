@@ -24,7 +24,7 @@ public class ItwApplication extends Application {
 
     private ObjectGraph applicationGraph;
 
-    public final static String EXTRA_ID_INTERVIEW = "com.fourreau.itwapp.idInterview";
+    public String interviewId;
 
     @Override public void onCreate() {
         super.onCreate();
@@ -37,6 +37,14 @@ public class ItwApplication extends Application {
         }
 
         applicationGraph = ObjectGraph.create(getModules().toArray());
+    }
+
+    public String getInterviewId() {
+        return interviewId;
+    }
+
+    public void setInterviewId(String interviewId) {
+        this.interviewId = interviewId;
     }
 
     /**

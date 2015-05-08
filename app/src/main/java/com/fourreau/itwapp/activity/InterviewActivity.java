@@ -36,8 +36,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
         setContentView(R.layout.activity_interview);
 
-        Intent intent = getIntent();
-        idInterview = intent.getStringExtra(ItwApplication.EXTRA_ID_INTERVIEW);
+        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 
         Timber.d("InterviewActivity: id interview " + idInterview);
         Toast.makeText(this, idInterview, Toast.LENGTH_SHORT).show();
@@ -60,7 +59,6 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
             @Override
             public void onClick(View arg0) {
                 Intent intent = new Intent(InterviewActivity.this, ApplicantsActivity.class);
-                intent.putExtra(ItwApplication.EXTRA_ID_INTERVIEW, idInterview);
                 startActivity(intent);
             }
         });

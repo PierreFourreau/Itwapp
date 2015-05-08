@@ -2,7 +2,6 @@
     <string name="app_name">Itwapp</string>
 
     <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
     <string name="title_activity_home">Home</string>
 
     <string name="title_section1">Interviews</string>
@@ -15,16 +14,14 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
-
-
     <!--Alert dialog-->
     <string name="dialog_loading">Loading</string>
 
+    <!--Alert messages-->
     <string name="dialog_title_generic_error">Erreur</string>
     <string name="dialog_content_generic_error_server">Problème de connexion au serveur</string>
     <string name="dialog_content_cancellation">Annulation de la récupération des données effectuée</string>
     <string name="alert_dialog_ok">OK</string>
-
 
     <!--Add interview activity-->
     <string name="title_activity_add_interview">Add Interview</string>
@@ -37,11 +34,13 @@
     <string name="activity_interview_description">Description</string>
     <string name="activity_interview_see_applicants_button">See applicants</string>
 
+    <!--Applicants activity-->
+    <string name="title_activity_applicants">Applicants</string>
 
+    <!--Applicant details activity-->
+    <string name="title_activity_applicant_details">Applicant details</string>
 
-
-    <string name="title_activity_applicants">ApplicantsActivity</string>
-    <string name="title_activity_applicant_details">ApplicantDetailsActivity</string>
-    <string name="title_activity_add_applicant">AddApplicantActivity</string>
+    <!--Add applicant activity-->
+    <string name="title_activity_add_applicant">Add applicant</string>
 
 </resources>

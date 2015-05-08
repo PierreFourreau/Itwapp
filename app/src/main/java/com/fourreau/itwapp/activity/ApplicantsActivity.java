@@ -1,8 +1,7 @@
 package com.fourreau.itwapp.activity;
 
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -10,16 +9,11 @@ import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.service.ApplicantService;
-import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
-import com.fourreau.itwapp.task.OneInterviewTask;
-
-import java.util.HashMap;
 
 import javax.inject.Inject;
 
 import io.itwapp.models.Applicant;
-import io.itwapp.models.Interview;
 import timber.log.Timber;
 
 public class ApplicantsActivity extends ActionBarActivity implements ApplicantAllResponse {
@@ -36,8 +30,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
 
         ((ItwApplication) getApplication()).inject(this);
 
-        Intent intent = getIntent();
-        idInterview = intent.getStringExtra(ItwApplication.EXTRA_ID_INTERVIEW);
+        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 
         //launch task which retrieve one interview
         AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
@@ -62,4 +55,11 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         }
 //        Timber.d("ApplicantsActivity:applicants retrieved : " + applicants.toString());
     }
+
+    @Override
+    public void onBackPressed() {
+
+            super.onBackPressed();
+    }
+
 }

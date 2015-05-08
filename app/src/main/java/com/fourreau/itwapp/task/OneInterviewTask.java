@@ -37,6 +37,7 @@ public class OneInterviewTask extends AsyncTask<String, Void, AsyncTaskResult<In
         this.interviewId = interviewId;
 
         mProgressDialog = new ProgressDialog(mActivity);
+        mProgressDialog.setTitle(mActivity.getString(R.string.title_activity_interview));
         mProgressDialog.setMessage(mActivity.getString(R.string.dialog_loading));
         mProgressDialog.setCancelable(true);
     }
