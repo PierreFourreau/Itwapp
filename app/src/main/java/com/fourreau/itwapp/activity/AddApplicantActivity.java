@@ -79,7 +79,7 @@ public class AddApplicantActivity extends ActionBarActivity {
                     output.append(" - Email:" + email);
                     //create and add contact
                     if(name != null && email != null) {
-                        Contact contact = new Contact(contact_id, name, email);
+                        Contact contact = new Contact(contact_id, name, email, null);
                         contacts.add(contact);
                     }
                 }

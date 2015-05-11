@@ -88,7 +88,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         //fill contact list
         List<Contact> contactList = new ArrayList<Contact>();
         for(int i = 0; i < applicants.length; i++) {
-            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail));
+            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd));
         }
         //set adapter
         ca = new ContactAdapter(contactList);

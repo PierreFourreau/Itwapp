@@ -39,6 +39,7 @@
 
     <!--Applicants activity-->
     <string name="title_activity_applicants">Applicants</string>
+    <string name="activity_applicants_deadline">Deadline : </string>
 
     <!--Applicant details activity-->
     <string name="title_activity_applicant_details">Applicant details</string>
