@@ -48,7 +48,6 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         Timber.d("InterviewActivity: id interview " + idInterview);
         Toast.makeText(this, idInterview, Toast.LENGTH_SHORT).show();
 
-
         //launch task which retrieve one interview
         OneInterviewTask mTask = new OneInterviewTask(InterviewActivity.this, interviewService, idInterview);
         mTask.delegate = this;
@@ -100,5 +99,4 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
             textViewVideo.setText(R.string.none);
         }
     }
-
 }

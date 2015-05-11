@@ -1,18 +1,22 @@
 package com.fourreau.itwapp.adapter;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.activity.ApplicantDetailsActivity;
 import com.fourreau.itwapp.model.Contact;
+import com.fourreau.itwapp.util.UiUtils;
 
 import java.sql.Date;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import timber.log.Timber;
@@ -22,9 +26,12 @@ import timber.log.Timber;
  */
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
+    private Context context;
+
     private List<Contact> contactList;
 
-    public ContactAdapter(List<Contact> contactList) {
+    public ContactAdapter(Context context, List<Contact> contactList) {
+        this.context = context;
         this.contactList = contactList;
     }
 
@@ -36,10 +43,18 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
     @Override
     public void onBindViewHolder(ContactViewHolder contactViewHolder, int i) {
         Contact c = contactList.get(i);
+        contactViewHolder.vId.setText(c.getId());
+        //set mail
         contactViewHolder.vMail.setText(c.getEmail());
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z");
-
-        contactViewHolder.vDeadline.setText( sdf.format(new Date(c.getDeadline())));
+        //set deadline
+        contactViewHolder.vDeadline.setText(UiUtils.sdf.format(new Date(c.getDeadline())));
+        //set language
+        if(c.getLanguage().equals(Contact.Language.EN)) {
+            contactViewHolder.vLanguage.setBackgroundResource(R.drawable.flag_en);
+        }
+        else {
+            contactViewHolder.vLanguage.setBackgroundResource(R.drawable.flag_fr);
+        }
     }
 
     @Override
@@ -47,9 +62,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.contact_item, viewGroup, false);
 
         ContactAdapter.ContactViewHolder vh = new ContactViewHolder(itemView, new ContactAdapter.ContactViewHolder.IContactViewHolderClicks() {
-            public void onPotato(View caller) {
-                Timber.d("aaaaaaaaaaaa");
-                Log.d("aaaaaa","aaaaaa");
+            public void onPotato(View caller, String id) {
+                //launch activity
+                Intent intent = new Intent(context, ApplicantDetailsActivity.class);
+                intent.putExtra("idApplicant", id);
+                context.startActivity(intent);
             };
         });
         return vh;
@@ -57,27 +74,30 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
     public static class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected CardView cardView;
+        protected TextView vId;
         protected TextView vMail;
         protected TextView vDeadline;
+        protected ImageView vLanguage;
         public IContactViewHolderClicks mListener;
 
         public ContactViewHolder(View v, IContactViewHolderClicks listener) {
             super(v);
             mListener = listener;
             cardView = (CardView) v.findViewById(R.id.card_view);
+            vId = (TextView) v.findViewById(R.id.id);
             vMail =  (TextView) v.findViewById(R.id.mail);
             vDeadline = (TextView)  v.findViewById(R.id.deadline);
-
+            vLanguage = (ImageView)  v.findViewById(R.id.language);
             cardView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-            mListener.onPotato(v);
+            mListener.onPotato(v, vId.getText().toString());
         }
 
         public static interface IContactViewHolderClicks {
-            public void onPotato(View caller);
+            public void onPotato(View caller, String id);
         }
     }
 }

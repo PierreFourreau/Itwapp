@@ -24,7 +24,6 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.itwapp.models.Applicant;
-import timber.log.Timber;
 
 public class ApplicantsActivity extends ActionBarActivity implements ApplicantAllResponse {
 
@@ -88,10 +87,10 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         //fill contact list
         List<Contact> contactList = new ArrayList<Contact>();
         for(int i = 0; i < applicants.length; i++) {
-            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd));
+            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd, applicants[i].lang, applicants[i].status.getCode()));
         }
         //set adapter
-        ca = new ContactAdapter(contactList);
+        ca = new ContactAdapter(ApplicantsActivity.this, contactList);
         recList.setAdapter(ca);
     }
 }
