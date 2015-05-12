@@ -1,6 +1,5 @@
 package com.fourreau.itwapp.activity;
 
-import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -15,16 +14,13 @@ import com.fourreau.itwapp.model.ApplicantOneResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.OneApplicantTask;
-import com.fourreau.itwapp.task.OneInterviewTask;
-import com.fourreau.itwapp.util.UiUtils;
+import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
-import com.google.common.base.Strings;
 
 import javax.inject.Inject;
 
 import io.itwapp.models.Applicant;
 import io.itwapp.models.ApplicantStatus;
-import io.itwapp.models.Interview;
 import timber.log.Timber;
 
 public class ApplicantDetailsActivity extends ActionBarActivity implements ApplicantOneResponse{
@@ -100,9 +96,9 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         else {
             textViewLastName.setText(R.string.none);
         }
-        textViewDeadline.setText(UiUtils.sdf.format(applicant.dateEnd));
+        textViewDeadline.setText(Utils.sdf.format(applicant.dateEnd));
         textViewDeleted.setText(String.valueOf(applicant.deleted));
-        textViewAnswerDate.setText(UiUtils.sdf.format(applicant.dateAnswer));
+        textViewAnswerDate.setText(Utils.sdf.format(applicant.dateAnswer));
         textViewEmailView.setText(String.valueOf(applicant.emailView));
         //status
         if(applicant.status.equals(ApplicantStatus.COMPLETED)) {

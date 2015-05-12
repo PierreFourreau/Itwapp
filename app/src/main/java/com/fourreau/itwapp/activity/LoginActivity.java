@@ -28,10 +28,13 @@ import android.widget.TextView;
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.AuthenticationService;
+import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -151,8 +154,15 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private boolean isEmailValid(String email) {
-        //TODO: Replace this with your own logic
-        return email.contains("@");
+        Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+
+        if(matcher.matches()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean isPasswordValid(String password) {

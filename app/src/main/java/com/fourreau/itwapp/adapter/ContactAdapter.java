@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,12 +13,10 @@ import android.widget.TextView;
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.ApplicantDetailsActivity;
 import com.fourreau.itwapp.model.Contact;
-import com.fourreau.itwapp.util.UiUtils;
+import com.fourreau.itwapp.util.Utils;
 
 import java.sql.Date;
 import java.util.List;
-
-import timber.log.Timber;
 
 /**
  * Created by Pierre on 08/05/2015.
@@ -47,7 +44,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         //set mail
         contactViewHolder.vMail.setText(c.getEmail());
         //set deadline
-        contactViewHolder.vDeadline.setText(UiUtils.sdf.format(new Date(c.getDeadline())));
+        contactViewHolder.vDeadline.setText(Utils.sdf.format(new Date(c.getDeadline())));
         //set language
         if(c.getLanguage().equals(Contact.Language.EN)) {
             contactViewHolder.vLanguage.setBackgroundResource(R.drawable.flag_en);
