@@ -60,7 +60,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.contact_item, viewGroup, false);
 
         ContactAdapter.ContactViewHolder vh = new ContactViewHolder(itemView, new ContactAdapter.ContactViewHolder.IContactViewHolderClicks() {
-            public void onPotato(View caller, String id) {
+            public void triggerOnClickContact(View caller, String id) {
                 //launch activity
                 Intent intent = new Intent(activity, ApplicantDetailsActivity.class);
                 intent.putExtra("idApplicant", id);
@@ -92,11 +92,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
         @Override
         public void onClick(View v) {
-            mListener.onPotato(v, vId.getText().toString());
+            mListener.triggerOnClickContact(v, vId.getText().toString());
         }
 
         public static interface IContactViewHolderClicks {
-            public void onPotato(View caller, String id);
+            public void triggerOnClickContact(View caller, String id);
         }
     }
 }

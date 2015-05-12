@@ -1,5 +1,7 @@
 package com.fourreau.itwapp.core.module;
 
+import com.fourreau.itwapp.activity.AddInterviewActivity;
+import com.fourreau.itwapp.activity.EditInterviewActivity;
 import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.fragment.AllInterviewsFragment;
@@ -15,7 +17,7 @@ import dagger.Provides;
 * Created by Pierre on 22/04/2015.
 */
 @Module(
-        injects = {AllInterviewsFragment.class, InterviewActivity.class},
+        injects = {AllInterviewsFragment.class, InterviewActivity.class, AddInterviewActivity.class, EditInterviewActivity.class},
         complete = false,
         library = true
 )

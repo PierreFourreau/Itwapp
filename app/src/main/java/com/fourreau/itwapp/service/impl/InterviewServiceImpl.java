@@ -2,6 +2,7 @@ package com.fourreau.itwapp.service.impl;
 
 import com.fourreau.itwapp.service.InterviewService;
 import java.util.HashMap;
+import java.util.Map;
 
 import javax.inject.Inject;
 
@@ -35,5 +36,26 @@ public class InterviewServiceImpl implements InterviewService{
         Itwapp.secretKey = "4fde9994f78b789f23941837566278cd7d21c8af";
 
         return Interview.findOne(interviewId);
+    }
+
+    @Override
+    public Interview update(String interviewId, Map<String, Object> param) throws APIException {
+        Itwapp.apiKey = "1965936758968ade03c70da2c21ad7c6";
+        Itwapp.secretKey = "4fde9994f78b789f23941837566278cd7d21c8af";
+
+        return Interview.update(interviewId, param);
+    }
+
+    @Override
+    public void delete(String interviewId, Boolean withApplicants) throws APIException {
+        Itwapp.apiKey = "1965936758968ade03c70da2c21ad7c6";
+        Itwapp.secretKey = "4fde9994f78b789f23941837566278cd7d21c8af";
+
+        Map<String, Object> param = new HashMap<String, Object>();
+
+        if(withApplicants) {
+            param.put("withApplicant", true);
+        }
+        Interview.delete(interviewId, param);
     }
 }

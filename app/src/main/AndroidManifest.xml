@@ -38,6 +38,14 @@
                 android:value="com.fourreau.itwapp.activity.HomeActivity" />
         </activity>
         <activity
+            android:name=".activity.EditInterviewActivity"
+            android:label="@string/title_activity_edit_interview"
+            android:parentActivityName=".activity.InterviewActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.InterviewActivity" />
+        </activity>
+        <activity
             android:name=".activity.InterviewActivity"
             android:label="@string/title_activity_interview"
             android:parentActivityName=".activity.HomeActivity" >

@@ -3,23 +3,24 @@ package com.fourreau.itwapp.fragment;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.ListFragment;
+import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListView;
+import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.AddInterviewActivity;
 import com.fourreau.itwapp.activity.HomeActivity;
-import com.fourreau.itwapp.activity.InterviewActivity;
-import com.fourreau.itwapp.adapter.ListViewAllInterviewsAdapter;
+import com.fourreau.itwapp.adapter.InterviewAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.InterviewAllResponse;
-import com.fourreau.itwapp.model.ListViewInterviewItem;
+import com.fourreau.itwapp.model.InterviewDto;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.gc.materialdesign.views.ButtonFloat;
@@ -34,19 +35,34 @@ import io.itwapp.models.Interview;
 /**
  * Created by Pierre on 04/05/2015.
  */
-public class AllInterviewsFragment extends ListFragment implements InterviewAllResponse {
+public class AllInterviewsFragment extends Fragment implements InterviewAllResponse {
 
     @Inject
     InterviewService interviewService;
 
-    private List<ListViewInterviewItem> mItems = new ArrayList<ListViewInterviewItem>();
     private ButtonFloat addInterviewButton;
     private MenuItem menuItem;
+
+    private RecyclerView recList;
+    private LinearLayoutManager llm;
+    private InterviewAdapter itwAdapter;
+    private TextView textViewNoData;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
-        View view = inflater.inflate(R.layout.listview_interviews, container, false);
+        View view = inflater.inflate(R.layout.fragment_interviews, container, false);
+
+        textViewNoData = (TextView) view.findViewById(R.id.textViewNoData);
+
+        //recycler view
+        recList = (RecyclerView) view.findViewById(R.id.cardListInterviews);
+        recList.setHasFixedSize(true);
+        llm = new LinearLayoutManager(getActivity());
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
+
+        //add button
         addInterviewButton = (ButtonFloat) view.findViewById(R.id.addInterviewButton);
         addInterviewButton.setOnClickListener(new View.OnClickListener() {
 
@@ -69,28 +85,18 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
         ((ItwApplication)getActivity().getApplication()).inject(this);
 
         //launch task which retrieve all interviews
-        AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
-        mTask.delegate = this;
-        mTask.execute();
-
-        //fetchContacts();
-
+        launchTask();
     }
 
     @Override
-    public void onListItemClick(ListView l, View v, int position, long id) {
-        ListViewInterviewItem item = mItems.get(position);
-        Intent intent = new Intent(getActivity(), InterviewActivity.class);
-        ((ItwApplication) getActivity().getApplication()).setInterviewId(item.id);
-        startActivity(intent);
-        getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+    public void onResume() {
+        launchTask();
+        super.onResume();
     }
 
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        // remove the dividers from the ListView of the ListFragment
-        getListView().setDivider(null);
     }
 
     @Override
@@ -115,20 +121,31 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
         if (id == R.id.action_refresh) {
             menuItem.setActionView(R.layout.progressbar);
             menuItem.expandActionView();
-            //launch task
-            AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
-            mTask.delegate = this;
-            mTask.execute();
+            launchTask();
         }
         return super.onOptionsItemSelected(item);
     }
 
+    public void launchTask() {
+        AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
+        mTask.delegate = this;
+        mTask.execute();
+    }
 
     public void processFinish(Interview[] interviews){
+        List<InterviewDto> interviewList = new ArrayList<InterviewDto>();
         for(int i = 0; i < interviews.length; i++) {
-            mItems.add(new ListViewInterviewItem(interviews[i].id, interviews[i].name, interviews[i].text));
+            interviewList.add(new InterviewDto(interviews[i].id, interviews[i].name, interviews[i].text));
         }
-        setListAdapter(new ListViewAllInterviewsAdapter(getActivity(), mItems));
+
+        //set adapter
+        itwAdapter = new InterviewAdapter(getActivity(), interviewList);
+        recList.setAdapter(itwAdapter);
+
+        //show textview no data
+        if(interviewList.size() == 0) {
+            textViewNoData.setVisibility(View.VISIBLE);
+        }
 
         //restore action bar refresh
         if(menuItem != null) {

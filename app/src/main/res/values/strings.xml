@@ -17,15 +17,18 @@
     <string name="none">None</string>
     <string name="unknown">Unknown</string>
     <string name="action_refresh">Refresh</string>
+    <string name="action_edit">Edit</string>
+    <string name="action_remove">Remove</string>
     <string name="no_data">No data</string>
 
     <!--Alert dialog-->
     <string name="dialog_loading">Loading</string>
 
     <!--Alert messages-->
-    <string name="dialog_title_generic_error">Erreur</string>
-    <string name="dialog_content_generic_error_server">Problème de connexion au serveur</string>
-    <string name="dialog_content_cancellation">Annulation de la récupération des données effectuée</string>
+    <string name="dialog_title_generic_error">Error</string>
+    <string name="dialog_title_generic_success">Success</string>
+    <string name="dialog_content_generic_error_server">Problem connecting to server</string>
+    <string name="dialog_content_cancellation">Cancelling the recovery of data done</string>
     <string name="alert_dialog_ok">OK</string>
 
     <!--Add interview activity-->
@@ -33,12 +36,20 @@
     <string name="activity_add_interview_name">Name</string>
     <string name="activity_add_interview_description">Description</string>
 
+    <!--Edit interview activity-->
+    <string name="title_activity_edit_interview">Edit Interview</string>
+
     <!--View interview activity-->
     <string name="title_activity_interview">Interview</string>
     <string name="activity_interview_name">Name</string>
     <string name="activity_interview_description">Description</string>
     <string name="activity_interview_video">Video</string>
+    <string name="activity_interview_questions">Questions</string>
     <string name="activity_interview_see_applicants_button">See applicants</string>
+
+    <!--Delete interview-->
+    <string name="dialog_title_delete_error">The deletion has failed</string>
+    <string name="dialog_title_delete_success">The deletion was done successfully</string>
 
     <!--Applicants activity-->
     <string name="title_activity_applicants">Applicants</string>
@@ -62,10 +73,8 @@
     <string name="activity_applicant_details_status_email_sent">email sent</string>
     <string name="activity_applicant_details_error">Error while retrieving the applicant</string>
 
-
     <!--Add applicant activity-->
     <string name="title_activity_add_applicant">Add applicant</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="action_settings">Settings</string>
+    <string name="activity_add_interview_success">The interview has been updated successfully</string>
 
 </resources>

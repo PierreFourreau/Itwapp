@@ -6,7 +6,6 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -18,7 +17,6 @@ import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
-import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;

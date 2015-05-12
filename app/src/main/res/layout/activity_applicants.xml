@@ -9,7 +9,16 @@
         android:id="@+id/cardList"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:drawSelectorOnTop="false"
         />
+
+    <TextView android:id="@+id/textViewNoData"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_data"
+        android:visibility="gone"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="30dp" />
 
     <com.gc.materialdesign.views.ButtonFloat
         android:id="@+id/addApplicantButton"

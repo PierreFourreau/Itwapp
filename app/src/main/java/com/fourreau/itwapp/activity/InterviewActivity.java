@@ -1,5 +1,7 @@
 package com.fourreau.itwapp.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -11,25 +13,28 @@ import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.model.InterviewOneResponse;
+import com.fourreau.itwapp.model.UpdateInterviewResponse;
 import com.fourreau.itwapp.service.InterviewService;
+import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
-import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.views.ButtonRectangle;
 
 import javax.inject.Inject;
 
 import io.itwapp.models.Interview;
+import io.itwapp.models.Question;
 import timber.log.Timber;
 
-public class InterviewActivity extends ActionBarActivity implements InterviewOneResponse {
+public class InterviewActivity extends ActionBarActivity implements InterviewOneResponse, DeleteInterviewResponse, UpdateInterviewResponse {
 
     @Inject
     InterviewService interviewService;
 
     private String idInterview;
 
-    private TextView textViewName, textViewDescription, textViewVideo;
+    private TextView textViewName, textViewDescription, textViewVideo, textViewQuestions;
     private ButtonRectangle seeApplicantsButton;
 
     @Override
@@ -44,19 +49,13 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         textViewName = (TextView) findViewById(R.id.activity_interview_name);
         textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
         textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
+        textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
 
         Timber.d("InterviewActivity: id interview " + idInterview);
         Toast.makeText(this, idInterview, Toast.LENGTH_SHORT).show();
 
         //launch task which retrieve one interview
-        OneInterviewTask mTask = new OneInterviewTask(InterviewActivity.this, interviewService, idInterview);
-        mTask.delegate = this;
-        mTask.execute();
-
-
-
-        //set interview informations
-//        interview.name
+        launchTask();
 
         //see applicants button
         seeApplicantsButton = (ButtonRectangle) findViewById(R.id.see_applicants_button);
@@ -71,9 +70,9 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         });
     }
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.interview, menu);
         return true;
     }
 
@@ -85,6 +84,13 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
                 finish();
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
+            case R.id.action_edit:
+                Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.action_delete:
+                deleteInterview();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -94,6 +100,19 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+    }
+
+    public void launchTask() {
+        OneInterviewTask mTask = new OneInterviewTask(InterviewActivity.this, interviewService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
+    }
+
+    public void deleteInterview() {
+        //launch task which remove interview
+        DeleteInterviewTask mTask = new DeleteInterviewTask(InterviewActivity.this, interviewService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
     }
 
     public void processFinish(Interview interview){
@@ -113,5 +132,40 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         else {
             textViewVideo.setText(R.string.none);
         }
+        if(interview.questions.length > 0) {
+            String questions = "";
+            for(Question q : interview.questions) {
+                questions += q.content + "\n";
+            }
+            textViewQuestions.setText(questions);
+        }
+        else {
+            textViewQuestions.setText(R.string.none);
+        }
+    }
+
+    public void processFinishDelete(Boolean output) {
+        if(output) {
+            showAlertDialog(R.string.dialog_title_generic_success, R.string.dialog_title_delete_success);
+        }
+        else {
+            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_delete_error);
+        }
+    }
+
+    public void processFinishUpdate(Interview output) {
+        showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
+        launchTask();
+    }
+
+    private void showAlertDialog(int title, int content) {
+        new AlertDialog.Builder(InterviewActivity.this).setTitle(title).setMessage(content)
+                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                finish();
+            }
+        }).show();
     }
 }
