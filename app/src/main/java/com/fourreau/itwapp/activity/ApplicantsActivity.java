@@ -6,8 +6,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.adapter.ContactAdapter;
@@ -16,6 +18,7 @@ import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
+import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;
@@ -35,6 +38,8 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     private ContactAdapter ca;
 
     private ButtonFloat addApplicationButton;
+    private TextView textViewNoData;
+    private MenuItem menuItem;
 
     private String idInterview;
 
@@ -44,6 +49,8 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         setContentView(R.layout.activity_applicants);
 
         ((ItwApplication) getApplication()).inject(this);
+
+        textViewNoData = (TextView) findViewById(R.id.textViewNoData);
 
         //recycler view
         recList = (RecyclerView) findViewById(R.id.cardList);
@@ -73,19 +80,29 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     }
 
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.global, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
+        menuItem = item;
         switch(id) {
             case android.R.id.home:
                 finish();
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
+            case  R.id.action_refresh:
+                menuItem.setActionView(R.layout.progressbar);
+                menuItem.expandActionView();
+                //launch task
+                AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
+                mTask.delegate = this;
+                mTask.execute();
         }
         return super.onOptionsItemSelected(item);
     }
@@ -106,5 +123,16 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         //set adapter
         ca = new ContactAdapter(ApplicantsActivity.this, contactList);
         recList.setAdapter(ca);
+
+        //show textview no data
+        if(contactList.size() == 0) {
+            textViewNoData.setVisibility(View.VISIBLE);
+        }
+
+        //restore action bar refresh
+        if(menuItem != null) {
+            menuItem.collapseActionView();
+            menuItem.setActionView(null);
+        }
     }
 }

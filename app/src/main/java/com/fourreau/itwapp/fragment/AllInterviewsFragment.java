@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -38,6 +41,7 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
 
     private List<ListViewInterviewItem> mItems = new ArrayList<ListViewInterviewItem>();
     private ButtonFloat addInterviewButton;
+    private MenuItem menuItem;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
@@ -52,6 +56,8 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
                 startActivity(intent);
             }
         });
+
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -93,11 +99,42 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
         ((HomeActivity) activity).onSectionAttached(1);
     }
 
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.global, menu);
+        super.onCreateOptionsMenu(menu,inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        menuItem = item;
+        if (id == R.id.action_refresh) {
+            menuItem.setActionView(R.layout.progressbar);
+            menuItem.expandActionView();
+            //launch task
+            AllInterviewsTask mTask = new AllInterviewsTask(getActivity(), interviewService);
+            mTask.delegate = this;
+            mTask.execute();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
     public void processFinish(Interview[] interviews){
         for(int i = 0; i < interviews.length; i++) {
             mItems.add(new ListViewInterviewItem(interviews[i].id, interviews[i].name, interviews[i].text));
         }
         setListAdapter(new ListViewAllInterviewsAdapter(getActivity(), mItems));
+
+        //restore action bar refresh
+        if(menuItem != null) {
+            menuItem.collapseActionView();
+            menuItem.setActionView(null);
+        }
     }
 
 }

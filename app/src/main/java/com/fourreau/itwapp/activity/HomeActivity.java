@@ -99,7 +99,7 @@ public class HomeActivity extends ActionBarActivity
             // Only show items in the action bar relevant to this screen
             // if the drawer is not showing. Otherwise, let the drawer
             // decide what to show in the action bar.
-//            getMenuInflater().inflate(R.menu.home, menu);
+//            getMenuInflater().inflate(R.menu.global, menu);
             restoreActionBar();
             return true;
         }
@@ -112,6 +112,11 @@ public class HomeActivity extends ActionBarActivity
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+
+//        if (id == R.id.action_refresh) {
+//            finish();
+//            startActivity(getIntent());
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -155,5 +160,4 @@ public class HomeActivity extends ActionBarActivity
                     getArguments().getInt(ARG_SECTION_NUMBER));
         }
     }
-
 }
