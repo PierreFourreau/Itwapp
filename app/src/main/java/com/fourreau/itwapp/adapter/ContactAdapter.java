@@ -1,5 +1,6 @@
 package com.fourreau.itwapp.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
@@ -23,12 +24,12 @@ import java.util.List;
  */
 public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactViewHolder> {
 
-    private Context context;
+    private Activity activity;
 
     private List<Contact> contactList;
 
-    public ContactAdapter(Context context, List<Contact> contactList) {
-        this.context = context;
+    public ContactAdapter(Activity activity, List<Contact> contactList) {
+        this.activity = activity;
         this.contactList = contactList;
     }
 
@@ -61,9 +62,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         ContactAdapter.ContactViewHolder vh = new ContactViewHolder(itemView, new ContactAdapter.ContactViewHolder.IContactViewHolderClicks() {
             public void onPotato(View caller, String id) {
                 //launch activity
-                Intent intent = new Intent(context, ApplicantDetailsActivity.class);
+                Intent intent = new Intent(activity, ApplicantDetailsActivity.class);
                 intent.putExtra("idApplicant", id);
-                context.startActivity(intent);
+                activity.startActivity(intent);
+                activity.overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             };
         });
         return vh;

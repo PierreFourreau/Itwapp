@@ -66,6 +66,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
             public void onClick(View arg0) {
                 Intent intent = new Intent(InterviewActivity.this, ApplicantsActivity.class);
                 startActivity(intent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             }
         });
     }
@@ -78,7 +79,21 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        switch(id) {
+            case android.R.id.home:
+                finish();
+                overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+                return true;
+        }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        // finish() is called in super: we only override this method to be able to override the transition
+        super.onBackPressed();
+        overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
     }
 
     public void processFinish(Interview interview){

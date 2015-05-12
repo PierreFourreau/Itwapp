@@ -154,15 +154,18 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private boolean isEmailValid(String email) {
-        Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
-        Matcher matcher = pattern.matcher(email);
+        //TODO uncomment
+        return true;
 
-        if(matcher.matches()) {
-            return true;
-        }
-        else {
-            return false;
-        }
+//        Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
+//        Matcher matcher = pattern.matcher(email);
+//
+//        if(matcher.matches()) {
+//            return true;
+//        }
+//        else {
+//            return false;
+//        }
     }
 
     private boolean isPasswordValid(String password) {

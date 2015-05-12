@@ -77,6 +77,7 @@ public class AllInterviewsFragment extends ListFragment implements InterviewAllR
         Intent intent = new Intent(getActivity(), InterviewActivity.class);
         ((ItwApplication) getActivity().getApplication()).setInterviewId(item.id);
         startActivity(intent);
+        getActivity().overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
     }
 
     @Override
