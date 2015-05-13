@@ -52,7 +52,6 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
 
         Timber.d("InterviewActivity: id interview " + idInterview);
-        Toast.makeText(this, idInterview, Toast.LENGTH_SHORT).show();
 
         //launch task which retrieve one interview
         launchTask();
@@ -100,6 +99,12 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+    }
+
+    @Override
+    public void onResume() {
+        launchTask();
+        super.onResume();
     }
 
     public void launchTask() {

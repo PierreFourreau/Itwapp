@@ -32,6 +32,7 @@
         <activity
             android:name=".activity.AddInterviewActivity"
             android:label="@string/title_activity_add_interview"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".activity.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

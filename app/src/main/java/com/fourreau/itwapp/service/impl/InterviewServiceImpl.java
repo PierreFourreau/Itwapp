@@ -39,6 +39,14 @@ public class InterviewServiceImpl implements InterviewService{
     }
 
     @Override
+    public Interview create(Map<String, Object> param) throws APIException {
+        Itwapp.apiKey = "1965936758968ade03c70da2c21ad7c6";
+        Itwapp.secretKey = "4fde9994f78b789f23941837566278cd7d21c8af";
+
+        return Interview.create(param);
+    }
+
+    @Override
     public Interview update(String interviewId, Map<String, Object> param) throws APIException {
         Itwapp.apiKey = "1965936758968ade03c70da2c21ad7c6";
         Itwapp.secretKey = "4fde9994f78b789f23941837566278cd7d21c8af";

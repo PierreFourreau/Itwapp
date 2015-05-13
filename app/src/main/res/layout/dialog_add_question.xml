@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/layout_root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:padding="10dp" >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_question_content"/>
+
+    <EditText
+        android:id="@+id/editTextQuestionName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="none"
+        android:singleLine="true"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_question_reading_time"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerReadingTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_question_answer_time"
+        android:layout_marginTop="20dp"/>
+
+    <Spinner
+        android:id="@+id/spinnerAnswerTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
 
 </LinearLayout>

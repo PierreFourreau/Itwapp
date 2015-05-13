@@ -34,7 +34,25 @@
     <!--Add interview activity-->
     <string name="title_activity_add_interview">Add Interview</string>
     <string name="activity_add_interview_name">Name</string>
-    <string name="activity_add_interview_description">Description</string>
+    <string name="activity_add_interview_description">Description (optionnal)</string>
+    <string name="activity_add_interview_video">Presentation video (optionnal)</string>
+    <string name="activity_add_interview_callback">Redirection URL (optionnal)</string>
+    <string name="activity_add_interview_questions">Questions</string>
+    <string name="activity_add_interview_name_error">Name field is required</string>
+    <string name="activity_add_interview_success">Interview created successfully</string>
+
+    <!--Add question-->
+    <string name="dialog_add_question_content">Content</string>
+    <string name="dialog_add_question_reading_time">Reading time</string>
+    <string name="dialog_add_question_answer_time">Answer time</string>
+    <string name="dialog_add_interview_question_content_error">Content question field is required</string>
+    <string-array name="question_time">
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>4 minutes</item>
+        <item>5 minutes</item>
+    </string-array>
 
     <!--Edit interview activity-->
     <string name="title_activity_edit_interview">Edit Interview</string>
@@ -75,6 +93,6 @@
 
     <!--Add applicant activity-->
     <string name="title_activity_add_applicant">Add applicant</string>
-    <string name="activity_add_interview_success">The interview has been updated successfully</string>
+    <string name="activity_update_interview_success">The interview has been updated successfully</string>
 
 </resources>

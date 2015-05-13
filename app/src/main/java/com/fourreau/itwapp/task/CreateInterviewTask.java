@@ -9,12 +9,15 @@ import android.os.AsyncTask;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.model.AsyncTaskResult;
+import com.fourreau.itwapp.model.CreateInterviewResponse;
 import com.fourreau.itwapp.model.UpdateInterviewResponse;
 import com.fourreau.itwapp.service.InterviewService;
 
+import java.net.ConnectException;
 import java.util.Map;
 
 import io.itwapp.exception.APIException;
+import io.itwapp.exception.InvalidRequestError;
 import io.itwapp.models.Interview;
 import timber.log.Timber;
 
@@ -26,18 +29,16 @@ public class CreateInterviewTask extends AsyncTask<String, Void, AsyncTaskResult
     private Context mContext;
     private Activity mActivity;
     private InterviewService interviewService;
-    private String interviewId;
     private Map<String, Object> param;
 
     private ProgressDialog mProgressDialog;
 
-    public UpdateInterviewResponse delegate = null;
+    public CreateInterviewResponse delegate = null;
 
-    public CreateInterviewTask(Activity activity, InterviewService interviewService, String interviewId, Map<String, Object> param){
+    public CreateInterviewTask(Activity activity, InterviewService interviewService, Map<String, Object> param){
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
         this.interviewService = interviewService;
-        this.interviewId = interviewId;
         this.param = param;
 
         mProgressDialog = new ProgressDialog(mActivity);
@@ -56,12 +57,12 @@ public class CreateInterviewTask extends AsyncTask<String, Void, AsyncTaskResult
     protected AsyncTaskResult<Interview> doInBackground(String... params) {
         Interview interview = null;
         try {
-            interview = interviewService.update(interviewId, param);
+            interview = interviewService.create(param);
             return new AsyncTaskResult<Interview>(interview);
         }
-        catch (APIException e) {
-            Timber.e("InterviewActivity:update:" + e.toString());
-            return new AsyncTaskResult<Interview>(e);
+        catch (APIException | InvalidRequestError e) {
+            Timber.e("AddInterviewActivity:create:" + e.toString());
+            return new AsyncTaskResult<>(e);
         }
     }
 
@@ -77,7 +78,7 @@ public class CreateInterviewTask extends AsyncTask<String, Void, AsyncTaskResult
             Interview interview = result.getResult();
 
             if(interview != null) {
-                delegate.processFinishUpdate(interview);
+                delegate.processFinishCreate(interview);
             }
         }
         mProgressDialog.dismiss();
