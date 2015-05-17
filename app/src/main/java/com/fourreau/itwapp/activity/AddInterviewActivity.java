@@ -46,7 +46,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
     @Inject
     InterviewService interviewService;
 
-    private  EditText editTextName, editTextDescription, editTextVideo, editTextCallback;
+    private EditText editTextName, editTextDescription, editTextVideo, editTextCallback;
     private ButtonFloat buttonValidateAddInterview;
     private Button buttonOpenDialogAddQuestion;
     private Spinner spinnerQuestionReadingTime, spinnerQuestionAnswerTime;
@@ -68,7 +68,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
         editTextVideo = (EditText)findViewById(R.id.addInterviewVideo);
         editTextCallback = (EditText)findViewById(R.id.addInterviewCallback);
         buttonOpenDialogAddQuestion = (Button)findViewById(R.id.openDialogAddQuestion);
-        buttonValidateAddInterview = (ButtonFloat)findViewById(R.id.addApplicantButtonValidate);
+        buttonValidateAddInterview = (ButtonFloat)findViewById(R.id.addInterviewButtonValidate);
 
         container = (LinearLayout)findViewById(R.id.containerQuestions);
 
@@ -89,7 +89,6 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                 spinnerQuestionReadingTime = (Spinner)promptsView.findViewById(R.id.spinnerReadingTime);
                 spinnerQuestionAnswerTime = (Spinner)promptsView.findViewById(R.id.spinnerAnswerTime);
 
-
                 //fill spinner question time
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(AddInterviewActivity.this, question_time, android.R.layout.simple_spinner_item);
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -99,7 +98,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                 //set dialog message
                 alertDialogBuilder
                         .setCancelable(false)
-                        .setPositiveButton("OK",
+                        .setPositiveButton(R.string.alert_dialog_ok,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         //add row
@@ -125,6 +124,11 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                                                 }
                                             });
                                             dialog.dismiss();
+                                            addView.setBackgroundResource(R.drawable.frame);
+                                            addView.setPadding(5,5,5,5);
+                                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                                            lp.setMargins(5, 5, 5, 2);
+                                            addView.setLayoutParams(lp);
                                             //add row to container
                                             container.addView(addView);
                                         } else {
@@ -132,7 +136,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                                         }
                                     }
                                 })
-                        .setNegativeButton("Cancel",
+                        .setNegativeButton(R.string.alert_dialog_cancel,
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
                                         dialog.cancel();

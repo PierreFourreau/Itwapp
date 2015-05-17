@@ -30,6 +30,7 @@
     <string name="dialog_content_generic_error_server">Problem connecting to server</string>
     <string name="dialog_content_cancellation">Cancelling the recovery of data done</string>
     <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
 
     <!--Add interview activity-->
     <string name="title_activity_add_interview">Add Interview</string>
@@ -38,6 +39,7 @@
     <string name="activity_add_interview_video">Presentation video (optionnal)</string>
     <string name="activity_add_interview_callback">Redirection URL (optionnal)</string>
     <string name="activity_add_interview_questions">Questions</string>
+    <string name="activity_add_question_button">Add</string>
     <string name="activity_add_interview_name_error">Name field is required</string>
     <string name="activity_add_interview_success">Interview created successfully</string>
 
@@ -56,6 +58,12 @@
 
     <!--Edit interview activity-->
     <string name="title_activity_edit_interview">Edit Interview</string>
+    <string name="activity_edit_interview_name">Name</string>
+    <string name="activity_edit_interview_description">Description (optionnal)</string>
+    <string name="activity_edit_interview_video">Presentation video (optionnal)</string>
+    <string name="activity_edit_interview_callback">Redirection URL (optionnal)</string>
+    <string name="activity_edit_interview_questions">Questions</string>
+    <string name="activity_update_interview_success">The interview has been updated successfully</string>
 
     <!--View interview activity-->
     <string name="title_activity_interview">Interview</string>
@@ -93,6 +101,14 @@
 
     <!--Add applicant activity-->
     <string name="title_activity_add_applicant">Add applicant</string>
-    <string name="activity_update_interview_success">The interview has been updated successfully</string>
+    <string name="activity_add_applicant_mails">Emails (split by ;)</string>
+    <string name="activity_add_applicant_message">Message (optionnal)</string>
+    <string name="activity_add_applicant_deadline">Deadline (optionnal)</string>
+    <string name="activity_add_applicant_language">Language</string>
+    <string name="activity_add_applicant_language_english">English</string>
+    <string name="activity_add_applicant_language_french">French</string>
+    <string name="activity_add_applicant_mails_error">Mails field is required</string>
+    <string name="dialog_title_add_applicant_error">The creation has failed</string>
+    <string name="dialog_title_add_applicant_success">The creation was done successfully</string>
 
 </resources>

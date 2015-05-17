@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context="com.fourreau.itwapp.activity.AddInterviewActivity">
 
-
     <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" >
 
         <LinearLayout
@@ -87,12 +86,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
-                android:text="Add"/>
+                android:text="@string/activity_add_question_button"/>
         </LinearLayout>
     </ScrollView>
 
     <com.gc.materialdesign.views.ButtonFloat
-        android:id="@+id/addApplicantButtonValidate"
+        android:id="@+id/addInterviewButtonValidate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|right"
@@ -100,7 +99,6 @@
         android:layout_alignParentBottom="true"
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
-        android:layout_marginTop="20dp"
         android:background="#1E88E5"
         materialdesign:animate="false"
         materialdesign:iconDrawable="@drawable/ic_action_accept" />

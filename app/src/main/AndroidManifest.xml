@@ -18,7 +18,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="adjustResize|stateVisible" >
+            android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -73,6 +73,7 @@
         <activity
             android:name=".activity.AddApplicantActivity"
             android:label="@string/title_activity_add_applicant"
+            android:windowSoftInputMode="stateHidden"
             android:parentActivityName=".activity.ApplicantsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

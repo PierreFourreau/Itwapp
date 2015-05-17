@@ -1,36 +1,106 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:materialdesign="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    tools:context="com.fourreau.itwapp.activity.AddInterviewActivity">
+    android:orientation="vertical"
+    tools:context="com.fourreau.itwapp.activity.EditInterviewActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+    <ScrollView android:layout_width="fill_parent" android:layout_height="fill_parent" >
 
-    <TextView
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <!--name-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_interview_name"/>
+
+            <EditText
+                android:id="@+id/editInterviewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:singleLine="true"
+                android:inputType="none"
+                android:nextFocusForward="@+id/editInterviewDescription"/>
+
+            <!--description-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_interview_description" />
+
+            <EditText
+                android:id="@+id/editInterviewDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textLongMessage"
+                android:nextFocusForward="@+id/editInterviewVideo"/>
+
+            <!--video-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_interview_video" />
+
+            <EditText
+                android:id="@+id/editInterviewVideo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri"
+                android:nextFocusForward="@+id/editInterviewCallback"/>
+
+            <!--callback-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_interview_callback" />
+
+            <EditText
+                android:id="@+id/editInterviewCallback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textUri"
+                android:nextFocusForward="@+id/textin"/>
+
+            <!--questions-->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/activity_edit_interview_questions" />
+
+            <LinearLayout
+                android:id="@+id/containerQuestions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/openDialogAddQuestion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/activity_add_question_button"/>
+        </LinearLayout>
+    </ScrollView>
+
+    <com.gc.materialdesign.views.ButtonFloat
+        android:id="@+id/editApplicantButtonValidate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/activity_add_interview_name" />
-
-
-    <EditText
-        android:layout_width="213dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/addInterviewName" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/activity_add_interview_description" />
-
-    <EditText
-        android:layout_width="211dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/addInterviewDescription"/>
-</LinearLayout>
+        android:layout_gravity="bottom|right"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginRight="24dp"
+        android:layout_marginBottom="24dp"
+        android:background="#1E88E5"
+        materialdesign:animate="false"
+        materialdesign:iconDrawable="@drawable/ic_action_accept" />
 
 </RelativeLayout>
