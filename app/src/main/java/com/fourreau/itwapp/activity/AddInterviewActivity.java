@@ -174,8 +174,8 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
 
                         //put question fields
                         question.put("content", textViewQuestionName.getText().toString());
-                        question.put("readingTime", Integer.parseInt(textViewQuestionReadingTime.getText().toString()) * 60);
-                        question.put("answerTime", Integer.parseInt(textViewQuestionAnswerTime.getText().toString()) * 60);
+                        question.put("readingTime", Integer.parseInt(textViewQuestionReadingTime.getText().toString().substring(0, 1)) * 60);
+                        question.put("answerTime", Integer.parseInt(textViewQuestionAnswerTime.getText().toString().substring(0, 1)) * 60);
                         question.put("number", i + 1);
 
                         questions.add(question);
