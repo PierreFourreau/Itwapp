@@ -29,9 +29,14 @@ import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.model.CreateApplicantsResponse;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.CreateApplicantsTask;
+import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +73,10 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
         addApplicanTimeChoosen = (TextView) findViewById(R.id.add_applicant_time_choosen);
         radioGroupLanguage = (RadioGroup) findViewById(R.id.add_applicant_radio_group_language);
         buttonValidateAddApplicant = (ButtonFloat) findViewById(R.id.add_applicant_button_validate);
+
+        Calendar c = Calendar.getInstance();
+        addApplicanDateChoosen.setText(Utils.sdfDateSimple.format(c.getTime()));
+        addApplicanTimeChoosen.setText(Utils.sdfTimeSimple.format(c.getTime()));
 
         //validate add
         buttonValidateAddApplicant.setOnClickListener(new View.OnClickListener(){
