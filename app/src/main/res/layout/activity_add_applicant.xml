@@ -22,12 +22,26 @@
                 android:layout_height="wrap_content"
                 android:text="@string/activity_add_applicant_mails"/>
 
-            <EditText
-                android:id="@+id/add_applicant_mails"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="none"
-                android:nextFocusForward="@+id/addApplicantMessage"/>
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/add_applicant_mails"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="none"
+                    android:layout_weight="0.7"
+                    android:nextFocusForward="@+id/addApplicantMessage"/>
+
+                <ImageButton
+                    android:background="@drawable/ic_action_add_person"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:onClick="showContactsDialog"/>
+            </LinearLayout>
 
             <!--message-->
             <TextView
@@ -87,6 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
+                    android:onClick="showDatePickerDialog"
                     android:text="25/09/2016"/>
 
                 <ImageButton
@@ -101,6 +116,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_gravity="center_vertical"
+                    android:onClick="showTimePickerDialog"
                     android:text="16:05"/>
 
                 <ImageButton

@@ -110,5 +110,8 @@
     <string name="activity_add_applicant_mails_error">Mails field is required</string>
     <string name="dialog_title_add_applicant_error">The creation has failed</string>
     <string name="dialog_title_add_applicant_success">The creation was done successfully</string>
+    <string name="dialog_title_add_applicant_contact_loading">Retrieving contact</string>
+    <string name="dialog_title_add_applicant_contact_no_result">No email associated with contact</string>
+    <string name="dialog_title_add_applicant_contact_success">Contact added</string>
 
 </resources>

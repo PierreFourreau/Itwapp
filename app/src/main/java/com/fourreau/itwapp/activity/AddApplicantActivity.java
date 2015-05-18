@@ -5,6 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
 import android.provider.ContactsContract;
@@ -20,6 +21,7 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
@@ -27,8 +29,11 @@ import com.fourreau.itwapp.fragment.DatePickerFragment;
 import com.fourreau.itwapp.fragment.TimePickerFragment;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.model.CreateApplicantsResponse;
+import com.fourreau.itwapp.model.GetContactResponse;
 import com.fourreau.itwapp.service.ApplicantService;
+import com.fourreau.itwapp.task.AllApplicantsTask;
 import com.fourreau.itwapp.task.CreateApplicantsTask;
+import com.fourreau.itwapp.task.GetContactTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
 
@@ -45,7 +50,9 @@ import javax.inject.Inject;
 
 import timber.log.Timber;
 
-public class AddApplicantActivity extends ActionBarActivity implements CreateApplicantsResponse, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+public class AddApplicantActivity extends ActionBarActivity implements CreateApplicantsResponse, GetContactResponse, DatePickerDialog.OnDateSetListener, TimePickerDialog.OnTimeSetListener {
+
+    static final int PICK_CONTACT_REQUEST = 1;
 
     @Inject
     ApplicantService applicantService;
@@ -118,6 +125,61 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
                 showAlertDialog(R.string.dialog_title_generic_error, R.string.activity_add_applicant_mails_error);
             }
         }});
+    }
+
+    /**
+     * Show contacts dialog.
+     */
+    public void showContactsDialog(View v) {
+        Intent intent = new Intent(Intent.ACTION_PICK);
+        intent.setType(ContactsContract.Contacts.CONTENT_TYPE);
+        startActivityForResult(intent, PICK_CONTACT_REQUEST);
+    }
+
+    /**
+     * Get contact email.
+     *
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //check which request it is that we're responding to
+        if (requestCode == PICK_CONTACT_REQUEST) {
+            //make sure the request was successful
+            if (resultCode == RESULT_OK) {
+                //get the URI that points to the selected contact
+                Uri contactUri = data.getData();
+
+                //launch task
+                GetContactTask mTask = new GetContactTask(AddApplicantActivity.this, contactUri);
+                mTask.delegate = AddApplicantActivity.this;
+                mTask.execute();
+            }
+        }
+    }
+
+    /**
+     * Get result from contact dialog.
+     *
+     * @param email
+     */
+    public void processFinishGetContact(String email) {
+        if(email != null && email != "") {
+            String textViewContent = editTextMails.getText().toString();
+            if(textViewContent.isEmpty()) {
+                editTextMails.setText(email, TextView.BufferType.EDITABLE);
+            }
+            else {
+                editTextMails.setText(textViewContent + ";" + email, TextView.BufferType.EDITABLE);
+            }
+
+            Toast.makeText(AddApplicantActivity.this, R.string.dialog_title_add_applicant_contact_success, Toast.LENGTH_LONG).show();
+        }
+        else {
+            Toast.makeText(AddApplicantActivity.this, R.string.dialog_title_add_applicant_contact_no_result, Toast.LENGTH_LONG).show();
+        }
     }
 
     /**
@@ -197,54 +259,5 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
                 //do nothing
             }
         }).show();
-    }
-
-    public void fetchContacts() {
-
-        List<Contact> contacts = new ArrayList<Contact>();
-
-
-        String email = null;
-
-        Uri CONTENT_URI = ContactsContract.Contacts.CONTENT_URI;
-        String _ID = ContactsContract.Contacts._ID;
-        String DISPLAY_NAME = ContactsContract.Contacts.DISPLAY_NAME;
-        String HAS_PHONE_NUMBER = ContactsContract.Contacts.HAS_PHONE_NUMBER;
-
-        Uri PhoneCONTENT_URI = ContactsContract.CommonDataKinds.Phone.CONTENT_URI;
-        String Phone_CONTACT_ID = ContactsContract.CommonDataKinds.Phone.CONTACT_ID;
-        String NUMBER = ContactsContract.CommonDataKinds.Phone.NUMBER;
-
-        Uri EmailCONTENT_URI =  ContactsContract.CommonDataKinds.Email.CONTENT_URI;
-        String EmailCONTACT_ID = ContactsContract.CommonDataKinds.Email.CONTACT_ID;
-        String DATA = ContactsContract.CommonDataKinds.Email.DATA;
-
-        StringBuffer output = new StringBuffer();
-
-        ContentResolver contentResolver = AddApplicantActivity.this.getContentResolver();
-
-        Cursor cursor = contentResolver.query(CONTENT_URI, null,null, null, null);
-
-        // Loop for every contact in the phone
-        if (cursor.getCount() > 0) {
-            while (cursor.moveToNext()) {
-                String contact_id = cursor.getString(cursor.getColumnIndex( _ID ));
-                // Query and loop for every email of the contact
-                Cursor emailCursor = contentResolver.query(EmailCONTENT_URI,	null, EmailCONTACT_ID+ " = ?", new String[] { contact_id }, null);
-                while (emailCursor.moveToNext()) {
-                    String name = cursor.getString(cursor.getColumnIndex( DISPLAY_NAME ));
-                    output.append("\n First Name:" + name);
-                    email = emailCursor.getString(emailCursor.getColumnIndex(DATA));
-                    output.append(" - Email:" + email);
-                    //create and add contact
-                    if(name != null && email != null) {
-                        Contact contact = new Contact(contact_id, name, email, null, null, null);
-                        contacts.add(contact);
-                    }
-                }
-                emailCursor.close();
-            }
-            Timber.d(output.toString());
-        }
     }
 }
