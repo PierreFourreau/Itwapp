@@ -17,6 +17,7 @@ import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
+import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;
@@ -72,9 +73,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 
         //launch task which retrieve one interview
-        AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
-        mTask.delegate = this;
-        mTask.execute();
+        launchTask();
     }
 
 
@@ -106,10 +105,25 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     }
 
     @Override
+    public void onResume() {
+        launchTask();
+        super.onResume();
+    }
+
+    @Override
     public void onBackPressed() {
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+    }
+
+    /**
+     * Launch task for applicants.
+     */
+    public void launchTask() {
+        AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
     }
 
     public void processFinish(Applicant[] applicants){

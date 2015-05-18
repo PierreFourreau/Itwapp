@@ -70,8 +70,8 @@
     <string name="activity_interview_name">Name</string>
     <string name="activity_interview_description">Description</string>
     <string name="activity_interview_video">Video</string>
+    <string name="activity_interview_callback">Callback</string>
     <string name="activity_interview_questions">Questions</string>
-    <string name="activity_interview_see_applicants_button">See applicants</string>
 
     <!--Delete interview-->
     <string name="dialog_title_delete_error">The deletion has failed</string>

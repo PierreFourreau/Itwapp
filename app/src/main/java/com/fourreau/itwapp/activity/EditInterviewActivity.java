@@ -295,8 +295,6 @@ public class EditInterviewActivity extends ActionBarActivity implements Intervie
     public void processFinishUpdate(Interview output) {
         Toast.makeText(this, R.string.activity_update_interview_success, Toast.LENGTH_SHORT).show();
         finish();
-        Intent intent = new Intent(EditInterviewActivity.this, InterviewActivity.class);
-        startActivity(intent);
     }
 
     /**

@@ -16,6 +16,7 @@
 
     <color name="navigation">#33373B</color>
     <color name="navigation_logo">#AEE655</color>
+    <color name="camera_logo">#54AAE6</color>
 
     <color name="frame">#b4b4b4</color>
     <color name="frame_solid">#eee</color>

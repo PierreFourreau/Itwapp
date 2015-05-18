@@ -18,7 +18,7 @@ import com.fourreau.itwapp.model.UpdateInterviewResponse;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
-import com.gc.materialdesign.views.ButtonRectangle;
+import com.gc.materialdesign.views.ButtonFloat;
 
 import javax.inject.Inject;
 
@@ -33,8 +33,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private String idInterview;
 
-    private TextView textViewName, textViewDescription, textViewVideo, textViewQuestions;
-    private ButtonRectangle seeApplicantsButton;
+    private TextView textViewName, textViewDescription, textViewVideo, textViewCallback, textViewQuestions;
+    private ButtonFloat seeApplicantsButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +48,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         textViewName = (TextView) findViewById(R.id.activity_interview_name);
         textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
         textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
+        textViewCallback = (TextView) findViewById(R.id.activity_interview_callback);
         textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
 
         Timber.d("InterviewActivity: id interview " + idInterview);
@@ -56,7 +57,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         launchTask();
 
         //see applicants button
-        seeApplicantsButton = (ButtonRectangle) findViewById(R.id.see_applicants_button);
+        seeApplicantsButton = (ButtonFloat) findViewById(R.id.see_applicants_button);
         seeApplicantsButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -136,10 +137,17 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         else {
             textViewVideo.setText(R.string.none);
         }
+        //callback
+        if(!interview.callback.isEmpty()) {
+            textViewCallback.setText(interview.callback);
+        }
+        else {
+            textViewCallback.setText(R.string.none);
+        }
         if(interview.questions.length > 0) {
             String questions = "";
             for(Question q : interview.questions) {
-                questions += q.content + "\n";
+                questions += "- " + q.content + "\n";
             }
             textViewQuestions.setText(questions);
         }

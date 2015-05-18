@@ -226,6 +226,21 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
         addApplicanTimeChoosen.setText(hourOfDay + ":" + minute);
     }
 
+    /**
+     * Retrieve result from task.
+     *
+     * @param output
+     */
+    public void processFinishCreate(Boolean output) {
+        if(output) {
+            Toast.makeText(AddApplicantActivity.this, R.string.dialog_title_add_applicant_success, Toast.LENGTH_LONG).show();
+            finish();
+        }
+        else {
+            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_add_applicant_error);
+        }
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
@@ -234,20 +249,6 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * Retrieve result from task.
-     *
-     * @param output
-     */
-    public void processFinishCreate(Boolean output) {
-        if(output) {
-            showAlertDialog(R.string.dialog_title_generic_success, R.string.dialog_title_add_applicant_success);
-        }
-        else {
-            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_add_applicant_error);
-        }
     }
 
     private void showAlertDialog(int title, int content) {

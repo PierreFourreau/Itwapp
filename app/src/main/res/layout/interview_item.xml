@@ -13,6 +13,7 @@
     <!-- the container view for the title and description -->
     <RelativeLayout android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="5dp"
         android:layout_centerVertical="true" >
 
         <!-- the hidden id view -->
