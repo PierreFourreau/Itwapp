@@ -43,8 +43,6 @@ import javax.inject.Inject;
  */
 public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
-    private static final String TAG = LoginActivity.class.getName();
-
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */

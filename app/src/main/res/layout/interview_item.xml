@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="4dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp">
 
     <!-- the container view for the title and description -->
     <RelativeLayout android:layout_width="wrap_content"
@@ -26,8 +26,6 @@
         <TextView android:id="@+id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/material_deep_teal_500"
-            android:textSize="30sp"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
         <!-- the description view -->
@@ -35,8 +33,6 @@
             android:layout_below="@id/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="25sp"
-            android:textColor="@color/material_deep_teal_500"
             android:textAppearance="@android:style/TextAppearance.Small" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

@@ -145,7 +145,7 @@ public class NavigationDrawerFragment extends Fragment {
         // set up the drawer's list view with items and click listener
 
         ActionBar actionBar = getActionBar();
-//        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.navigation)));
+        actionBar.setBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.navigation)));
         actionBar.setDisplayHomeAsUpEnabled(true);
         actionBar.setHomeButtonEnabled(true);
 
