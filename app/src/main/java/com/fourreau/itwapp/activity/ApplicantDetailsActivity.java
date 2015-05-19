@@ -1,6 +1,7 @@
 package com.fourreau.itwapp.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -28,6 +29,8 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
     @Inject
     ApplicantService applicantService;
 
+    private Applicant applicant;
+
     private String idApplicant;
 
     private TextView textViewMail, textViewFirstName, textViewLastName, textViewDeadline, textViewDeleted, textViewAnswerDate, textViewEmailView, textViewStatus;
@@ -40,26 +43,16 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
         ((ItwApplication) getApplication()).inject(this);
 
-
         Intent i = getIntent();
         idApplicant = i.getStringExtra("idApplicant");
 
         if(idApplicant != null) {
+            initView();
+
             //launch task which retrieve one interview
             OneApplicantTask mTask = new OneApplicantTask(ApplicantDetailsActivity.this, applicantService, idApplicant);
             mTask.delegate = this;
             mTask.execute();
-
-            //get fields
-            textViewMail = (TextView) findViewById(R.id.activity_details_mail);
-            textViewFirstName = (TextView) findViewById(R.id.activity_details_first_name);
-            textViewLastName = (TextView) findViewById(R.id.activity_details_last_name);
-            textViewDeadline = (TextView) findViewById(R.id.activity_details_deadline);
-            textViewDeleted = (TextView) findViewById(R.id.activity_details_deleted);
-            textViewAnswerDate = (TextView) findViewById(R.id.activity_details_answer_date);
-            textViewEmailView = (TextView) findViewById(R.id.activity_details_email_view);
-            textViewStatus = (TextView) findViewById(R.id.activity_details_status);
-            language = (ImageView) findViewById(R.id.activity_details_language);
         }
         else {
             Dialog dialog = new Dialog(getApplicationContext(), getString(R.string.dialog_title_generic_error), getString(R.string.activity_applicant_details_error));
@@ -92,8 +85,29 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
     }
 
-    public void processFinish(Applicant applicant){
-        Timber.d("ApplicantDetailsActivity:applicant retrieved : " + applicant.mail);
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_applicant_details);
+
+        initView();
+        updateUi();
+    }
+
+    public void initView() {
+        //get fields
+        textViewMail = (TextView) findViewById(R.id.activity_details_mail);
+        textViewFirstName = (TextView) findViewById(R.id.activity_details_first_name);
+        textViewLastName = (TextView) findViewById(R.id.activity_details_last_name);
+        textViewDeadline = (TextView) findViewById(R.id.activity_details_deadline);
+        textViewDeleted = (TextView) findViewById(R.id.activity_details_deleted);
+        textViewAnswerDate = (TextView) findViewById(R.id.activity_details_answer_date);
+        textViewEmailView = (TextView) findViewById(R.id.activity_details_email_view);
+        textViewStatus = (TextView) findViewById(R.id.activity_details_status);
+        language = (ImageView) findViewById(R.id.activity_details_language);
+    }
+
+    public void updateUi() {
         //set fields
         textViewMail.setText(applicant.mail);
         //firstname
@@ -139,4 +153,9 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
     }
 
+    public void processFinish(Applicant a){
+        applicant = a;
+        Timber.d("ApplicantDetailsActivity:applicant retrieved : " + applicant.mail);
+        updateUi();
+    }
 }

@@ -81,14 +81,8 @@ public class AllApplicantsTask extends AsyncTask<String, Void, AsyncTaskResult<A
             Applicant[] applicants = result.getResult();
 
             if(applicants != null) {
-                for(int i = 0; i < applicants.length; i++) {
-                    Timber.d("Applicant : " + applicants[i].firstname);
-                }
-
                 delegate.processFinish(applicants);
-
                 Timber.d("Number of applicants retrieved : " + applicants.length);
-                Toast.makeText(mContext, "Number of applicants retrieved : " + applicants.length, Toast.LENGTH_LONG).show();
             }
         }
         mProgressDialog.dismiss();

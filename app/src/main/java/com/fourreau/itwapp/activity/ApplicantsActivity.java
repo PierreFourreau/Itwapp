@@ -1,6 +1,7 @@
 package com.fourreau.itwapp.activity;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,8 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     @Inject
     ApplicantService applicantService;
 
+    private List<Contact> contactList;
+
     private RecyclerView recList;
     private LinearLayoutManager llm;
     private ContactAdapter ca;
@@ -49,28 +52,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
 
         ((ItwApplication) getApplication()).inject(this);
 
-        textViewNoData = (TextView) findViewById(R.id.textViewNoData);
-
-        //recycler view
-        recList = (RecyclerView) findViewById(R.id.cardList);
-        recList.setHasFixedSize(true);
-        llm = new LinearLayoutManager(this);
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recList.setLayoutManager(llm);
-
-        //add applicant button
-        addApplicationButton = (ButtonFloat) findViewById(R.id.addApplicantButton);
-        addApplicationButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(ApplicantsActivity.this, AddApplicantActivity.class);
-                startActivity(intent);
-            }
-        });
-
-        //get interview id
-        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
+        initView();
 
         //launch task which retrieve one interview
         launchTask();
@@ -117,21 +99,41 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
     }
 
-    /**
-     * Launch task for applicants.
-     */
-    public void launchTask() {
-        AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
-        mTask.delegate = this;
-        mTask.execute();
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_applicants);
+
+        initView();
+        updateUi();
     }
 
-    public void processFinish(Applicant[] applicants){
-        //fill contact list
-        List<Contact> contactList = new ArrayList<Contact>();
-        for(int i = 0; i < applicants.length; i++) {
-            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd, applicants[i].lang, applicants[i].status.getCode()));
-        }
+    public void initView() {
+        textViewNoData = (TextView) findViewById(R.id.textViewNoData);
+
+        //recycler view
+        recList = (RecyclerView) findViewById(R.id.cardList);
+        recList.setHasFixedSize(true);
+        llm = new LinearLayoutManager(this);
+        llm.setOrientation(LinearLayoutManager.VERTICAL);
+        recList.setLayoutManager(llm);
+
+        //add applicant button
+        addApplicationButton = (ButtonFloat) findViewById(R.id.addApplicantButton);
+        addApplicationButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(ApplicantsActivity.this, AddApplicantActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        //get interview id
+        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
+    }
+
+    public void updateUi(){
         //set adapter
         ca = new ContactAdapter(ApplicantsActivity.this, contactList);
         recList.setAdapter(ca);
@@ -146,5 +148,23 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
             menuItem.collapseActionView();
             menuItem.setActionView(null);
         }
+    }
+
+    /**
+     * Launch task for applicants.
+     */
+    public void launchTask() {
+        AllApplicantsTask mTask = new AllApplicantsTask(ApplicantsActivity.this, applicantService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
+    }
+
+    public void processFinish(Applicant[] applicants){
+        //fill contact list
+        contactList = new ArrayList<Contact>();
+        for(int i = 0; i < applicants.length; i++) {
+            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd, applicants[i].lang, applicants[i].status.getCode()));
+        }
+        updateUi();
     }
 }

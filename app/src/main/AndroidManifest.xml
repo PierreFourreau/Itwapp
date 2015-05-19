@@ -51,6 +51,7 @@
         <activity
             android:name=".activity.InterviewActivity"
             android:label="@string/title_activity_interview"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activity.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,6 +60,7 @@
         <activity
             android:name=".activity.ApplicantsActivity"
             android:label="@string/title_activity_applicants"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activity.InterviewActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -67,6 +69,7 @@
         <activity
             android:name=".activity.ApplicantDetailsActivity"
             android:label="@string/title_activity_applicant_details"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:parentActivityName=".activity.ApplicantsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

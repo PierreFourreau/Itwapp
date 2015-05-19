@@ -3,6 +3,7 @@ package com.fourreau.itwapp.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -31,6 +32,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
     @Inject
     InterviewService interviewService;
 
+    private Interview interview;
+
     private String idInterview;
 
     private TextView textViewName, textViewDescription, textViewVideo, textViewCallback, textViewQuestions;
@@ -43,30 +46,10 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
         setContentView(R.layout.activity_interview);
 
-        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
-
-        textViewName = (TextView) findViewById(R.id.activity_interview_name);
-        textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
-        textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
-        textViewCallback = (TextView) findViewById(R.id.activity_interview_callback);
-        textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
-
-        Timber.d("InterviewActivity: id interview " + idInterview);
+        initView();
 
         //launch task which retrieve one interview
         launchTask();
-
-        //see applicants button
-        seeApplicantsButton = (ButtonFloat) findViewById(R.id.see_applicants_button);
-        seeApplicantsButton.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(InterviewActivity.this, ApplicantsActivity.class);
-                startActivity(intent);
-                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
-            }
-        });
     }
 
     @Override
@@ -107,21 +90,40 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         super.onResume();
     }
 
-    public void launchTask() {
-        OneInterviewTask mTask = new OneInterviewTask(InterviewActivity.this, interviewService, idInterview);
-        mTask.delegate = this;
-        mTask.execute();
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setContentView(R.layout.activity_interview);
+
+        initView();
+        updateUi();
     }
 
-    public void deleteInterview() {
-        //launch task which remove interview
-        DeleteInterviewTask mTask = new DeleteInterviewTask(InterviewActivity.this, interviewService, idInterview);
-        mTask.delegate = this;
-        mTask.execute();
+    public void initView(){
+        idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
+
+        textViewName = (TextView) findViewById(R.id.activity_interview_name);
+        textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
+        textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
+        textViewCallback = (TextView) findViewById(R.id.activity_interview_callback);
+        textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
+
+        Timber.d("InterviewActivity: id interview " + idInterview);
+
+        //see applicants button
+        seeApplicantsButton = (ButtonFloat) findViewById(R.id.see_applicants_button);
+        seeApplicantsButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View arg0) {
+                Intent intent = new Intent(InterviewActivity.this, ApplicantsActivity.class);
+                startActivity(intent);
+                overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
+            }
+        });
     }
 
-    public void processFinish(Interview interview){
-        Timber.d("InterviewActivity:interview retrieved : " + interview.name);
+    public void updateUi() {
         textViewName.setText(interview.name);
         //description
         if(!interview.text.isEmpty()) {
@@ -154,6 +156,26 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         else {
             textViewQuestions.setText(R.string.none);
         }
+    }
+
+    public void launchTask() {
+        OneInterviewTask mTask = new OneInterviewTask(InterviewActivity.this, interviewService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
+    }
+
+    public void deleteInterview() {
+        //launch task which remove interview
+        DeleteInterviewTask mTask = new DeleteInterviewTask(InterviewActivity.this, interviewService, idInterview);
+        mTask.delegate = this;
+        mTask.execute();
+    }
+
+    public void processFinish(Interview itw){
+        interview = itw;
+        Timber.d("InterviewActivity:interview retrieved : " + interview.name);
+
+        updateUi();
     }
 
     public void processFinishDelete(Boolean output) {
