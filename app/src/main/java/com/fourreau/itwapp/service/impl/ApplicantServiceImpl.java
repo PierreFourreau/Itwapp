@@ -30,13 +30,6 @@ public class ApplicantServiceImpl implements ApplicantService {
 
     @Override
     public Applicant create(Map<String, Object> param) {
-//        Map<String, Object> param = new HashMap<String, Object>();
-//        param.put("mail", "jerome@itwapp.io");
-//        param.put("alert", false);
-//        param.put("interview", ApplicantTest.interviewId);
-//        param.put("lang", "en");
-//        param.put("deadline", 1409045626568L);
-
         return Applicant.create(param);
     }
 
