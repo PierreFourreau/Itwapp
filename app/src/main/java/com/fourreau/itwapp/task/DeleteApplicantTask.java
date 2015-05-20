@@ -12,6 +12,10 @@ import com.fourreau.itwapp.model.DeleteApplicantResponse;
 import com.fourreau.itwapp.service.ApplicantService;
 
 import io.itwapp.exception.APIException;
+import io.itwapp.exception.InvalidRequestError;
+import io.itwapp.exception.ResourceNotFoundException;
+import io.itwapp.exception.ServiceException;
+import io.itwapp.exception.UnauthorizedException;
 import timber.log.Timber;
 
 /**
@@ -52,7 +56,7 @@ public class DeleteApplicantTask extends AsyncTask<String, Void, Boolean> {
             applicantService.delete(applicantId);
             return true;
         }
-        catch (APIException e) {
+        catch (APIException | UnauthorizedException |InvalidRequestError | ResourceNotFoundException | ServiceException e) {
             Timber.e("ApplicantDetailsActivity:delete:" + e.toString());
             return false;
         }

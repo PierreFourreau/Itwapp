@@ -15,6 +15,10 @@ import com.fourreau.itwapp.service.InterviewService;
 import java.util.Map;
 
 import io.itwapp.exception.APIException;
+import io.itwapp.exception.InvalidRequestError;
+import io.itwapp.exception.ResourceNotFoundException;
+import io.itwapp.exception.ServiceException;
+import io.itwapp.exception.UnauthorizedException;
 import io.itwapp.models.Interview;
 import timber.log.Timber;
 
@@ -59,7 +63,7 @@ public class UpdateInterviewTask extends AsyncTask<String, Void, AsyncTaskResult
             interview = interviewService.update(interviewId, param);
             return new AsyncTaskResult<Interview>(interview);
         }
-        catch (APIException e) {
+        catch (APIException | UnauthorizedException |InvalidRequestError | ResourceNotFoundException | ServiceException e) {
             Timber.e("InterviewActivity:update:" + e.toString());
             return new AsyncTaskResult<Interview>(e);
         }

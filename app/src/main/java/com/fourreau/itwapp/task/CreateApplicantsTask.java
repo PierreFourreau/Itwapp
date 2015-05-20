@@ -16,6 +16,9 @@ import java.util.Map;
 
 import io.itwapp.exception.APIException;
 import io.itwapp.exception.InvalidRequestError;
+import io.itwapp.exception.ResourceNotFoundException;
+import io.itwapp.exception.ServiceException;
+import io.itwapp.exception.UnauthorizedException;
 import timber.log.Timber;
 
 /**
@@ -58,7 +61,7 @@ public class CreateApplicantsTask extends AsyncTask<String, Void, Boolean> {
             }
             return true;
         }
-        catch (APIException | InvalidRequestError e) {
+        catch (APIException | UnauthorizedException |InvalidRequestError | ResourceNotFoundException | ServiceException e) {
             Timber.e("AddInterviewActivity:create:" + e.toString());
             return false;
         }

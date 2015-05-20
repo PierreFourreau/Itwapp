@@ -13,6 +13,10 @@ import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.service.InterviewService;
 
 import io.itwapp.exception.APIException;
+import io.itwapp.exception.InvalidRequestError;
+import io.itwapp.exception.ResourceNotFoundException;
+import io.itwapp.exception.ServiceException;
+import io.itwapp.exception.UnauthorizedException;
 import io.itwapp.models.Interview;
 import timber.log.Timber;
 
@@ -55,7 +59,7 @@ public class OneInterviewTask extends AsyncTask<String, Void, AsyncTaskResult<In
             interview = interviewService.findOne(interviewId);
             return new AsyncTaskResult<Interview>(interview);
         }
-        catch (APIException e) {
+        catch (APIException | UnauthorizedException |InvalidRequestError | ResourceNotFoundException | ServiceException e) {
             Timber.e("InterviewActivity:findOne:" + e.toString());
             return new AsyncTaskResult<Interview>(e);
         }
