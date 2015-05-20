@@ -58,8 +58,6 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         launchTask();
     }
 
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.global, menu);

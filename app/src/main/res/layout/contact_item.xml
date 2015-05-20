@@ -5,31 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="4dp"
-    android:layout_marginRight="20dp"
-    android:layout_marginLeft="20dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp">
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginTop="3dp"
+    android:layout_marginBottom="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:orientation="vertical"
+            android:orientation="horizontal"
             android:padding="15dp"
             android:layout_height="wrap_content"
             android:layout_width="fill_parent">
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
-
-                <ImageView
-                    android:id="@+id/gravatar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_action_person" />
+                android:layout_width="0dp"
+                android:layout_weight=".2">
 
                 <TextView
                     android:id="@+id/id"
@@ -37,47 +32,70 @@
                     android:layout_height="wrap_content"
                     android:visibility="gone"/>
 
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/contact_gravatar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_weight=".7">
+
                 <TextView
                     android:id="@+id/mail"
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
-                    android:background="@color/ripple_material_dark"
                     android:text="fourreau.pierre@gmail.com"
+                    android:textAppearance="@android:style/TextAppearance.Medium"
                     android:gravity="center_vertical"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="20dp"
                     android:textSize="14dp"/>
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_applicants_deadline"
+                        android:textAppearance="@android:style/TextAppearance.Small"
+                        android:gravity="center_vertical"
+                        android:textSize="10dp"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="10dp"/>
+
+                    <TextView
+                        android:id="@+id/deadline"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/activity_applicants_deadline"
+                        android:textAppearance="@android:style/TextAppearance.Small"
+                        android:gravity="center_vertical"
+                        android:textSize="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="5dp"/>
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 android:layout_height="wrap_content"
-                android:layout_width="wrap_content">
+                android:layout_width="0dp"
+                android:layout_weight=".1">
 
                 <ImageView
                     android:id="@+id/language"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
                     android:src="@drawable/flag_fr" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/activity_applicants_deadline"
-                    android:gravity="center_vertical"
-                    android:textSize="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginTop="10dp"/>
-
-                <TextView
-                    android:id="@+id/deadline"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/activity_applicants_deadline"
-                    android:gravity="center_vertical"
-                    android:textSize="10dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="5dp"/>
 
             </LinearLayout>
         </LinearLayout>

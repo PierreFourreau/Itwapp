@@ -33,21 +33,25 @@
                     android:layout_width="wrap_content"
                     android:layout_gravity="center">
 
-                    <ImageView
+                    <!--gravatar-->
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/activity_details_gravatar"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:src="@drawable/gravatar" />
+                        android:layout_height="wrap_content" />
+
                     <ImageView
                         android:id="@+id/activity_details_language"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
                         android:src="@drawable/flag_fr" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
+                    android:layout_width="wrap_content"
+                    android:layout_marginTop="20dp">
 
                     <TextView
                         android:text="@string/activity_applicant_details_mail"

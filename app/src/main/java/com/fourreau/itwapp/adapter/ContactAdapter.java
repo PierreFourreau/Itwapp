@@ -15,10 +15,13 @@ import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.ApplicantDetailsActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.Contact;
+import com.fourreau.itwapp.task.DownloadImageTask;
 import com.fourreau.itwapp.util.Utils;
 
 import java.sql.Date;
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
  * Created by Pierre on 08/05/2015.
@@ -54,6 +57,9 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         else {
             contactViewHolder.vLanguage.setBackgroundResource(R.drawable.flag_fr);
         }
+        //gravatar download image
+        String hash = Utils.md5Hex(c.getEmail());
+        new DownloadImageTask(contactViewHolder.vGravatar).execute(Utils.getSmallUrlGravatar(hash));
     }
 
     @Override
@@ -77,6 +83,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         protected TextView vId;
         protected TextView vMail;
         protected TextView vDeadline;
+        protected ImageView vGravatar;
         protected ImageView vLanguage;
         public IContactViewHolderClicks mListener;
 
@@ -87,6 +94,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             vId = (TextView) v.findViewById(R.id.id);
             vMail =  (TextView) v.findViewById(R.id.mail);
             vDeadline = (TextView)  v.findViewById(R.id.deadline);
+            vGravatar = (ImageView)  v.findViewById(R.id.contact_gravatar);
             vLanguage = (ImageView)  v.findViewById(R.id.language);
             cardView.setOnClickListener(this);
         }

@@ -4,8 +4,12 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,9 +24,14 @@ import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.DeleteApplicantTask;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
+import com.fourreau.itwapp.task.DownloadImageTask;
 import com.fourreau.itwapp.task.OneApplicantTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
+
+import org.slf4j.helpers.Util;
+
+import java.io.InputStream;
 
 import javax.inject.Inject;
 
@@ -40,7 +49,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
     private String idApplicant;
 
     private TextView textViewMail, textViewFirstName, textViewLastName, textViewDeadline, textViewDeleted, textViewAnswerDate, textViewEmailView, textViewStatus;
-    private ImageView language;
+    private ImageView language, gravatar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,7 +59,6 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         ((ItwApplication) getApplication()).inject(this);
 
         idApplicant = ((ItwApplication) this.getApplication()).getApplicantId();
-        String aa = ((ItwApplication) this.getApplication()).getInterviewId();
 
         if(idApplicant != null) {
             initView();
@@ -114,11 +122,24 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         textViewAnswerDate = (TextView) findViewById(R.id.activity_details_answer_date);
         textViewEmailView = (TextView) findViewById(R.id.activity_details_email_view);
         textViewStatus = (TextView) findViewById(R.id.activity_details_status);
+        gravatar = (ImageView) findViewById(R.id.activity_details_gravatar);
         language = (ImageView) findViewById(R.id.activity_details_language);
     }
 
     public void updateUi() {
         //set fields
+        //language
+        if(applicant.equals(Contact.Language.EN)){
+            language.setBackgroundResource(R.drawable.flag_en);
+        }
+        else {
+            language.setBackgroundResource(R.drawable.flag_fr);
+        }
+        //gravatar download image
+        String hash = Utils.md5Hex(applicant.mail);
+        new DownloadImageTask(gravatar).execute(Utils.getUrlGravatar(hash));
+
+        //mail
         textViewMail.setText(applicant.mail);
         //firstname
         if(!applicant.firstname.isEmpty()) {
@@ -153,13 +174,6 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
         else {
             textViewStatus.setText(R.string.unknown);
-        }
-        //language
-        if(applicant.equals(Contact.Language.EN)){
-            language.setBackgroundResource(R.drawable.flag_en);
-        }
-        else {
-            language.setBackgroundResource(R.drawable.flag_fr);
         }
     }
 
