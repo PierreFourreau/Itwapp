@@ -14,7 +14,9 @@
         <item>#CAF1E7</item>
     </string-array>
 
-    <color name="navigation">#1565C0</color>
+    <color name="navigation">#1976D2</color>
+    <color name="navigation_drawer">#33373B</color>
+
     <color name="navigation_logo">#AEE655</color>
     <color name="camera_logo">#54AAE6</color>
 

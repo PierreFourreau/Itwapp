@@ -1,5 +1,7 @@
 package com.fourreau.itwapp.activity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.v7.app.ActionBarActivity;
@@ -13,7 +15,11 @@ import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.ApplicantOneResponse;
 import com.fourreau.itwapp.model.Contact;
+import com.fourreau.itwapp.model.DeleteApplicantResponse;
+import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.service.ApplicantService;
+import com.fourreau.itwapp.task.DeleteApplicantTask;
+import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneApplicantTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
@@ -24,7 +30,7 @@ import io.itwapp.models.Applicant;
 import io.itwapp.models.ApplicantStatus;
 import timber.log.Timber;
 
-public class ApplicantDetailsActivity extends ActionBarActivity implements ApplicantOneResponse{
+public class ApplicantDetailsActivity extends ActionBarActivity implements ApplicantOneResponse, DeleteApplicantResponse{
 
     @Inject
     ApplicantService applicantService;
@@ -43,8 +49,8 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
         ((ItwApplication) getApplication()).inject(this);
 
-        Intent i = getIntent();
-        idApplicant = i.getStringExtra("idApplicant");
+        idApplicant = ((ItwApplication) this.getApplication()).getApplicantId();
+        String aa = ((ItwApplication) this.getApplication()).getInterviewId();
 
         if(idApplicant != null) {
             initView();
@@ -63,6 +69,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.applicant_details, menu);
         return true;
     }
 
@@ -73,6 +80,9 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
             case android.R.id.home:
                 finish();
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
+                return true;
+            case R.id.action_delete:
+                deleteApplicant();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -157,5 +167,32 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         applicant = a;
         Timber.d("ApplicantDetailsActivity:applicant retrieved : " + applicant.mail);
         updateUi();
+    }
+
+    public void processFinishDelete(Boolean output) {
+        if(output) {
+            showAlertDialog(R.string.dialog_title_generic_success, R.string.dialog_title_delete_success);
+        }
+        else {
+            showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_delete_error);
+        }
+    }
+
+    public void deleteApplicant() {
+        //launch task which remove applicant
+        DeleteApplicantTask mTask = new DeleteApplicantTask(ApplicantDetailsActivity.this, applicantService, idApplicant);
+        mTask.delegate = this;
+        mTask.execute();
+    }
+
+    private void showAlertDialog(int title, int content) {
+        new AlertDialog.Builder(ApplicantDetailsActivity.this).setTitle(title).setMessage(content)
+                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                finish();
+            }
+        }).show();
     }
 }

@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.ApplicantDetailsActivity;
+import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.util.Utils;
 
@@ -63,7 +64,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             public void triggerOnClickContact(View caller, String id) {
                 //launch activity
                 Intent intent = new Intent(activity, ApplicantDetailsActivity.class);
-                intent.putExtra("idApplicant", id);
+                ((ItwApplication) activity.getApplication()).setApplicantId(id);
                 activity.startActivity(intent);
                 activity.overridePendingTransition(R.anim.activity_in, R.anim.activity_out);
             };

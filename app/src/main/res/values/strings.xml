@@ -24,6 +24,10 @@
     <!--Alert dialog-->
     <string name="dialog_loading">Loading</string>
 
+    <!--Delete dialog-->
+    <string name="dialog_title_delete_error">The deletion has failed</string>
+    <string name="dialog_title_delete_success">The deletion was done successfully</string>
+
     <!--Alert messages-->
     <string name="dialog_title_generic_error">Error</string>
     <string name="dialog_title_generic_success">Success</string>
@@ -73,10 +77,6 @@
     <string name="activity_interview_callback">Callback</string>
     <string name="activity_interview_questions">Questions</string>
 
-    <!--Delete interview-->
-    <string name="dialog_title_delete_error">The deletion has failed</string>
-    <string name="dialog_title_delete_success">The deletion was done successfully</string>
-
     <!--Applicants activity-->
     <string name="title_activity_applicants">Applicants</string>
     <string name="activity_applicants_deadline">Deadline : </string>
@@ -97,6 +97,7 @@
     <string name="activity_applicant_details_status_in_progress">in progress</string>
     <string name="activity_applicant_details_status_open_email">open email</string>
     <string name="activity_applicant_details_status_email_sent">email sent</string>
+    <string name="title_activity_applicant_deletion">Applicant deletion</string>
     <string name="activity_applicant_details_error">Error while retrieving the applicant</string>
 
     <!--Add applicant activity-->

@@ -8,40 +8,34 @@ import android.content.DialogInterface;
 import android.os.AsyncTask;
 
 import com.fourreau.itwapp.R;
-import com.fourreau.itwapp.model.AsyncTaskResult;
-import com.fourreau.itwapp.model.DeleteInterviewResponse;
-import com.fourreau.itwapp.model.InterviewOneResponse;
-import com.fourreau.itwapp.service.InterviewService;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.fourreau.itwapp.model.DeleteApplicantResponse;
+import com.fourreau.itwapp.service.ApplicantService;
 
 import io.itwapp.exception.APIException;
-import io.itwapp.models.Interview;
 import timber.log.Timber;
 
 /**
  * Created by Pierre on 15/04/2015.
  */
-public class DeleteInterviewTask extends AsyncTask<String, Void, Boolean> {
+public class DeleteApplicantTask extends AsyncTask<String, Void, Boolean> {
 
     private Context mContext;
     private Activity mActivity;
-    private InterviewService interviewService;
-    private String interviewId;
+    private ApplicantService applicantService;
+    private String applicantId;
 
     private ProgressDialog mProgressDialog;
 
-    public DeleteInterviewResponse delegate = null;
+    public DeleteApplicantResponse delegate = null;
 
-    public DeleteInterviewTask(Activity activity, InterviewService interviewService, String interviewId){
+    public DeleteApplicantTask(Activity activity, ApplicantService applicantService, String applicantId){
         this.mContext = activity.getApplicationContext();
         this.mActivity = activity;
-        this.interviewService = interviewService;
-        this.interviewId = interviewId;
+        this.applicantService = applicantService;
+        this.applicantId = applicantId;
 
         mProgressDialog = new ProgressDialog(mActivity);
-        mProgressDialog.setTitle(mActivity.getString(R.string.title_activity_interview));
+        mProgressDialog.setTitle(mActivity.getString(R.string.title_activity_applicant_deletion));
         mProgressDialog.setMessage(mActivity.getString(R.string.dialog_loading));
         mProgressDialog.setCancelable(true);
     }
@@ -55,11 +49,11 @@ public class DeleteInterviewTask extends AsyncTask<String, Void, Boolean> {
     @Override
     protected Boolean doInBackground(String... params) {
         try {
-            interviewService.delete(interviewId, true);
+            applicantService.delete(applicantId);
             return true;
         }
         catch (APIException e) {
-            Timber.e("InterviewActivity:delete:" + e.toString());
+            Timber.e("ApplicantDetailsActivity:delete:" + e.toString());
             return false;
         }
     }

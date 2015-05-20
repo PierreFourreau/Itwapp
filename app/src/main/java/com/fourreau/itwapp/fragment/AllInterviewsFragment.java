@@ -169,6 +169,9 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
         if(interviewList.size() == 0) {
             textViewNoData.setVisibility(View.VISIBLE);
         }
+        else {
+            textViewNoData.setVisibility(View.GONE);
+        }
 
         //restore action bar refresh
         if(menuItem != null) {

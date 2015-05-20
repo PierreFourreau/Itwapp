@@ -25,6 +25,7 @@ public class ItwApplication extends Application {
     private ObjectGraph applicationGraph;
 
     public String interviewId;
+    public String applicantId;
 
     @Override public void onCreate() {
         super.onCreate();
@@ -45,6 +46,14 @@ public class ItwApplication extends Application {
 
     public void setInterviewId(String interviewId) {
         this.interviewId = interviewId;
+    }
+
+    public String getApplicantId() {
+        return applicantId;
+    }
+
+    public void setApplicantId(String applicantId) {
+        this.applicantId = applicantId;
     }
 
     /**

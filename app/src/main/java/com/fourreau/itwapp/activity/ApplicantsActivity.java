@@ -142,6 +142,9 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         if(contactList.size() == 0) {
             textViewNoData.setVisibility(View.VISIBLE);
         }
+        else {
+            textViewNoData.setVisibility(View.GONE);
+        }
 
         //restore action bar refresh
         if(menuItem != null) {
