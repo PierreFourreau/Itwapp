@@ -13,16 +13,20 @@ import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
+import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.model.UpdateInterviewResponse;
+import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.service.InterviewService;
+import com.fourreau.itwapp.task.AllApplicantsTask;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
 import com.gc.materialdesign.views.ButtonFloat;
 
 import javax.inject.Inject;
 
+import io.itwapp.models.Applicant;
 import io.itwapp.models.Interview;
 import io.itwapp.models.Question;
 import timber.log.Timber;
@@ -67,8 +71,14 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
             case R.id.action_edit:
-                Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
-                startActivity(intent);
+                //TODO with new api version
+//                if(interview.nb > 0) {
+//                    showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
+//                }
+//                else {
+                    Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
+                    startActivity(intent);
+//                }
                 return true;
             case R.id.action_delete:
                 deleteInterview();
@@ -82,12 +92,6 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
         overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
-    }
-
-    @Override
-    public void onResume() {
-        launchTask();
-        super.onResume();
     }
 
     @Override
@@ -171,6 +175,9 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         mTask.execute();
     }
 
+    /**
+     * Callback method of asyncs task.
+     */
     public void processFinish(Interview itw){
         interview = itw;
         Timber.d("InterviewActivity:interview retrieved : " + interview.name);
@@ -178,6 +185,9 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         updateUi();
     }
 
+    /**
+     * Callback method of asyncs task.
+     */
     public void processFinishDelete(Boolean output) {
         if(output) {
             showAlertDialog(R.string.dialog_title_generic_success, R.string.dialog_title_delete_success);
@@ -187,6 +197,9 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         }
     }
 
+    /**
+     * Callback method of asyncs task.
+     */
     public void processFinishUpdate(Interview output) {
         showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
         launchTask();
@@ -199,6 +212,20 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
             public void onClick(DialogInterface dialog, int which)
             {
                 finish();
+                Intent intent = new Intent(InterviewActivity.this, HomeActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        }).show();
+    }
+
+    private void showAlertDialogInfo(int title, int content) {
+        new AlertDialog.Builder(InterviewActivity.this).setTitle(title).setMessage(content)
+                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //do nothing
             }
         }).show();
     }

@@ -3,6 +3,7 @@ package com.fourreau.itwapp.core.module;
 import com.fourreau.itwapp.activity.AddApplicantActivity;
 import com.fourreau.itwapp.activity.ApplicantDetailsActivity;
 import com.fourreau.itwapp.activity.ApplicantsActivity;
+import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.fragment.AllInterviewsFragment;
 import com.fourreau.itwapp.service.ApplicantService;
@@ -19,7 +20,7 @@ import dagger.Provides;
 * Created by Pierre on 22/04/2015.
 */
 @Module(
-        injects = {ApplicantsActivity.class, ApplicantDetailsActivity.class, AddApplicantActivity.class},
+        injects = {ApplicantsActivity.class, ApplicantDetailsActivity.class, AddApplicantActivity.class, InterviewActivity.class},
         complete = false,
         library = true
 )

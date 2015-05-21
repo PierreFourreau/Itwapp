@@ -98,12 +98,6 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
     }
 
     @Override
-    public void onResume() {
-        launchTask();
-        super.onResume();
-    }
-
-    @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
     }

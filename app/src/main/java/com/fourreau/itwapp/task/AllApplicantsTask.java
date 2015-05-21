@@ -85,7 +85,7 @@ public class AllApplicantsTask extends AsyncTask<String, Void, AsyncTaskResult<A
             Applicant[] applicants = result.getResult();
 
             if(applicants != null) {
-                delegate.processFinish(applicants);
+                delegate.processFinishApplicantAll(applicants);
                 Timber.d("Number of applicants retrieved : " + applicants.length);
             }
         }

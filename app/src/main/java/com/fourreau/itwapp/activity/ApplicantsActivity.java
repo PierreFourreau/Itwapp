@@ -85,12 +85,6 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     }
 
     @Override
-    public void onResume() {
-        launchTask();
-        super.onResume();
-    }
-
-    @Override
     public void onBackPressed() {
         // finish() is called in super: we only override this method to be able to override the transition
         super.onBackPressed();
@@ -160,7 +154,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         mTask.execute();
     }
 
-    public void processFinish(Applicant[] applicants){
+    public void processFinishApplicantAll(Applicant[] applicants){
         //fill contact list
         contactList = new ArrayList<Contact>();
         for(int i = 0; i < applicants.length; i++) {

@@ -7,6 +7,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
@@ -25,6 +28,9 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
 
     private List<InterviewDto> interviewList;
 
+    //allows to remember the last item shown on screen
+    private int lastPosition = -1;
+
     public InterviewAdapter(Activity activity, List<InterviewDto> interviewList) {
         this.activity = activity;
         this.interviewList = interviewList;
@@ -41,8 +47,24 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         interviewViewHolder.vId.setText(itw.getId());
         interviewViewHolder.vTitle.setText(itw.getTitle());
         interviewViewHolder.vDescription.setText(itw.getDescription());
+
+        // Here you apply the animation when the view is bound
+        setAnimation(interviewViewHolder.container, i);
     }
 
+    /**
+     * Here is the method to apply the animation.
+     */
+    private void setAnimation(View viewToAnimate, int position)
+    {
+        // If the bound view wasn't previously displayed on screen, it's animated
+        if (position > lastPosition)
+        {
+            Animation animation = AnimationUtils.loadAnimation(activity, android.R.anim.slide_in_left);
+            viewToAnimate.startAnimation(animation);
+            lastPosition = position;
+        }
+    }
     @Override
     public InterviewViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View itemView = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.interview_item, viewGroup, false);
@@ -66,8 +88,12 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         protected TextView vDescription;
         public IInterviewViewHolderClicks mListener;
 
+        //need to retrieve the container (ie the root ViewGroup from your custom_item_layout), it's the view that will be animated
+        FrameLayout container;
+
         public InterviewViewHolder(View v, IInterviewViewHolderClicks listener) {
             super(v);
+            container = (FrameLayout) itemView.findViewById(R.id.card_view_interview);
             mListener = listener;
             cardView = (CardView) v.findViewById(R.id.card_view_interview);
             vId = (TextView) v.findViewById(R.id.id);

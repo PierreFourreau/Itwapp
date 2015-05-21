@@ -4,12 +4,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ImageView;
@@ -20,18 +16,12 @@ import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.ApplicantOneResponse;
 import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.model.DeleteApplicantResponse;
-import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.DeleteApplicantTask;
-import com.fourreau.itwapp.task.DeleteInterviewTask;
-import com.fourreau.itwapp.task.DownloadImageTask;
 import com.fourreau.itwapp.task.OneApplicantTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
-
-import org.slf4j.helpers.Util;
-
-import java.io.InputStream;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
@@ -137,8 +127,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
         //gravatar download image
         String hash = Utils.md5Hex(applicant.mail);
-        new DownloadImageTask(gravatar).execute(Utils.getUrlGravatar(hash));
-
+        Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar(hash)).into(gravatar);
         //mail
         textViewMail.setText(applicant.mail);
         //firstname
@@ -206,6 +195,9 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
             public void onClick(DialogInterface dialog, int which)
             {
                 finish();
+                Intent intent = new Intent(ApplicantDetailsActivity.this, ApplicantsActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
             }
         }).show();
     }
