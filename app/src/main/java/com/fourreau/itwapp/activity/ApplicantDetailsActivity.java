@@ -1,15 +1,25 @@
 package com.fourreau.itwapp.activity;
 
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
@@ -23,10 +33,17 @@ import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.inject.Inject;
 
 import io.itwapp.models.Applicant;
 import io.itwapp.models.ApplicantStatus;
+import io.itwapp.models.Question;
+import io.itwapp.models.Response;
 import timber.log.Timber;
 
 public class ApplicantDetailsActivity extends ActionBarActivity implements ApplicantOneResponse, DeleteApplicantResponse{
@@ -38,8 +55,10 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
     private String idApplicant;
 
-    private TextView textViewMail, textViewFirstName, textViewLastName, textViewDeadline, textViewDeleted, textViewAnswerDate, textViewEmailView, textViewStatus;
+    private TextView textViewMail, textViewFirstName, textViewLastName, textViewDeadline, textViewDeleted, textViewAnswerDate, textViewEmailView, textViewStatus, textViewResponsesNone;
     private ImageView language, gravatar;
+
+    private LinearLayout container;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,8 +131,10 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         textViewAnswerDate = (TextView) findViewById(R.id.activity_details_answer_date);
         textViewEmailView = (TextView) findViewById(R.id.activity_details_email_view);
         textViewStatus = (TextView) findViewById(R.id.activity_details_status);
+        textViewResponsesNone = (TextView) findViewById(R.id.text_view_responses_none);
         gravatar = (ImageView) findViewById(R.id.activity_details_gravatar);
         language = (ImageView) findViewById(R.id.activity_details_language);
+        container = (LinearLayout)findViewById(R.id.containerResponses);
     }
 
     public void updateUi() {
@@ -163,6 +184,47 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
         else {
             textViewStatus.setText(R.string.unknown);
+        }
+        //responses
+        if(applicant.questions.length > 0) {
+            if(applicant.responses.length > 0) {
+                for (Response r : applicant.responses) {
+                    for(Question q : applicant.questions) {
+                        if(q.number == r.number) {
+                            final String video = r.file;
+                            //add row
+                            LayoutInflater layoutInflater = (LayoutInflater) getBaseContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                            final View addView = layoutInflater.inflate(R.layout.response_row, null);
+
+                            //get fields
+                            TextView textViewQuestionName = (TextView) addView.findViewById(R.id.textViewQuestion);
+                            ImageButton buttonVideo = (ImageButton) addView.findViewById(R.id.button_video);
+                            //set fields
+                            textViewQuestionName.setText(q.content);
+                            //button video
+                            buttonVideo.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(ApplicantDetailsActivity.this, ResponseVideoActivity.class);
+                                    intent.putExtra("url", video);
+                                    startActivity(intent);
+                                }
+                            });
+                            addView.setBackgroundResource(R.drawable.frame);
+                            addView.setPadding(5,5,5,5);
+                            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+                            lp.setMargins(5, 5, 5, 2);
+                            addView.setLayoutParams(lp);
+                            //add row to container
+                            container.addView(addView);
+
+                        }
+                    }
+                }
+            }
+            else {
+                textViewResponsesNone.setVisibility(View.VISIBLE);
+            }
         }
     }
 

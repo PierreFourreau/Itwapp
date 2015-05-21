@@ -18,7 +18,7 @@
         <activity
             android:name=".activity.LoginActivity"
             android:label="@string/title_activity_login"
-            android:windowSoftInputMode="stateHidden">
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -33,8 +33,8 @@
         <activity
             android:name=".activity.AddInterviewActivity"
             android:label="@string/title_activity_add_interview"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".activity.HomeActivity" >
+            android:parentActivityName=".activity.HomeActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fourreau.itwapp.activity.HomeActivity" />
@@ -42,16 +42,16 @@
         <activity
             android:name=".activity.EditInterviewActivity"
             android:label="@string/title_activity_edit_interview"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".activity.InterviewActivity" >
+            android:parentActivityName=".activity.InterviewActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fourreau.itwapp.activity.InterviewActivity" />
         </activity>
         <activity
             android:name=".activity.InterviewActivity"
-            android:label="@string/title_activity_interview"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_interview"
             android:parentActivityName=".activity.HomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -59,8 +59,8 @@
         </activity>
         <activity
             android:name=".activity.ApplicantsActivity"
-            android:label="@string/title_activity_applicants"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_applicants"
             android:parentActivityName=".activity.InterviewActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -68,8 +68,8 @@
         </activity>
         <activity
             android:name=".activity.ApplicantDetailsActivity"
-            android:label="@string/title_activity_applicant_details"
             android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_applicant_details"
             android:parentActivityName=".activity.ApplicantsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
@@ -78,11 +78,19 @@
         <activity
             android:name=".activity.AddApplicantActivity"
             android:label="@string/title_activity_add_applicant"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".activity.ApplicantsActivity" >
+            android:parentActivityName=".activity.ApplicantsActivity"
+            android:windowSoftInputMode="stateHidden" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fourreau.itwapp.activity.ApplicantsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.ResponseVideoActivity"
+            android:label="@string/title_activity_response_video"
+            android:parentActivityName=".activity.ApplicantDetailsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.ApplicantDetailsActivity" />
         </activity>
     </application>
 

@@ -99,7 +99,8 @@ public class NavigationDrawerFragment extends Fragment {
     private void addItemsToDataList() {
         dataList.add(new DrawerItem(getString(R.string.title_section1), R.drawable.ic_action_view_as_list));
         dataList.add(new DrawerItem(getString(R.string.title_section2), R.drawable.ic_action_help));
-        dataList.add(new DrawerItem(getString(R.string.title_section3), R.drawable.ic_action_undo));
+        dataList.add(new DrawerItem(getString(R.string.title_section3), R.drawable.ic_action_about));
+        dataList.add(new DrawerItem(getString(R.string.title_section4), R.drawable.ic_action_undo));
     }
 
     @Override
@@ -262,7 +263,7 @@ public class NavigationDrawerFragment extends Fragment {
         if (mDrawerToggle.onOptionsItemSelected(item)) {
             return true;
         }
-
+//open default first launch
 //        if (item.getItemId() == R.id.action_example) {
 //            Toast.makeText(getActivity(), "Example action.", Toast.LENGTH_SHORT).show();
 //            return true;

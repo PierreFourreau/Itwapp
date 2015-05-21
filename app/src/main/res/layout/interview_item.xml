@@ -2,6 +2,8 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view_interview"
+    android:foreground="?android:attr/selectableItemBackground"
+    android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     card_view:cardCornerRadius="4dp"

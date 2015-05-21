@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.fragment.AboutFragment;
 import com.fourreau.itwapp.fragment.AllInterviewsFragment;
 import com.fourreau.itwapp.fragment.HelpFragment;
 import com.fourreau.itwapp.fragment.LogoutFragment;
@@ -56,6 +57,8 @@ public class HomeActivity extends ActionBarActivity
         FragmentManager fragmentManager = getSupportFragmentManager(); // For AppCompat use getSupportFragmentManager
         switch(position) {
             default:
+                fragment = new AllInterviewsFragment();
+                break;
             case 1:
                 fragment = new AllInterviewsFragment();
                 break;
@@ -63,6 +66,9 @@ public class HomeActivity extends ActionBarActivity
                 fragment = new HelpFragment();
                 break;
             case 3:
+                fragment = new AboutFragment();
+                break;
+            case 4:
                 fragment = new LogoutFragment();
                 break;
         }
@@ -81,6 +87,9 @@ public class HomeActivity extends ActionBarActivity
                 break;
             case 3:
                 mTitle = getString(R.string.title_section3);
+                break;
+            case 4:
+                mTitle = getString(R.string.title_section4);
                 break;
         }
     }
