@@ -8,3 +8,4 @@ Use :
 - Dagger for dependencies
 - Crashlytics
 - ButterKnife
+- Picasso
