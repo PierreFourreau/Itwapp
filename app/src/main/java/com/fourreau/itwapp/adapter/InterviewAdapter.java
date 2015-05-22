@@ -46,9 +46,9 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         InterviewDto itw = interviewList.get(i);
         interviewViewHolder.vId.setText(itw.getId());
         interviewViewHolder.vTitle.setText(itw.getTitle());
-        interviewViewHolder.vSent.setText(itw.getSent());
-        interviewViewHolder.vAnswers.setText(itw.getAnswers());
-        interviewViewHolder.vNew.setText(itw.getNews());
+        interviewViewHolder.vSent.setText(Integer.toString(itw.getSent()));
+        interviewViewHolder.vAnswers.setText(Integer.toString(itw.getAnswers()));
+        interviewViewHolder.vNew.setText(Integer.toString(itw.getNews()));
 
         // Here you apply the animation when the view is bound
         setAnimation(interviewViewHolder.container, i);
@@ -104,7 +104,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
             vTitle =  (TextView) v.findViewById(R.id.itw_title);
             vSent = (TextView)  v.findViewById(R.id.itw_sent);
             vAnswers = (TextView)  v.findViewById(R.id.itw_answers);
-            vNew = (TextView)  v.findViewById(R.id.itw_sent);
+            vNew = (TextView)  v.findViewById(R.id.itw_new);
             cardView.setOnClickListener(this);
         }
 

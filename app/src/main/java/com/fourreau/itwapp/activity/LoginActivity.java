@@ -21,7 +21,6 @@ import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -153,22 +152,22 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private boolean isEmailValid(String email) {
         //TODO uncomment
-        return true;
+//        return true;
 
-//        Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
-//        Matcher matcher = pattern.matcher(email);
-//
-//        if(matcher.matches()) {
-//            return true;
-//        }
-//        else {
-//            return false;
-//        }
+        Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
+        Matcher matcher = pattern.matcher(email);
+
+        if(matcher.matches()) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**
@@ -277,20 +276,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         @Override
         protected Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
-
-            try {
-                // Simulate network access.
-                Thread.sleep(3000);
-            } catch (InterruptedException e) {
-                return false;
-            }
-
-            //calling api
-            authenticationService.login(mEmail, mPassword);
-
-            // TODO: register the new account here.
-            return true;
+            return authenticationService.login(mEmail, mPassword);
         }
 
         @Override

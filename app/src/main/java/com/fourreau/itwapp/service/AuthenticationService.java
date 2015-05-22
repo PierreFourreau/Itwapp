@@ -6,5 +6,5 @@ import com.fourreau.itwapp.model.User;
  * Created by Pierre on 15/04/2015.
  */
 public interface AuthenticationService {
-    public User login(String email, String password);
+    public Boolean login(String email, String password);
 }
