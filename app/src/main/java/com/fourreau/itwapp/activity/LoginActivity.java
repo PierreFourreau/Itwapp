@@ -5,9 +5,11 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.LoaderManager.LoaderCallbacks;
+import android.content.Context;
 import android.content.CursorLoader;
 import android.content.Intent;
 import android.content.Loader;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -64,6 +66,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
+
+        //get login preference
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+        String login = sharedPref.getString(getString(R.string.login_preference), "");
+        mEmailView.setText(login);
 
         mPasswordView = (EditText) findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
@@ -286,6 +293,12 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
             //launch home activity
             if (success) {
+                //share login
+                SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString(getString(R.string.login_preference), mEmail);
+                editor.commit();
+
                 finish();
                 Intent home = new Intent();
                 home.setClass(getApplicationContext(),HomeActivity.class);

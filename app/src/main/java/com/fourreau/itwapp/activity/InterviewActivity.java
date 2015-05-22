@@ -71,14 +71,14 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
             case R.id.action_edit:
-                //TODO with new api version
-//                if(interview.nb > 0) {
-//                    showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
-//                }
-//                else {
-                    Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
-                    startActivity(intent);
-//                }
+                if(interview != null) {
+                    if (interview.sent > 0 && interview.news > 0) {
+                        showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
+                    } else {
+                        Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
+                        startActivity(intent);
+                    }
+                }
                 return true;
             case R.id.action_delete:
                 deleteInterview();

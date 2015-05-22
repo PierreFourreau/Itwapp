@@ -13,6 +13,8 @@
     <string name="fragment_help">fragment help</string>
     <string name="fragment_logout">Logout</string>
 
+    <string name="login_preference">login</string>
+
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
