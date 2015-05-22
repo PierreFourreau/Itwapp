@@ -42,6 +42,11 @@
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">Cancel</string>
 
+    <!--List interview-->
+    <string name="activity_interviews_interview_sent">Sent</string>
+    <string name="activity_interviews_interview_answers">Answers</string>
+    <string name="activity_interviews_interview_new">New</string>
+
     <!--Add interview activity-->
     <string name="title_activity_add_interview">Add Interview</string>
     <string name="activity_add_interview_name">Name</string>

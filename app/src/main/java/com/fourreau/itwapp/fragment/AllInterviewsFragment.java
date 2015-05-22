@@ -183,7 +183,7 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
     public void processFinish(Interview[] interviews){
         interviewList = new ArrayList<InterviewDto>();
         for(int i = 0; i < interviews.length; i++) {
-            interviewList.add(new InterviewDto(interviews[i].id, interviews[i].name, interviews[i].text));
+            interviewList.add(new InterviewDto(interviews[i].id, interviews[i].name, interviews[i].text, interviews[i].sent, interviews[i].answers, interviews[i].news));
         }
         updateUi();
     }

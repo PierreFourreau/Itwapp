@@ -7,11 +7,17 @@ public class InterviewDto {
     private String id;
     private String title;
     private String description;
+    private Integer sent;
+    private Integer answers;
+    private Integer news;
 
-    public InterviewDto(String id, String title, String description) {
+    public InterviewDto(String id, String title, String description, Integer sent, Integer answers, Integer news) {
         this.id = id;
         this.title = title;
         this.description = description;
+        this.sent = sent;
+        this.answers = answers;
+        this.news = news;
     }
 
     public String getId() {
@@ -38,12 +44,39 @@ public class InterviewDto {
         this.description = description;
     }
 
+    public Integer getSent() {
+        return sent;
+    }
+
+    public void setSent(Integer sent) {
+        this.sent = sent;
+    }
+
+    public Integer getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(Integer answers) {
+        this.answers = answers;
+    }
+
+    public Integer getNews() {
+        return news;
+    }
+
+    public void setNews(Integer news) {
+        this.news = news;
+    }
+
     @Override
     public String toString() {
-        return "Interview{" +
+        return "InterviewDto{" +
                 "id='" + id + '\'' +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", sent=" + sent +
+                ", answers=" + answers +
+                ", news=" + news +
                 '}';
     }
 }

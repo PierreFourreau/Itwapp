@@ -25,16 +25,55 @@
             android:visibility="gone"/>
 
         <!-- the title view -->
-        <TextView android:id="@+id/title"
+        <TextView android:id="@+id/itw_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
-        <!-- the description view -->
-        <TextView android:id="@+id/description"
-            android:layout_below="@id/title"
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
+
+        <!-- sent -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginLeft="20dp"
+            android:text="@string/activity_interviews_interview_sent"
+            android:textAppearance="@android:style/TextAppearance.Small" />
+        <TextView android:id="@+id/itw_sent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Small" />
+
+            <!-- answers -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:layout_marginLeft="20dp"
+                android:text="@string/activity_interviews_interview_answers"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+            <TextView android:id="@+id/itw_answers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+
+            <!-- new -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:textStyle="bold"
+                android:text="@string/activity_interviews_interview_new"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+            <TextView android:id="@+id/itw_new"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="@android:style/TextAppearance.Small" />
+
+        </LinearLayout>
     </RelativeLayout>
 </android.support.v7.widget.CardView>

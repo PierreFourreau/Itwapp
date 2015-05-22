@@ -46,7 +46,9 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         InterviewDto itw = interviewList.get(i);
         interviewViewHolder.vId.setText(itw.getId());
         interviewViewHolder.vTitle.setText(itw.getTitle());
-        interviewViewHolder.vDescription.setText(itw.getDescription());
+        interviewViewHolder.vSent.setText(itw.getSent());
+        interviewViewHolder.vAnswers.setText(itw.getAnswers());
+        interviewViewHolder.vNew.setText(itw.getNews());
 
         // Here you apply the animation when the view is bound
         setAnimation(interviewViewHolder.container, i);
@@ -85,7 +87,9 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         protected CardView cardView;
         protected TextView vId;
         protected TextView vTitle;
-        protected TextView vDescription;
+        protected TextView vSent;
+        protected TextView vAnswers;
+        protected TextView vNew;
         public IInterviewViewHolderClicks mListener;
 
         //need to retrieve the container (ie the root ViewGroup from your custom_item_layout), it's the view that will be animated
@@ -97,8 +101,10 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
             mListener = listener;
             cardView = (CardView) v.findViewById(R.id.card_view_interview);
             vId = (TextView) v.findViewById(R.id.id);
-            vTitle =  (TextView) v.findViewById(R.id.title);
-            vDescription = (TextView)  v.findViewById(R.id.description);
+            vTitle =  (TextView) v.findViewById(R.id.itw_title);
+            vSent = (TextView)  v.findViewById(R.id.itw_sent);
+            vAnswers = (TextView)  v.findViewById(R.id.itw_answers);
+            vNew = (TextView)  v.findViewById(R.id.itw_sent);
             cardView.setOnClickListener(this);
         }
 
