@@ -159,8 +159,8 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
             textViewFirstName.setText(R.string.none);
         }
         //lastname
-        if(!applicant.firstname.isEmpty()) {
-            textViewLastName.setText(applicant.firstname);
+        if(!applicant.lastname.isEmpty()) {
+            textViewLastName.setText(applicant.lastname);
         }
         else {
             textViewLastName.setText(R.string.none);
