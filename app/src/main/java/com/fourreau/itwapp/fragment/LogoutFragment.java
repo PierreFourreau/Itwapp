@@ -23,6 +23,7 @@ public class LogoutFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         Intent intent = new Intent(getActivity(), LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(intent);
 
         // Inflate the layout for this fragment

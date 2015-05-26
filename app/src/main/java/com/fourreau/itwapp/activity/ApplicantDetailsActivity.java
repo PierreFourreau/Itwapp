@@ -250,7 +250,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
     private void showAlertDialog(int title, int content) {
         new AlertDialog.Builder(ApplicantDetailsActivity.this).setTitle(title).setMessage(content)
-                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+                .setIcon(R.drawable.ic_warning).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
             {
