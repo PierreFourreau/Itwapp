@@ -56,7 +56,7 @@
     <string name="activity_add_interview_questions">Questions</string>
     <string name="activity_add_question_button">Ajouter</string>
     <string name="activity_add_interview_name_error">Le champs nom est requis</string>
-    <string name="activity_add_interview_success">L'interview a été correctement crée</string>
+    <string name="activity_add_interview_success">L\'interview a été correctement crée</string>
 
     <!--Add question-->
     <string name="dialog_add_question_content">Contenu</string>
@@ -78,7 +78,7 @@
     <string name="activity_edit_interview_video">Presentation video (optionnel)</string>
     <string name="activity_edit_interview_callback">Lien de redirection (optionnel)</string>
     <string name="activity_edit_interview_questions">Questions</string>
-    <string name="activity_update_interview_success">L'interview a été modifié avec succès</string>
+    <string name="activity_update_interview_success">L\'interview a été modifié avec succès</string>
 
     <!--View interview activity-->
     <string name="title_activity_interview">Interview</string>
@@ -140,6 +140,6 @@
     <string name="about_contact">fourreau.pierre@gmail.com</string>
     <string name="about_more_label">Plus</string>
     <string name="about_more1">Si vous aimez cette application, merci de la noter.</string>
-    <string name="about_more2">Si vous trouvez des erreurs sur l'application, pouvez-vous me les repporter afin que je puisse les corriger le plus vite possible? Merci.</string>
+    <string name="about_more2">Si vous trouvez des erreurs sur l\'application, pouvez-vous me les repporter afin que je puisse les corriger le plus vite possible? Merci.</string>
 
 </resources>
