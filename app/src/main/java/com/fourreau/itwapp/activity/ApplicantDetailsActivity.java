@@ -198,11 +198,10 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
                             //get fields
                             TextView textViewQuestionName = (TextView) addView.findViewById(R.id.textViewQuestion);
-                            ImageButton buttonVideo = (ImageButton) addView.findViewById(R.id.button_video);
                             //set fields
                             textViewQuestionName.setText(q.content);
                             //button video
-                            buttonVideo.setOnClickListener(new View.OnClickListener() {
+                            addView.setOnClickListener(new View.OnClickListener() {
                                 @Override
                                 public void onClick(View v) {
                                     Intent intent = new Intent(ApplicantDetailsActivity.this, ResponseVideoActivity.class);
@@ -211,13 +210,12 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
                                 }
                             });
                             addView.setBackgroundResource(R.drawable.frame);
-                            addView.setPadding(5,5,5,5);
+                            addView.setPadding(10, 10, 20, 10);
                             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            lp.setMargins(5, 5, 5, 2);
+                            lp.setMargins(2, 5, 2, 5);
                             addView.setLayoutParams(lp);
                             //add row to container
                             container.addView(addView);
-
                         }
                     }
                 }

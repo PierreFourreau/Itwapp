@@ -10,12 +10,15 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.InterviewActivity;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.model.InterviewDto;
+import com.fourreau.itwapp.util.Utils;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -49,7 +52,9 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         interviewViewHolder.vSent.setText(Integer.toString(itw.getSent()));
         interviewViewHolder.vAnswers.setText(Integer.toString(itw.getAnswers()));
         interviewViewHolder.vNew.setText(Integer.toString(itw.getNews()));
-
+        if(itw.getNews() > 0) {
+            Picasso.with(activity).load(R.drawable.ic_warning).into(interviewViewHolder.vImageNews);
+        }
         // Here you apply the animation when the view is bound
         setAnimation(interviewViewHolder.container, i);
     }
@@ -90,6 +95,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         protected TextView vSent;
         protected TextView vAnswers;
         protected TextView vNew;
+        protected ImageView vImageNews;
         public IInterviewViewHolderClicks mListener;
 
         //need to retrieve the container (ie the root ViewGroup from your custom_item_layout), it's the view that will be animated
@@ -105,6 +111,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
             vSent = (TextView)  v.findViewById(R.id.itw_sent);
             vAnswers = (TextView)  v.findViewById(R.id.itw_answers);
             vNew = (TextView)  v.findViewById(R.id.itw_new);
+            vImageNews = (ImageView)  v.findViewById(R.id.ic_news);
             cardView.setOnClickListener(this);
         }
 

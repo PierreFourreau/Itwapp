@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
@@ -40,7 +42,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private String idInterview;
 
-    private TextView textViewName, textViewDescription, textViewVideo, textViewCallback, textViewQuestions;
+    private TextView textViewName, textViewDescription, textViewVideoNone, textViewCallback, textViewQuestions;
+    private ImageButton imageButtonYoutube;
     private ButtonFloat seeApplicantsButton;
 
     @Override
@@ -72,8 +75,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
                 return true;
             case R.id.action_edit:
                 if(interview != null) {
-                    if (interview.sent > 0 && interview.news > 0) {
-                        showAlertDialog(R.string.dialog_title_generic_success, R.string.activity_add_interview_success);
+                    if (interview.sent > 0) {
+                        showAlertDialogInfo(R.string.dialog_title_generic_error, R.string.dialog_title_update_forbidden);
                     } else {
                         Intent intent = new Intent(InterviewActivity.this, EditInterviewActivity.class);
                         startActivity(intent);
@@ -108,7 +111,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
         textViewName = (TextView) findViewById(R.id.activity_interview_name);
         textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
-        textViewVideo = (TextView) findViewById(R.id.activity_interview_video);
+        imageButtonYoutube = (ImageButton) findViewById(R.id.activity_interview_video);
+        textViewVideoNone = (TextView) findViewById(R.id.activity_interview_video_none);
         textViewCallback = (TextView) findViewById(R.id.activity_interview_callback);
         textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
 
@@ -138,10 +142,17 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         }
         //video
         if(!interview.video.isEmpty()) {
-            textViewVideo.setText(interview.video);
+            imageButtonYoutube.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(interview.video));
+                    startActivity(i);
+                }
+            });
         }
         else {
-            textViewVideo.setText(R.string.none);
+            textViewVideoNone.setVisibility(View.VISIBLE);
+            imageButtonYoutube.setVisibility(View.GONE);
         }
         //callback
         if(!interview.callback.isEmpty()) {
@@ -207,7 +218,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private void showAlertDialog(int title, int content) {
         new AlertDialog.Builder(InterviewActivity.this).setTitle(title).setMessage(content)
-                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+                .setIcon(R.drawable.ic_warning).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
             {
@@ -221,7 +232,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private void showAlertDialogInfo(int title, int content) {
         new AlertDialog.Builder(InterviewActivity.this).setTitle(title).setMessage(content)
-                .setIcon(android.R.drawable.ic_dialog_info).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
+                .setIcon(R.drawable.ic_warning).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
             {
