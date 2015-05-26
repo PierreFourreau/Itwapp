@@ -1,0 +1,145 @@
+<resources>
+    <string name="app_name">Itwapp</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_home">Home</string>
+
+    <string name="title_section1">Interviews</string>
+    <string name="title_section2">Aide</string>
+    <string name="title_section3">A propos</string>
+    <string name="title_section4">Déconnexion</string>
+
+    <string name="fragment_logout">Déconnexion</string>
+
+    <string name="login_preference">Se connecter</string>
+
+    <string name="navigation_drawer_open">Ouvrir barre de navigation</string>
+    <string name="navigation_drawer_close">Fermer barre de navigation</string>
+
+    <string name="none">Non défini</string>
+    <string name="unknown">Inconnu</string>
+    <string name="action_refresh">Rafraîchir</string>
+    <string name="action_edit">Modifier</string>
+    <string name="action_remove">Supprimer</string>
+    <string name="no_data">Pas de résultats</string>
+
+    <!--Interviews-->
+    <string name="activity_interviews_no_data">Aucunes interviews</string>
+
+    <!--Alert dialog-->
+    <string name="dialog_loading">Chargement en cours</string>
+
+    <!--Delete dialog-->
+    <string name="dialog_title_delete_error">La suppression a échoué</string>
+    <string name="dialog_title_delete_success">La suppresion a été effectuée avec succès</string>
+    <string name="dialog_title_update_forbidden">La modification est interdite car il existe des candidats</string>
+
+    <!--Alert messages-->
+    <string name="dialog_title_generic_error">Erreur</string>
+    <string name="dialog_title_generic_success">Succès</string>
+    <string name="dialog_content_generic_error_server">Problème de connexion au serveur</string>
+    <string name="dialog_content_cancellation">Annulation de la récupération des données effectuée</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Annuler</string>
+
+    <!--List interview-->
+    <string name="activity_interviews_interview_sent">envoyés</string>
+    <string name="activity_interviews_interview_answers">répondus</string>
+    <string name="activity_interviews_interview_new">nouveaux</string>
+
+    <!--Add interview activity-->
+    <string name="title_activity_add_interview">Ajouter interview</string>
+    <string name="activity_add_interview_name">Nom</string>
+    <string name="activity_add_interview_description">Description (optionnel)</string>
+    <string name="activity_add_interview_video">Presentation video (optionnel)</string>
+    <string name="activity_add_interview_callback">Lien de redirection (optionnel)</string>
+    <string name="activity_add_interview_questions">Questions</string>
+    <string name="activity_add_question_button">Ajouter</string>
+    <string name="activity_add_interview_name_error">Le champs nom est requis</string>
+    <string name="activity_add_interview_success">L'interview a été correctement crée</string>
+
+    <!--Add question-->
+    <string name="dialog_add_question_content">Contenu</string>
+    <string name="dialog_add_question_reading_time">Temps de lecture</string>
+    <string name="dialog_add_question_answer_time">Temps de réponse</string>
+    <string name="dialog_add_interview_question_content_error">Le champs contenu est requis</string>
+    <string-array name="question_time">
+        <item>1 minute</item>
+        <item>2 minutes</item>
+        <item>3 minutes</item>
+        <item>4 minutes</item>
+        <item>5 minutes</item>
+    </string-array>
+
+    <!--Edit interview activity-->
+    <string name="title_activity_edit_interview">Modifier interview</string>
+    <string name="activity_edit_interview_name">Nom</string>
+    <string name="activity_edit_interview_description">Description (optionnel)</string>
+    <string name="activity_edit_interview_video">Presentation video (optionnel)</string>
+    <string name="activity_edit_interview_callback">Lien de redirection (optionnel)</string>
+    <string name="activity_edit_interview_questions">Questions</string>
+    <string name="activity_update_interview_success">L'interview a été modifié avec succès</string>
+
+    <!--View interview activity-->
+    <string name="title_activity_interview">Interview</string>
+    <string name="activity_interview_name">Nom</string>
+    <string name="activity_interview_description">Description</string>
+    <string name="activity_interview_video">Video</string>
+    <string name="activity_interview_callback">Lien de retour</string>
+    <string name="activity_interview_questions">Questions</string>
+
+    <!--Applicants activity-->
+    <string name="title_activity_applicants">Candidats</string>
+    <string name="activity_applicants_deadline">Deadline : </string>
+    <string name="activity_applicants_no_data">Aucun candidats</string>
+
+    <!--Applicant details activity-->
+    <string name="title_activity_applicant_details">Détails du candidat</string>
+    <string name="activity_applicant_details_mail">Email :\u00A0</string>
+    <string name="activity_applicant_details_first_name">Prénom :\u00A0</string>
+    <string name="activity_applicant_details_last_name">Nom :\u00A0</string>
+    <string name="activity_applicant_details_deadline">Deadline :\u00A0</string>
+    <string name="activity_applicant_details_deleted">Supprimé :\u00A0</string>
+    <string name="activity_applicant_details_questions">Responses :\u00A0</string>
+    <string name="activity_applicant_details_answer_date">Date de réponse :\u00A0</string>
+    <string name="activity_applicant_details_answer_date_not_completed">pas terminé</string>
+    <string name="activity_applicant_details_email_view">Email vu :\u00A0</string>
+    <string name="activity_applicant_details_status">Statut :\u00A0</string>
+    <string name="activity_applicant_details_status_completed">terminé</string>
+    <string name="activity_applicant_details_status_in_progress">en cours</string>
+    <string name="activity_applicant_details_status_open_email">email ouvert</string>
+    <string name="activity_applicant_details_status_email_sent">email envoyé</string>
+    <string name="title_activity_applicant_deletion">Candidat supprimé</string>
+    <string name="activity_applicant_details_error">Erreur lors de la récupération du candidat</string>
+
+    <!--Add applicant activity-->
+    <string name="title_activity_add_applicant">Ajouter un candidat</string>
+    <string name="activity_add_applicant_mails">Emails (séparé par ;)</string>
+    <string name="activity_add_applicant_message">Message (optionnel)</string>
+    <string name="activity_add_applicant_deadline">Deadline (optionnel)</string>
+    <string name="activity_add_applicant_language">Langage</string>
+    <string name="activity_add_applicant_language_english">Anglais</string>
+    <string name="activity_add_applicant_language_french">Français</string>
+    <string name="activity_add_applicant_mails_error">Le champs emails est requis</string>
+    <string name="dialog_title_add_applicant_error">La création a échoué</string>
+    <string name="dialog_title_add_applicant_success">La création a été effectué avec succès</string>
+    <string name="dialog_title_add_applicant_contact_loading">Récupération des contacts</string>
+    <string name="dialog_title_add_applicant_contact_no_result">Aucun email associé à ce contact</string>
+    <string name="dialog_title_add_applicant_contact_success">Contact ajouté</string>
+
+    <!--VideoResponse Activity-->
+    <string name="title_activity_response_video">Réponse vidéo</string>
+
+    <!--About activity-->
+    <string name="title_activity_about">A propos</string>
+    <string name="about_application_label">Application</string>
+    <string name="about_application">InterviewApp mobile</string>
+    <string name="about_developer_label">Développeur</string>
+    <string name="about_developer"><a href="www.pierrefourreau.fr">www.pierrefourreau.fr</a></string>
+    <string name="about_contact_label">Contact</string>
+    <string name="about_contact">fourreau.pierre@gmail.com</string>
+    <string name="about_more_label">Plus</string>
+    <string name="about_more1">Si vous aimez cette application, merci de la noter.</string>
+    <string name="about_more2">Si vous trouvez des erreurs sur l'application, pouvez-vous me les repporter afin que je puisse les corriger le plus vite possible? Merci.</string>
+
+</resources>
