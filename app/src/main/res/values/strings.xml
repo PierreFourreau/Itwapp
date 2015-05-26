@@ -9,8 +9,6 @@
     <string name="title_section3">About</string>
     <string name="title_section4">Logout</string>
 
-
-    <string name="fragment_help">fragment help</string>
     <string name="fragment_logout">Logout</string>
 
     <string name="login_preference">login</string>

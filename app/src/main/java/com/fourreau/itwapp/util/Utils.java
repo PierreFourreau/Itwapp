@@ -12,6 +12,8 @@ public class Utils {
     private Utils(){}
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    public static String URL_HELP = "http://itwapp.io/faq";
+
     public static SimpleDateFormat sdfDateSimple = new SimpleDateFormat("dd/MM/yyyy");
 
     public static SimpleDateFormat sdfTimeSimple = new SimpleDateFormat("HH:mm");

@@ -235,6 +235,9 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
         if(output) {
             Toast.makeText(AddApplicantActivity.this, R.string.dialog_title_add_applicant_success, Toast.LENGTH_LONG).show();
             finish();
+            Intent intent = new Intent(AddApplicantActivity.this, ApplicantsActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         else {
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_add_applicant_error);
