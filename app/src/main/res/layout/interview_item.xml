@@ -6,13 +6,13 @@
     android:clickable="true"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    card_view:cardCornerRadius="4dp"
+    card_view:cardBackgroundColor="@android:color/white"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="2dp"
     android:layout_marginRight="5dp"
     android:layout_marginLeft="5dp"
     android:layout_marginTop="3dp"
     android:layout_marginBottom="3dp">
-
-
 
     <!-- the hidden id view -->
     <TextView android:id="@+id/id"
@@ -20,32 +20,39 @@
         android:layout_height="wrap_content"
         android:visibility="gone"/>
 
-
     <RelativeLayout
-        android:padding="5dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="5dp"
-        android:layout_alignParentLeft="true"
+        android:padding="3dp"
         android:layout_height="wrap_content"
         android:layout_width="match_parent">
+
+        <ImageView
+            android:id="@+id/thumbnail_youtube"
+            android:background="#D8D8D8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"/>
 
         <!-- the title view -->
         <TextView android:id="@+id/itw_title"
             android:text="Interview"
+            android:layout_marginLeft="5dp"
+            android:layout_toRightOf="@id/thumbnail_youtube"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="@android:style/TextAppearance.Medium" />
 
-        <RelativeLayout
+
+        <LinearLayout
+            android:id="@+id/layout_sent"
             android:layout_below="@id/itw_title"
-            android:layout_alignParentLeft="true"
+            android:layout_toRightOf="@id/thumbnail_youtube"
+            android:layout_marginLeft="10dp"
+            android:orientation="horizontal"
             android:layout_height="wrap_content"
-            android:layout_width="match_parent">
+            android:layout_width="wrap_content">
 
             <!-- sent -->
             <TextView android:id="@+id/itw_sent"
-
-                android:layout_marginLeft="40dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Small" />
@@ -57,11 +64,20 @@
                 android:layout_toRightOf="@id/itw_sent"
                 android:text="@string/activity_interviews_interview_sent"
                 android:textAppearance="@android:style/TextAppearance.Small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_answers"
+            android:layout_below="@id/layout_sent"
+            android:layout_toRightOf="@id/thumbnail_youtube"
+            android:orientation="horizontal"
+            android:layout_marginLeft="10dp"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
 
             <!-- answers -->
             <TextView android:id="@+id/itw_answers"
-                android:layout_marginLeft="20dp"
-                android:layout_toRightOf="@id/itw_sent_label"
+                android:layout_below="@id/itw_sent"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="@android:style/TextAppearance.Small" />
@@ -73,10 +89,19 @@
                 android:layout_marginLeft="3dp"
                 android:text="@string/activity_interviews_interview_answers"
                 android:textAppearance="@android:style/TextAppearance.Small" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_news"
+            android:orientation="horizontal"
+            android:layout_below="@id/layout_answers"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/thumbnail_youtube"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content">
 
             <!-- new -->
             <TextView android:id="@+id/itw_new"
-                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/itw_answers_label"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -88,14 +113,13 @@
                 android:layout_marginLeft="3dp"
                 android:text="@string/activity_interviews_interview_new"
                 android:textAppearance="@android:style/TextAppearance.Small" />
-
-            <!--image alert if news-->
-            <ImageView
-                android:id="@+id/ic_news"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
-        </RelativeLayout>
+        </LinearLayout>
+        <!--image alert if news-->
+        <ImageView
+            android:id="@+id/ic_news"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </RelativeLayout>
 </android.support.v7.widget.CardView>

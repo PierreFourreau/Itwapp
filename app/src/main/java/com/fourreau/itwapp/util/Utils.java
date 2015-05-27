@@ -4,6 +4,8 @@ import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.SimpleDateFormat;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by Pierre on 11/05/2015.
@@ -13,6 +15,10 @@ public class Utils {
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     public static String URL_HELP = "http://itwapp.io/faq";
+
+    public static String URL_THUMBNAIL_YOUTUBE_BEGIN = "http://img.youtube.com/vi/";
+    //320*180
+    public static String URL_THUMBNAIL_YOUTUBE_END = "/mqdefault.jpg";
 
     public static SimpleDateFormat sdfDateSimple = new SimpleDateFormat("dd/MM/yyyy");
 
@@ -53,4 +59,13 @@ public class Utils {
         return null;
     }
 
+    public static String extractYoutubeId(String youtubeUrl) {
+        String vId = null;
+        Pattern pattern = Pattern.compile(".*(?:youtu.be\\/|v\\/|u\\/\\w\\/|embed\\/|watch\\?v=)([^#\\&\\?]*).*");
+        Matcher matcher = pattern.matcher(youtubeUrl);
+        if (matcher.matches()){
+            vId = matcher.group(1);
+        }
+        return vId;
+    }
 }

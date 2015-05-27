@@ -10,14 +10,16 @@ public class InterviewDto {
     private Integer sent;
     private Integer answers;
     private Integer news;
+    private String videoId;
 
-    public InterviewDto(String id, String title, String description, Integer sent, Integer answers, Integer news) {
+    public InterviewDto(String id, String title, String description, Integer sent, Integer answers, Integer news, String videoId) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.sent = sent;
         this.answers = answers;
         this.news = news;
+        this.videoId = videoId;
     }
 
     public String getId() {
@@ -68,15 +70,11 @@ public class InterviewDto {
         this.news = news;
     }
 
-    @Override
-    public String toString() {
-        return "InterviewDto{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", sent=" + sent +
-                ", answers=" + answers +
-                ", news=" + news +
-                '}';
+    public String getVideoId() {
+        return videoId;
+    }
+
+    public void setVideoId(String videoId) {
+        this.videoId = videoId;
     }
 }

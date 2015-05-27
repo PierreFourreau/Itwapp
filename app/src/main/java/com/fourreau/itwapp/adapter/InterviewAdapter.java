@@ -48,6 +48,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
     public void onBindViewHolder(InterviewViewHolder interviewViewHolder, int i) {
         InterviewDto itw = interviewList.get(i);
         interviewViewHolder.vId.setText(itw.getId());
+        Picasso.with(activity).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + itw.getVideoId() + Utils.URL_THUMBNAIL_YOUTUBE_END).fit().centerCrop().placeholder(R.drawable.youtube_logo).error(R.drawable.youtube_logo).into(interviewViewHolder.vThumbnailYoutube);
         interviewViewHolder.vTitle.setText(itw.getTitle());
         interviewViewHolder.vSent.setText(Integer.toString(itw.getSent()));
         interviewViewHolder.vAnswers.setText(Integer.toString(itw.getAnswers()));
@@ -55,7 +56,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
         if(itw.getNews() > 0) {
             Picasso.with(activity).load(R.drawable.ic_warning).into(interviewViewHolder.vImageNews);
         }
-        // Here you apply the animation when the view is bound
+        //apply the animation when the view is bound
         setAnimation(interviewViewHolder.container, i);
     }
 
@@ -91,6 +92,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
     public static class InterviewViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         protected CardView cardView;
         protected TextView vId;
+        protected ImageView vThumbnailYoutube;
         protected TextView vTitle;
         protected TextView vSent;
         protected TextView vAnswers;
@@ -107,6 +109,7 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
             mListener = listener;
             cardView = (CardView) v.findViewById(R.id.card_view_interview);
             vId = (TextView) v.findViewById(R.id.id);
+            vThumbnailYoutube = (ImageView)  v.findViewById(R.id.thumbnail_youtube);
             vTitle =  (TextView) v.findViewById(R.id.itw_title);
             vSent = (TextView)  v.findViewById(R.id.itw_sent);
             vAnswers = (TextView)  v.findViewById(R.id.itw_answers);

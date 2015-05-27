@@ -26,6 +26,7 @@ import com.fourreau.itwapp.model.InterviewAllResponse;
 import com.fourreau.itwapp.model.InterviewDto;
 import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
+import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
 
 import java.util.ArrayList;
@@ -183,7 +184,7 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
     public void processFinish(Interview[] interviews){
         interviewList = new ArrayList<InterviewDto>();
         for(int i = 0; i < interviews.length; i++) {
-            interviewList.add(new InterviewDto(interviews[i].id, interviews[i].name, interviews[i].text, interviews[i].sent, interviews[i].answers, interviews[i].news));
+            interviewList.add(new InterviewDto(interviews[i].id, interviews[i].name, interviews[i].text, interviews[i].sent, interviews[i].answers, interviews[i].news, Utils.extractYoutubeId(interviews[i].video)));
         }
         updateUi();
     }
