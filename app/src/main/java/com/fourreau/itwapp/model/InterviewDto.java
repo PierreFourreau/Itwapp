@@ -12,6 +12,17 @@ public class InterviewDto {
     private Integer news;
     private String videoId;
 
+    public InterviewDto(InterviewDto itw) {
+        this.id = itw.getId();
+        this.title = itw.getTitle();
+        this.description = itw.getDescription();
+        this.sent = itw.getSent();
+        this.answers = itw.getAnswers();
+        this.news = itw.getNews();
+        this.videoId = itw.getVideoId();
+    }
+
+
     public InterviewDto(String id, String title, String description, Integer sent, Integer answers, Integer news, String videoId) {
         this.id = id;
         this.title = title;
