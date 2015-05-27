@@ -10,30 +10,28 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
-import com.fourreau.itwapp.model.ApplicantAllResponse;
 import com.fourreau.itwapp.model.DeleteInterviewResponse;
 import com.fourreau.itwapp.model.InterviewOneResponse;
 import com.fourreau.itwapp.model.UpdateInterviewResponse;
-import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.service.InterviewService;
-import com.fourreau.itwapp.task.AllApplicantsTask;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
+import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
 
-import io.itwapp.models.Applicant;
 import io.itwapp.models.Interview;
 import io.itwapp.models.Question;
 import timber.log.Timber;
 
-public class InterviewActivity extends ActionBarActivity implements InterviewOneResponse, DeleteInterviewResponse, UpdateInterviewResponse {
+public  class InterviewActivity extends ActionBarActivity implements InterviewOneResponse, DeleteInterviewResponse, UpdateInterviewResponse {
 
     @Inject
     InterviewService interviewService;
@@ -42,8 +40,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private String idInterview;
 
-    private TextView textViewName, textViewDescription, textViewVideoNone, textViewCallback, textViewQuestions;
-    private ImageButton imageButtonYoutube;
+    private TextView textViewName, textViewDescription, textViewCallback, textViewQuestions;
+    private ImageView imageThumbnailYoutube, videoPlayButton;
     private ButtonFloat seeApplicantsButton;
 
     @Override
@@ -109,10 +107,10 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
     public void initView(){
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 
+        imageThumbnailYoutube = (ImageView) findViewById(R.id.image_thumbnail_youtube);
+        videoPlayButton = (ImageView) findViewById(R.id.video_play_button);
         textViewName = (TextView) findViewById(R.id.activity_interview_name);
         textViewDescription = (TextView) findViewById(R.id.activity_interview_description);
-        imageButtonYoutube = (ImageButton) findViewById(R.id.activity_interview_video);
-        textViewVideoNone = (TextView) findViewById(R.id.activity_interview_video_none);
         textViewCallback = (TextView) findViewById(R.id.activity_interview_callback);
         textViewQuestions = (TextView) findViewById(R.id.activity_interview_questions);
 
@@ -132,6 +130,25 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
     }
 
     public void updateUi() {
+        //video
+        if(interview.video != null) {
+            Picasso.with(InterviewActivity.this).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + Utils.extractYoutubeId(interview.video) + Utils.URL_THUMBNAIL_YOUTUBE_FULL_SIZE_END).fit().centerCrop().error(R.drawable.ic_itw).into(imageThumbnailYoutube);
+            imageThumbnailYoutube.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(interview.video));
+                    startActivity(i);
+                }
+            });
+            videoPlayButton.setVisibility(View.VISIBLE);
+        }
+        else {
+            Picasso.with(InterviewActivity.this).load(R.drawable.ic_itw).resize(50, 50).into(imageThumbnailYoutube);
+            imageThumbnailYoutube.setVisibility(View.GONE);
+            videoPlayButton.setVisibility(View.GONE);
+        }
+
+        //name
         textViewName.setText(interview.name);
         //description
         if(!interview.text.isEmpty()) {
@@ -139,20 +156,6 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         }
         else {
             textViewDescription.setText(R.string.none);
-        }
-        //video
-        if(!interview.video.isEmpty()) {
-            imageButtonYoutube.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent i = new Intent(Intent.ACTION_VIEW, Uri.parse(interview.video));
-                    startActivity(i);
-                }
-            });
-        }
-        else {
-            textViewVideoNone.setVisibility(View.VISIBLE);
-            imageButtonYoutube.setVisibility(View.GONE);
         }
         //callback
         if(!interview.callback.isEmpty()) {
@@ -164,7 +167,7 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
         if(interview.questions.length > 0) {
             String questions = "";
             for(Question q : interview.questions) {
-                questions += "- " + q.content + "\n";
+                questions += "- " + q.content + "\n\n";
             }
             textViewQuestions.setText(questions);
         }
@@ -232,10 +235,8 @@ public class InterviewActivity extends ActionBarActivity implements InterviewOne
 
     private void showAlertDialogInfo(int title, int content) {
         new AlertDialog.Builder(InterviewActivity.this).setTitle(title).setMessage(content)
-                .setIcon(R.drawable.ic_warning).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener()
-        {
-            public void onClick(DialogInterface dialog, int which)
-            {
+                .setIcon(R.drawable.ic_warning).setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 //do nothing
             }
         }).show();

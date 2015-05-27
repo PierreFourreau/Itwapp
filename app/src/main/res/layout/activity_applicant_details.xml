@@ -1,12 +1,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     tools:context="com.fourreau.itwapp.activity.ApplicantDetailsActivity">
 
     <ScrollView
@@ -14,205 +9,199 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent">
 
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            card_view:cardCornerRadius="4dp">
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:layout_height="fill_parent"
+            android:layout_width="fill_parent"
+            android:layout_gravity="center_horizontal">
 
             <LinearLayout
-                android:orientation="vertical"
-                android:padding="15dp"
-                android:layout_margin="10dp"
+                android:orientation="horizontal"
                 android:layout_height="wrap_content"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_gravity="center">
 
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
+                <!--gravatar-->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/activity_details_gravatar"
                     android:layout_width="wrap_content"
-                    android:layout_gravity="center">
+                    android:layout_height="wrap_content" />
 
-                    <!--gravatar-->
-                    <de.hdodenhof.circleimageview.CircleImageView
-                        android:id="@+id/activity_details_gravatar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <ImageView
-                        android:id="@+id/activity_details_language"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:src="@drawable/flag_fr" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/activity_details_language"
                     android:layout_width="wrap_content"
-                    android:layout_marginTop="20dp">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_mail"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_mail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
+                    android:layout_marginLeft="10dp"
+                    android:src="@drawable/flag_fr" />
+            </LinearLayout>
 
-                    <TextView
-                        android:text="@string/activity_applicant_details_first_name"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp">
 
-                    <TextView
-                        android:id="@+id/activity_details_first_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
+                <TextView
+                    android:text="@string/activity_applicant_details_mail"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_mail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_first_name"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_first_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_last_name"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_last_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_deadline"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_deadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_deleted"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_deleted"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_answer_date"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_answer_date"
+                    android:text="@string/activity_applicant_details_answer_date_not_completed"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_email_view"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_email_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_status"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/activity_details_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+
+                <TextView
+                    android:text="@string/activity_applicant_details_questions"
+                    android:textStyle="bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content">
+                <TextView
+                    android:text="@string/none"
+                    android:id="@+id/text_view_responses_none"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_last_name"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_last_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_deadline"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_deadline"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
+                    android:visibility="gone"/>
 
                 <LinearLayout
-                    android:orientation="horizontal"
+                    android:id="@+id/containerResponses"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_deleted"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_deleted"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_answer_date"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_answer_date"
-                        android:text="@string/activity_applicant_details_answer_date_not_completed"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_email_view"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_email_view"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_status"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:id="@+id/activity_details_status"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-
-                    <TextView
-                        android:text="@string/activity_applicant_details_questions"
-                        android:textStyle="bold"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_height="wrap_content"
-                    android:layout_width="wrap_content">
-                    <TextView
-                        android:text="@string/none"
-                        android:id="@+id/text_view_responses_none"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:visibility="gone"/>
-
-                    <LinearLayout
-                        android:id="@+id/containerResponses"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:padding="5dp"
-                        android:orientation="vertical">
-                    </LinearLayout>
+                    android:padding="5dp"
+                    android:orientation="vertical">
                 </LinearLayout>
             </LinearLayout>
-        </android.support.v7.widget.CardView>
+        </LinearLayout>
     </ScrollView>
 </RelativeLayout>

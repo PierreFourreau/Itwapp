@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.LinearLayoutCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,7 +22,6 @@ import com.fourreau.itwapp.activity.AddInterviewActivity;
 import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.adapter.InterviewAdapter;
 import com.fourreau.itwapp.core.ItwApplication;
-import com.fourreau.itwapp.model.DividerItemDecoration;
 import com.fourreau.itwapp.model.InterviewAllResponse;
 import com.fourreau.itwapp.model.InterviewDto;
 import com.fourreau.itwapp.service.InterviewService;
@@ -138,7 +136,6 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
 
         //recycler view
         recList = (RecyclerView) view.findViewById(R.id.cardListInterviews);
-        recList.addItemDecoration(new DividerItemDecoration(getActivity(), DividerItemDecoration.VERTICAL_LIST));
         recList.setHasFixedSize(true);
         llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);

@@ -19,6 +19,8 @@ public class Utils {
     public static String URL_THUMBNAIL_YOUTUBE_BEGIN = "http://img.youtube.com/vi/";
     //320*180
     public static String URL_THUMBNAIL_YOUTUBE_END = "/mqdefault.jpg";
+    //full size
+    public static String URL_THUMBNAIL_YOUTUBE_FULL_SIZE_END = "/0.jpg";
 
     public static SimpleDateFormat sdfDateSimple = new SimpleDateFormat("dd/MM/yyyy");
 
