@@ -1,5 +1,8 @@
 package com.fourreau.itwapp.util;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -34,12 +37,35 @@ public class Utils {
     public static String URL_GRAVATAR_END = "?s=400&r=pg&d=mm";
     public static String URL_GRAVATAR_END_SMALL = "?s=200&r=pg&d=mm";
 
+    public static String URL_GRAVATAR_END_4INCH = "?s=300&r=pg&d=mm";
+    public static String URL_GRAVATAR_END_SMALL_4INCH = "?s=100&r=pg&d=mm";
+
     public static String getUrlGravatar(String hash) {
         return URL_GRAVATAR_BEGIN + hash + URL_GRAVATAR_END;
     }
 
     public static String getSmallUrlGravatar(String hash) {
         return URL_GRAVATAR_BEGIN + hash + URL_GRAVATAR_END_SMALL;
+    }
+
+    public static String getUrlGravatar4Inch(String hash) {
+        return URL_GRAVATAR_BEGIN + hash + URL_GRAVATAR_END_4INCH;
+    }
+
+    public static String getSmallUrlGravatar4Inch(String hash) {
+        return URL_GRAVATAR_BEGIN + hash + URL_GRAVATAR_END_SMALL_4INCH;
+    }
+
+    public static Boolean is4InchScreen(Activity a) {
+        DisplayMetrics metrics = new DisplayMetrics();
+        a.getWindowManager().getDefaultDisplay().getMetrics(metrics);
+        int widthPixels = metrics.widthPixels;
+        if(widthPixels > 720) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public static String hex(byte[] array) {

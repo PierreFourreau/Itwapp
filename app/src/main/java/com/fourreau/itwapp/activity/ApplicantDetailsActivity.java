@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.VideoView;
 
 import com.fourreau.itwapp.R;
@@ -150,7 +152,12 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
         //gravatar download image
         String hash = Utils.md5Hex(applicant.mail);
-        Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar(hash)).into(gravatar);
+        if(Utils.is4InchScreen(ApplicantDetailsActivity.this)) {
+            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar(hash)).error(R.drawable.ic_action_person).into(gravatar);
+        }
+        else {
+            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar4Inch(hash)).error(R.drawable.ic_action_person).into(gravatar);
+        }
         //mail
         textViewMail.setText(applicant.mail);
         //firstname

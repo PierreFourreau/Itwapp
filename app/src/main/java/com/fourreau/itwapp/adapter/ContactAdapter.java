@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -62,7 +63,14 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         }
         //gravatar download image
         String hash = Utils.md5Hex(c.getEmail());
+
         Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
+        if(Utils.is4InchScreen(activity)) {
+            Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
+        }
+        else {
+            Picasso.with(activity).load(Utils.getSmallUrlGravatar4Inch(hash)).into(contactViewHolder.vGravatar);
+        }
 
         // Here you apply the animation when the view is bound
         setAnimation(contactViewHolder.container, i);
