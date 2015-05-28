@@ -22,6 +22,8 @@
     <string name="action_edit">Edit</string>
     <string name="action_remove">Remove</string>
     <string name="no_data">No data</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
 
     <!--Interviews-->
     <string name="activity_interviews_no_data">No interviews</string>
@@ -82,7 +84,6 @@
 
     <!--View interview activity-->
     <string name="title_activity_interview">Interview</string>
-    <string name="activity_interview_name">Name</string>
     <string name="activity_interview_description">Description</string>
     <string name="activity_interview_video">Video</string>
     <string name="activity_interview_callback">Callback</string>
@@ -95,13 +96,13 @@
 
     <!--Applicant details activity-->
     <string name="title_activity_applicant_details">Applicant details</string>
-    <string name="activity_applicant_details_mail">Mail :\u00A0</string>
-    <string name="activity_applicant_details_first_name">First name :\u00A0</string>
-    <string name="activity_applicant_details_last_name">Last name :\u00A0</string>
-    <string name="activity_applicant_details_deadline">Deadline :\u00A0</string>
+    <string name="activity_applicant_details_mail">Mail</string>
+    <string name="activity_applicant_details_first_name">First name</string>
+    <string name="activity_applicant_details_last_name">Last name</string>
+    <string name="activity_applicant_details_deadline">Deadline</string>
     <string name="activity_applicant_details_deleted">Deleted :\u00A0</string>
     <string name="activity_applicant_details_questions">Responses :\u00A0</string>
-    <string name="activity_applicant_details_answer_date">Answer date :\u00A0</string>
+    <string name="activity_applicant_details_answer_date">Answer date</string>
     <string name="activity_applicant_details_answer_date_not_completed">not completed</string>
     <string name="activity_applicant_details_email_view">Email view :\u00A0</string>
     <string name="activity_applicant_details_status">Status :\u00A0</string>

@@ -55,6 +55,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
     private String idApplicant;
 
+    private LinearLayout llTitleName;
     private TextView textViewMail, textViewFirstName, textViewLastName, textViewDeadline, textViewDeleted, textViewAnswerDate, textViewEmailView, textViewStatus, textViewResponsesNone;
     private ImageView language, gravatar;
 
@@ -123,6 +124,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
 
     public void initView() {
         //get fields
+        llTitleName = (LinearLayout)findViewById(R.id.layout_title_name);
         textViewMail = (TextView) findViewById(R.id.activity_details_mail);
         textViewFirstName = (TextView) findViewById(R.id.activity_details_first_name);
         textViewLastName = (TextView) findViewById(R.id.activity_details_last_name);
@@ -156,19 +158,31 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
             textViewFirstName.setText(applicant.firstname);
         }
         else {
-            textViewFirstName.setText(R.string.none);
+            llTitleName.setVisibility(View.GONE);
         }
         //lastname
         if(!applicant.lastname.isEmpty()) {
             textViewLastName.setText(applicant.lastname);
         }
         else {
-            textViewLastName.setText(R.string.none);
+            llTitleName.setVisibility(View.GONE);
         }
         textViewDeadline.setText(Utils.sdf.format(applicant.dateEnd));
-        textViewDeleted.setText(String.valueOf(applicant.deleted));
+        if(applicant.deleted) {
+            textViewDeleted.setText(R.string.yes);
+        }
+        else {
+            textViewDeleted.setText(R.string.no);
+        }
+
         textViewAnswerDate.setText(Utils.sdf.format(applicant.dateAnswer));
-        textViewEmailView.setText(String.valueOf(applicant.emailView));
+        //email view
+        if(applicant.emailView) {
+            textViewEmailView.setText(R.string.yes);
+        }
+        else {
+            textViewEmailView.setText(R.string.no);
+        }
         //status
         if(applicant.status.equals(ApplicantStatus.COMPLETED)) {
             textViewStatus.setText(R.string.activity_applicant_details_status_completed);

@@ -22,6 +22,8 @@
     <string name="action_edit">Modifier</string>
     <string name="action_remove">Supprimer</string>
     <string name="no_data">Pas de résultats</string>
+    <string name="yes">oui</string>
+    <string name="no">non</string>
 
     <!--Interviews-->
     <string name="activity_interviews_no_data">Aucunes interviews</string>
@@ -82,7 +84,6 @@
 
     <!--View interview activity-->
     <string name="title_activity_interview">Interview</string>
-    <string name="activity_interview_name">Nom</string>
     <string name="activity_interview_description">Description</string>
     <string name="activity_interview_video">Video</string>
     <string name="activity_interview_callback">Lien de retour</string>
@@ -95,13 +96,13 @@
 
     <!--Applicant details activity-->
     <string name="title_activity_applicant_details">Détails du candidat</string>
-    <string name="activity_applicant_details_mail">Email :\u00A0</string>
-    <string name="activity_applicant_details_first_name">Prénom :\u00A0</string>
-    <string name="activity_applicant_details_last_name">Nom :\u00A0</string>
-    <string name="activity_applicant_details_deadline">Deadline :\u00A0</string>
+    <string name="activity_applicant_details_mail">Email</string>
+    <string name="activity_applicant_details_first_name">Prénom</string>
+    <string name="activity_applicant_details_last_name">Nom</string>
+    <string name="activity_applicant_details_deadline">Deadline</string>
     <string name="activity_applicant_details_deleted">Supprimé :\u00A0</string>
     <string name="activity_applicant_details_questions">Responses :\u00A0</string>
-    <string name="activity_applicant_details_answer_date">Date de réponse :\u00A0</string>
+    <string name="activity_applicant_details_answer_date">Date de réponse</string>
     <string name="activity_applicant_details_answer_date_not_completed">pas terminé</string>
     <string name="activity_applicant_details_email_view">Email vu :\u00A0</string>
     <string name="activity_applicant_details_status">Statut :\u00A0</string>

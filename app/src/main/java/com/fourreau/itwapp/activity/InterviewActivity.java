@@ -131,8 +131,9 @@ public  class InterviewActivity extends ActionBarActivity implements InterviewOn
 
     public void updateUi() {
         //video
-        if(interview.video != null) {
-            Picasso.with(InterviewActivity.this).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + Utils.extractYoutubeId(interview.video) + Utils.URL_THUMBNAIL_YOUTUBE_FULL_SIZE_END).fit().centerCrop().error(R.drawable.ic_itw).into(imageThumbnailYoutube);
+        if(interview.video != null && interview.video != "") {
+            Picasso.with(InterviewActivity.this).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + Utils.extractYoutubeId(interview.video) + Utils.URL_THUMBNAIL_YOUTUBE_FULL_SIZE_END).fit().centerCrop().error(R.drawable.back_itw).into(imageThumbnailYoutube);
+            Picasso.with(InterviewActivity.this).load(R.drawable.ic_action_play_over_video).into(videoPlayButton);
             imageThumbnailYoutube.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -143,8 +144,7 @@ public  class InterviewActivity extends ActionBarActivity implements InterviewOn
             videoPlayButton.setVisibility(View.VISIBLE);
         }
         else {
-            Picasso.with(InterviewActivity.this).load(R.drawable.ic_itw).resize(50, 50).into(imageThumbnailYoutube);
-            imageThumbnailYoutube.setVisibility(View.GONE);
+            Picasso.with(InterviewActivity.this).load(R.drawable.back_itw).fit().centerCrop().into(imageThumbnailYoutube);
             videoPlayButton.setVisibility(View.GONE);
         }
 
