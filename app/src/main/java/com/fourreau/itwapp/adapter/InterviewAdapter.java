@@ -48,7 +48,12 @@ public class InterviewAdapter extends RecyclerView.Adapter<InterviewAdapter.Inte
     public void onBindViewHolder(InterviewViewHolder interviewViewHolder, int i) {
         InterviewDto itw = interviewList.get(i);
         interviewViewHolder.vId.setText(itw.getId());
-        Picasso.with(activity).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + itw.getVideoId() + Utils.URL_THUMBNAIL_YOUTUBE_END).resize(470, 320).centerCrop().into(interviewViewHolder.vThumbnailYoutube);
+        if(Utils.is4InchOrLessScreen(activity)) {
+            Picasso.with(activity).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + itw.getVideoId() + Utils.URL_THUMBNAIL_YOUTUBE_DEFAULT_END).fit().centerCrop().into(interviewViewHolder.vThumbnailYoutube);
+        }
+        else {
+            Picasso.with(activity).load(Utils.URL_THUMBNAIL_YOUTUBE_BEGIN + itw.getVideoId() + Utils.URL_THUMBNAIL_YOUTUBE_END).fit().centerCrop().into(interviewViewHolder.vThumbnailYoutube);
+        }
         interviewViewHolder.vTitle.setText(itw.getTitle());
         interviewViewHolder.vSent.setText(Integer.toString(itw.getSent()));
         interviewViewHolder.vAnswers.setText(Integer.toString(itw.getAnswers()));

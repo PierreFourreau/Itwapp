@@ -25,6 +25,8 @@ public class Utils {
     //full size
     public static String URL_THUMBNAIL_YOUTUBE_FULL_SIZE_END = "/0.jpg";
 
+    public static String URL_THUMBNAIL_YOUTUBE_DEFAULT_END = "/default.jpg";
+
     public static SimpleDateFormat sdfDateSimple = new SimpleDateFormat("dd/MM/yyyy");
 
     public static SimpleDateFormat sdfTimeSimple = new SimpleDateFormat("HH:mm");
@@ -34,10 +36,10 @@ public class Utils {
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
     public static String URL_GRAVATAR_BEGIN = "http://www.gravatar.com/avatar/";
-    public static String URL_GRAVATAR_END = "?s=400&r=pg&d=mm";
+    public static String URL_GRAVATAR_END = "?s=300&r=pg&d=mm";
     public static String URL_GRAVATAR_END_SMALL = "?s=200&r=pg&d=mm";
 
-    public static String URL_GRAVATAR_END_4INCH = "?s=300&r=pg&d=mm";
+    public static String URL_GRAVATAR_END_4INCH = "?s=200&r=pg&d=mm";
     public static String URL_GRAVATAR_END_SMALL_4INCH = "?s=100&r=pg&d=mm";
 
     public static String getUrlGravatar(String hash) {
@@ -56,11 +58,11 @@ public class Utils {
         return URL_GRAVATAR_BEGIN + hash + URL_GRAVATAR_END_SMALL_4INCH;
     }
 
-    public static Boolean is4InchScreen(Activity a) {
+    public static Boolean is4InchOrLessScreen(Activity a) {
         DisplayMetrics metrics = new DisplayMetrics();
         a.getWindowManager().getDefaultDisplay().getMetrics(metrics);
         int widthPixels = metrics.widthPixels;
-        if(widthPixels > 720) {
+        if(widthPixels <= 720) {
             return true;
         }
         else {

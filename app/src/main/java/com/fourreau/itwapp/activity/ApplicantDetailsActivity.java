@@ -152,11 +152,11 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         }
         //gravatar download image
         String hash = Utils.md5Hex(applicant.mail);
-        if(Utils.is4InchScreen(ApplicantDetailsActivity.this)) {
-            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar(hash)).error(R.drawable.ic_action_person).into(gravatar);
+        if(Utils.is4InchOrLessScreen(ApplicantDetailsActivity.this)) {
+            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar4Inch(hash)).into(gravatar);
         }
         else {
-            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar4Inch(hash)).error(R.drawable.ic_action_person).into(gravatar);
+            Picasso.with(ApplicantDetailsActivity.this).load(Utils.getUrlGravatar(hash)).into(gravatar);
         }
         //mail
         textViewMail.setText(applicant.mail);

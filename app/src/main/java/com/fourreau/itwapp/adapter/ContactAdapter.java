@@ -65,11 +65,11 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         String hash = Utils.md5Hex(c.getEmail());
 
         Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
-        if(Utils.is4InchScreen(activity)) {
-            Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
+        if(Utils.is4InchOrLessScreen(activity)) {
+            Picasso.with(activity).load(Utils.getSmallUrlGravatar4Inch(hash)).into(contactViewHolder.vGravatar);
         }
         else {
-            Picasso.with(activity).load(Utils.getSmallUrlGravatar4Inch(hash)).into(contactViewHolder.vGravatar);
+            Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
         }
 
         // Here you apply the animation when the view is bound
