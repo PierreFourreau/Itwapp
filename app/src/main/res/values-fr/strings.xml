@@ -9,10 +9,6 @@
     <string name="title_section3">A propos</string>
     <string name="title_section4">Déconnexion</string>
 
-    <string name="fragment_logout">Déconnexion</string>
-
-    <string name="login_preference">Se connecter</string>
-
     <string name="navigation_drawer_open">Ouvrir barre de navigation</string>
     <string name="navigation_drawer_close">Fermer barre de navigation</string>
 
@@ -24,6 +20,25 @@
     <string name="no_data">Pas de résultats</string>
     <string name="yes">oui</string>
     <string name="no">non</string>
+
+    <!--Logout fragment-->
+    <string name="fragment_logout">Déconnexion</string>
+
+    <!--Login activity-->
+    <string name="title_activity_login">ItwApp</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Se connecter</string>
+    <string name="action_sign_in_short">Se connecter</string>
+    <string name="error_invalid_email">L\'email est incorrect</string>
+    <string name="error_invalid_password">Le mot de passe est trop court</string>
+    <string name="error_incorrect_password">Le mot de passe est incorrect</string>
+    <string name="error_field_required">Ce champs est requis</string>
+    <string name="login_sign_up"><u>S\'inscrire</u></string>
+
+
+    <!--for shared pref-->
+    <string name="login_preference">login</string>
 
     <!--Interviews-->
     <string name="activity_interviews_no_data">Aucunes interviews</string>

@@ -11,13 +11,17 @@ import android.content.Intent;
 import android.content.Loader;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.text.Html;
 import android.text.TextUtils;
+import android.text.method.LinkMovementMethod;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
@@ -55,6 +59,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     private View mProgressView;
     private View mLoginFormView;
 
+    private TextView linkSignUp;
+
     @Inject
     AuthenticationService authenticationService;
 
@@ -65,6 +71,17 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
+        linkSignUp = (TextView) findViewById(R.id.link_sign_up);
+        linkSignUp.setMovementMethod(LinkMovementMethod.getInstance());
+
+        //onclick to sign up
+        linkSignUp.setOnClickListener(new OnClickListener() {
+            public void onClick(View arg0) {
+                Intent viewIntent = new Intent("android.intent.action.VIEW", Uri.parse("http://itwapp.io/signup"));
+                startActivity(viewIntent);
+            }
+        });
+
         populateAutoComplete();
 
         //get login preference

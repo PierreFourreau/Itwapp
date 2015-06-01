@@ -50,6 +50,15 @@
                 android:textStyle="bold"
                 android:background="#1E88E5" />
 
+            <TextView
+                android:id="@+id/link_sign_up"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="40dp"
+                android:autoLink="web"
+                android:text="@string/login_sign_up"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
