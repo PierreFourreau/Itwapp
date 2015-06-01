@@ -9,10 +9,6 @@
     <string name="title_section3">About</string>
     <string name="title_section4">Logout</string>
 
-    <string name="fragment_logout">Logout</string>
-
-    <string name="login_preference">login</string>
-
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
@@ -24,6 +20,23 @@
     <string name="no_data">No data</string>
     <string name="yes">yes</string>
     <string name="no">no</string>
+
+    <!--Login activity-->
+    <string name="title_activity_login">ItwApp</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Login</string>
+    <string name="action_sign_in_short">Validate</string>
+    <string name="error_invalid_email">Email is incorrect</string>
+    <string name="error_invalid_password">Password too short</string>
+    <string name="error_incorrect_password">Password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="login_sign_up"><u>Sign up</u></string>
+    <!--for shared pref-->
+    <string name="login_preference">login</string>
+
+    <!--Logout fragment-->
+    <string name="fragment_logout">Logout</string>
 
     <!--Interviews-->
     <string name="activity_interviews_no_data">No interviews</string>
