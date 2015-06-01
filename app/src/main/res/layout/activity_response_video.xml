@@ -1,15 +1,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    tools:context="com.fourreau.itwapp.activity.ResponseVideoActivity">
+    tools:context="com.fourreau.itwapp.activity.ResponseVideoActivity"
+    android:background="#000000">
 
-    <VideoView
-        android:id="@+id/video_view_response"
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentBottom="true"/>
+        android:gravity="center_horizontal|center_vertical">
 
+        <VideoView
+            android:id="@+id/video_view_response"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"/>
+    </LinearLayout>
 </RelativeLayout>

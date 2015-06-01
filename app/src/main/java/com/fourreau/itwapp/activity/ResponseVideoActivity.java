@@ -1,6 +1,7 @@
 package com.fourreau.itwapp.activity;
 
 import android.app.ProgressDialog;
+import android.content.res.Configuration;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.support.v7.app.ActionBarActivity;
@@ -49,7 +50,7 @@ public class ResponseVideoActivity extends ActionBarActivity {
             progressDialog = new ProgressDialog(ResponseVideoActivity.this);
             progressDialog.setTitle(R.string.title_activity_response_video);
             progressDialog.setMessage(ResponseVideoActivity.this.getString(R.string.dialog_loading));
-            progressDialog.setCancelable(false);
+            progressDialog.setCancelable(true);
             progressDialog.show();
 
             try {
@@ -80,6 +81,11 @@ public class ResponseVideoActivity extends ActionBarActivity {
                 }
             });
         }
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
     }
 
     @Override

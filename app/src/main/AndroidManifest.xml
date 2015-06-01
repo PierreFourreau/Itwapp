@@ -87,7 +87,8 @@
         <activity
             android:name=".activity.ResponseVideoActivity"
             android:label="@string/title_activity_response_video"
-            android:parentActivityName=".activity.ApplicantDetailsActivity" >
+            android:parentActivityName=".activity.ApplicantDetailsActivity"
+            android:configChanges="orientation|screenSize">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fourreau.itwapp.activity.ApplicantDetailsActivity" />
