@@ -74,9 +74,11 @@ public class UpdateInterviewTask extends AsyncTask<String, Void, AsyncTaskResult
         if(result.getError() != null ) {
             // error handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_generic_error_server);
+            delegate.processFinishUpdate(null);
         }  else if (isCancelled()) {
             // cancel handling here
             showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_content_cancellation);
+            delegate.processFinishUpdate(null);
         } else {
             Interview interview = result.getResult();
 

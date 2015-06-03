@@ -278,17 +278,19 @@ public class EditInterviewActivity extends ActionBarActivity implements Intervie
                 container.addView(addView);
             }
         }
-        else {
-//            textViewQuestions.setText(R.string.none);
-        }
     }
 
     public void processFinishUpdate(Interview output) {
-        Toast.makeText(this, R.string.activity_update_interview_success, Toast.LENGTH_SHORT).show();
-        finish();
-        Intent intent = new Intent(EditInterviewActivity.this, InterviewActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(intent);
+        if(output != null) {
+            Toast.makeText(this, R.string.activity_update_interview_success, Toast.LENGTH_SHORT).show();
+            finish();
+            Intent intent = new Intent(EditInterviewActivity.this, InterviewActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
+        }
+        else {
+            questions.clear();
+        }
     }
 
     /**
