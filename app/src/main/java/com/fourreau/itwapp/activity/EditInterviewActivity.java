@@ -239,22 +239,13 @@ public class EditInterviewActivity extends ActionBarActivity implements Intervie
         if(!interview.text.isEmpty()) {
             editTextDescription.setText(interview.text);
         }
-        else {
-            editTextDescription.setText(R.string.none);
-        }
         //video
         if(!interview.video.isEmpty()) {
             editTextVideo.setText(interview.video);
         }
-        else {
-            editTextVideo.setText(R.string.none);
-        }
         //callback
         if(!interview.callback.isEmpty()) {
             editTextCallback.setText(interview.callback);
-        }
-        else {
-            editTextCallback.setText(R.string.none);
         }
         if(interview.questions.length > 0) {
             for (Question q : interview.questions) {
