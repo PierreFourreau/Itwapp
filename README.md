@@ -7,5 +7,4 @@ Use :
 - Timber for logging
 - Dagger for dependencies
 - Crashlytics
-- ButterKnife
 - Picasso
