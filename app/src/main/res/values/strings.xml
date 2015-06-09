@@ -71,6 +71,7 @@
     <string name="activity_add_interview_questions">Questions</string>
     <string name="activity_add_question_button">Add</string>
     <string name="activity_add_interview_name_error">Name field is required</string>
+    <string name="activity_add_interview_questions_error">At least one question required</string>
     <string name="activity_add_interview_success">Interview created successfully</string>
 
     <!--Add question-->

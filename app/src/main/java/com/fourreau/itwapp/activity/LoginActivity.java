@@ -175,12 +175,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private boolean isEmailValid(String email) {
-        //TODO uncomment
-//        return true;
-
         Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
         Matcher matcher = pattern.matcher(email);
-
         if(matcher.matches()) {
             return true;
         }
@@ -190,7 +186,7 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     }
 
     private boolean isPasswordValid(String password) {
-        return password.length() > 4;
+        return password.length() > 1;
     }
 
     /**

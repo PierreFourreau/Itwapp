@@ -28,6 +28,7 @@ import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.CreateInterviewTask;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.gc.materialdesign.widgets.SnackBar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -168,35 +169,41 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                     //get questions container and get childs
                     LinearLayout linearLayout = (LinearLayout) findViewById(R.id.containerQuestions);
                     int childCount = linearLayout.getChildCount();
-                    for (int i=0; i < childCount; i++){
-                        View v = linearLayout.getChildAt(i);
-                        TextView textViewQuestionName = (TextView) v.findViewById(R.id.textViewQuestionName);
-                        TextView textViewQuestionReadingTime = (TextView) v.findViewById(R.id.textViewQuestionReadingTime);
-                        TextView textViewQuestionAnswerTime = (TextView) v.findViewById(R.id.textViewQuestionAnswerTime);
+                    //if at least one question
+                    if(childCount > 0) {
+                        for (int i=0; i < childCount; i++){
+                            View v = linearLayout.getChildAt(i);
+                            TextView textViewQuestionName = (TextView) v.findViewById(R.id.textViewQuestionName);
+                            TextView textViewQuestionReadingTime = (TextView) v.findViewById(R.id.textViewQuestionReadingTime);
+                            TextView textViewQuestionAnswerTime = (TextView) v.findViewById(R.id.textViewQuestionAnswerTime);
 
-                        final Map<String, Object> question = new HashMap<String, Object>();
+                            final Map<String, Object> question = new HashMap<String, Object>();
 
-                        //put question fields
-                        question.put("content", textViewQuestionName.getText().toString());
-                        question.put("readingTime", Integer.parseInt(textViewQuestionReadingTime.getText().toString().substring(0, 1)) * 60);
-                        question.put("answerTime", Integer.parseInt(textViewQuestionAnswerTime.getText().toString().substring(0, 1)) * 60);
-                        question.put("number", i + 1);
+                            //put question fields
+                            question.put("content", textViewQuestionName.getText().toString());
+                            question.put("readingTime", Integer.parseInt(textViewQuestionReadingTime.getText().toString().substring(0, 1)) * 60);
+                            question.put("answerTime", Integer.parseInt(textViewQuestionAnswerTime.getText().toString().substring(0, 1)) * 60);
+                            question.put("number", i + 1);
 
-                        questions.add(question);
+                            questions.add(question);
+                        }
+
+                        param.put("name", editTextName.getText().toString());
+                        param.put("video", editTextVideo.getText().toString());
+                        param.put("text", editTextDescription.getText().toString());
+                        param.put("callback", editTextCallback.getText().toString());
+                        param.put("questions", questions);
+
+                        Timber.d("AddInterviewActivity:interview sent : " + param.toString());
+
+                        //launch task which add interview
+                        CreateInterviewTask mTask = new CreateInterviewTask(AddInterviewActivity.this, interviewService, param);
+                        mTask.delegate = AddInterviewActivity.this;
+                        mTask.execute();
                     }
-
-                    param.put("name", editTextName.getText().toString());
-                    param.put("video", editTextVideo.getText().toString());
-                    param.put("text", editTextDescription.getText().toString());
-                    param.put("callback", editTextCallback.getText().toString());
-                    param.put("questions", questions);
-
-                    Timber.d("AddInterviewActivity:interview sent : " + param.toString());
-
-                    //launch task which add interview
-                    CreateInterviewTask mTask = new CreateInterviewTask(AddInterviewActivity.this, interviewService, param);
-                    mTask.delegate = AddInterviewActivity.this;
-                    mTask.execute();
+                    else {
+                        showAlertDialog(R.string.dialog_title_generic_error, R.string.activity_add_interview_questions_error);
+                    }
                 }
                 else {
                     showAlertDialog(R.string.dialog_title_generic_error, R.string.activity_add_interview_name_error);

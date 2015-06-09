@@ -73,6 +73,7 @@
     <string name="activity_add_interview_questions">Questions</string>
     <string name="activity_add_question_button">Ajouter</string>
     <string name="activity_add_interview_name_error">Le champs nom est requis</string>
+    <string name="activity_add_interview_questions_error">Au moins une question est requise</string>
     <string name="activity_add_interview_success">L\'interview a été correctement crée</string>
 
     <!--Add question-->
