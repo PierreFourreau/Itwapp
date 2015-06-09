@@ -116,7 +116,7 @@
     <string name="activity_applicant_details_last_name">Nom</string>
     <string name="activity_applicant_details_deadline">Deadline</string>
     <string name="activity_applicant_details_deleted">Supprimé :\u00A0</string>
-    <string name="activity_applicant_details_questions">Responses :\u00A0</string>
+    <string name="activity_applicant_details_questions">Réponses :\u00A0</string>
     <string name="activity_applicant_details_answer_date">Date de réponse</string>
     <string name="activity_applicant_details_answer_date_not_completed">pas terminé</string>
     <string name="activity_applicant_details_email_view">Email vu :\u00A0</string>
