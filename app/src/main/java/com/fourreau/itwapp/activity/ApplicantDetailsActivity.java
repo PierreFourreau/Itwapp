@@ -33,6 +33,7 @@ import com.fourreau.itwapp.task.DeleteApplicantTask;
 import com.fourreau.itwapp.task.OneApplicantTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
+import com.google.common.base.Strings;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -181,8 +182,13 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
         else {
             textViewDeleted.setText(R.string.no);
         }
-
-        textViewAnswerDate.setText(Utils.sdf.format(applicant.dateAnswer));
+        //answered date
+        if(applicant.dateAnswer == 0) {
+            textViewAnswerDate.setText(R.string.none);
+        }
+        else {
+            textViewAnswerDate.setText(Utils.sdf.format(applicant.dateAnswer));
+        }
         //email view
         if(applicant.emailView) {
             textViewEmailView.setText(R.string.yes);
