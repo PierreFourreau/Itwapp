@@ -1,6 +1,8 @@
 package com.fourreau.itwapp.activity;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -120,7 +122,7 @@ public class HomeActivity extends ActionBarActivity
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+//        int id = item.getItemId();
 
 //        if (id == R.id.action_refresh) {
 //            finish();
@@ -128,6 +130,23 @@ public class HomeActivity extends ActionBarActivity
 //        }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /**
+     * Catch back pressed on Home activity.
+     */
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+            .setMessage(R.string.dialog_exit_application)
+            .setCancelable(false)
+            .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int id) {
+                    finish();
+                }
+            })
+            .setNegativeButton(R.string.no, null)
+            .show();
     }
 
     /**

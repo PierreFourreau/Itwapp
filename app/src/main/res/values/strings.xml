@@ -43,6 +43,7 @@
 
     <!--Alert dialog-->
     <string name="dialog_loading">Loading</string>
+    <string name="dialog_exit_application">Are you sure you want to exit application?</string>
 
     <!--Delete dialog-->
     <string name="dialog_title_delete_error">The deletion has failed</string>

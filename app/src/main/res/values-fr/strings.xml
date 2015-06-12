@@ -45,6 +45,7 @@
 
     <!--Alert dialog-->
     <string name="dialog_loading">Chargement en cours</string>
+    <string name="dialog_exit_application">Etes vous sûr de vouloir quitter l\'application?</string>
 
     <!--Delete dialog-->
     <string name="dialog_title_delete_error">La suppression a échoué</string>
