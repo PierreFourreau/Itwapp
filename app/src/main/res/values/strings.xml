@@ -148,7 +148,7 @@
     <!--About activity-->
     <string name="title_activity_about">About</string>
     <string name="about_application_label">Application</string>
-    <string name="about_application">InterviewApp mobile</string>
+    <string name="about_application">InterviewApp Manager unofficial</string>
     <string name="about_developer_label">Developer</string>
     <string name="about_developer"><a href="www.pierrefourreau.fr">www.pierrefourreau.fr</a></string>
     <string name="about_contact_label">Contact</string>

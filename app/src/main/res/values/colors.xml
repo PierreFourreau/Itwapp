@@ -14,10 +14,11 @@
         <item>#CAF1E7</item>
     </string-array>
 
-    <color name="navigation">#1976D2</color>
+    <color name="logo">#5EA8D6</color>
+
+    <color name="navigation">#5EA8D6</color>
     <color name="navigation_drawer">#33373B</color>
 
-    <color name="navigation_logo">#AEE655</color>
     <color name="camera_logo">#54AAE6</color>
 
     <color name="frame">#b4b4b4</color>
