@@ -14,6 +14,7 @@ public class Contact {
     private Long deadline;
     private Language language;
     private Status status;
+    private Boolean answered;
 
     public enum Language {
         FR("fr"),
@@ -49,7 +50,7 @@ public class Contact {
     }
 
 
-    public Contact(String id, String name, String email, Long deadline, String language, Integer status) {
+    public Contact(String id, String name, String email, Long deadline, String language, Integer status, Boolean answered) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -81,6 +82,7 @@ public class Contact {
                 this.status = Status.UNKNOWN;
                 break;
         }
+        this.answered = answered;
     }
 
     public String getId() {
@@ -124,6 +126,14 @@ public class Contact {
         this.language = language;
     }
 
+    public Boolean getAnswered() {
+        return answered;
+    }
+
+    public void setAnswered(Boolean answered) {
+        this.answered = answered;
+    }
+
     @Override
     public String toString() {
         return "Contact{" +
@@ -132,6 +142,8 @@ public class Contact {
                 ", email='" + email + '\'' +
                 ", deadline=" + deadline +
                 ", language=" + language +
+                ", status=" + status +
+                ", answered=" + answered +
                 '}';
     }
 }

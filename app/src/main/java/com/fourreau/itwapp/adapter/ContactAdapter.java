@@ -71,6 +71,10 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         else {
             Picasso.with(activity).load(Utils.getSmallUrlGravatar(hash)).into(contactViewHolder.vGravatar);
         }
+        //answered check
+        if(c.getAnswered()) {
+            Picasso.with(activity).load(R.drawable.ic_action_accept_black).into(contactViewHolder.vAnswered);
+        }
 
         // Here you apply the animation when the view is bound
         setAnimation(contactViewHolder.container, i);
@@ -113,6 +117,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
         protected TextView vDeadline;
         protected ImageView vGravatar;
         protected ImageView vLanguage;
+        protected ImageView vAnswered;
         public IContactViewHolderClicks mListener;
 
         //need to retrieve the container (ie the root ViewGroup from your custom_item_layout), it's the view that will be animated
@@ -128,6 +133,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             vDeadline = (TextView)  v.findViewById(R.id.deadline);
             vGravatar = (ImageView)  v.findViewById(R.id.contact_gravatar);
             vLanguage = (ImageView)  v.findViewById(R.id.language);
+            vAnswered = (ImageView)  v.findViewById(R.id.answered);
             cardView.setOnClickListener(this);
         }
 

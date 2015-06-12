@@ -27,6 +27,7 @@ import java.util.List;
 import javax.inject.Inject;
 
 import io.itwapp.models.Applicant;
+import timber.log.Timber;
 
 public class ApplicantsActivity extends ActionBarActivity implements ApplicantAllResponse {
 
@@ -158,7 +159,7 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
         //fill contact list
         contactList = new ArrayList<Contact>();
         for(int i = 0; i < applicants.length; i++) {
-            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd, applicants[i].lang, applicants[i].status.getCode()));
+            contactList.add(new Contact(applicants[i].id, applicants[i].firstname, applicants[i].mail, applicants[i].dateEnd, applicants[i].lang, applicants[i].status.getCode(), applicants[i].questions.length == applicants[i].responses.length));
         }
         updateUi();
     }
