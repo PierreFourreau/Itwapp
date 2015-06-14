@@ -82,7 +82,16 @@ public  class InterviewActivity extends ActionBarActivity implements InterviewOn
                 }
                 return true;
             case R.id.action_delete:
-                deleteInterview();
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.dialog_delete_interview)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                deleteInterview();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
                 return true;
         }
         return super.onOptionsItemSelected(item);

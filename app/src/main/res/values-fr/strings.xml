@@ -36,7 +36,6 @@
     <string name="error_field_required">Ce champ est requis</string>
     <string name="login_sign_up"><u>S\'inscrire</u></string>
 
-
     <!--for shared pref-->
     <string name="login_preference">login</string>
 
@@ -46,6 +45,8 @@
     <!--Alert dialog-->
     <string name="dialog_loading">Chargement en cours</string>
     <string name="dialog_exit_application">Etes vous sûr de vouloir quitter l\'application?</string>
+    <string name="dialog_delete_interview">Etes vous sûr de vouloir supprimer l\'interview?</string>
+    <string name="dialog_delete_applicant">Etes vous sûr de vouloir supprimer le candidat?</string>
 
     <!--Delete dialog-->
     <string name="dialog_title_delete_error">La suppression a échoué</string>

@@ -103,7 +103,16 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
                 overridePendingTransition(R.anim.activity_back_in, R.anim.activity_back_out);
                 return true;
             case R.id.action_delete:
-                deleteApplicant();
+                new AlertDialog.Builder(this)
+                        .setMessage(R.string.dialog_delete_applicant)
+                        .setCancelable(false)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                deleteApplicant();
+                            }
+                        })
+                        .setNegativeButton(R.string.no, null)
+                        .show();
                 return true;
         }
         return super.onOptionsItemSelected(item);
@@ -145,7 +154,7 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
     public void updateUi() {
         //set fields
         //language
-        if(applicant.equals(Contact.Language.EN)){
+        if(applicant.lang.equals(Contact.Language.EN.getLanguage())){
             language.setBackgroundResource(R.drawable.flag_en);
         }
         else {
