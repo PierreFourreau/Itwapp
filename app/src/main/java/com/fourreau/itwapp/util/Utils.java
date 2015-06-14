@@ -17,6 +17,8 @@ public class Utils {
     private Utils(){}
     public static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
+    public static SimpleDateFormat sdfFromString = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+
     public static String URL_HELP = "http://itwapp.io/faq";
 
     public static String URL_THUMBNAIL_YOUTUBE_BEGIN = "http://img.youtube.com/vi/";

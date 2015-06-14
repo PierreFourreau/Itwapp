@@ -120,7 +120,8 @@
                     android:id="@+id/activity_interview_questions"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/activity_interview_questions" />
+                    android:text="@string/activity_interview_questions"
+                    android:layout_marginBottom="50dp"/>
 
             </LinearLayout>
         </LinearLayout>
@@ -137,7 +138,7 @@
         android:layout_marginRight="24dp"
         android:layout_marginBottom="24dp"
         android:background="@color/logo"
-        materialdesign:animate="true"
+        materialdesign:animate="false"
         materialdesign:iconDrawable="@drawable/ic_action_group" />
 
 </RelativeLayout>

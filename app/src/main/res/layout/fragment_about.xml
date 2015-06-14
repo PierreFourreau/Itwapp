@@ -72,6 +72,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/about_more2"/>
+
+            <Button
+                android:id="@+id/see_projects_open_source_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="@string/about_projects_button"
+                android:background="@color/logo" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

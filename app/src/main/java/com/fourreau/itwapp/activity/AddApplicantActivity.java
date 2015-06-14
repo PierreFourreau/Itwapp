@@ -3,21 +3,18 @@ package com.fourreau.itwapp.activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
-import android.content.ContentResolver;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.database.Cursor;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -27,24 +24,25 @@ import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.fragment.DatePickerFragment;
 import com.fourreau.itwapp.fragment.TimePickerFragment;
-import com.fourreau.itwapp.model.Contact;
 import com.fourreau.itwapp.model.CreateApplicantsResponse;
 import com.fourreau.itwapp.model.GetContactResponse;
 import com.fourreau.itwapp.service.ApplicantService;
-import com.fourreau.itwapp.task.AllApplicantsTask;
 import com.fourreau.itwapp.task.CreateApplicantsTask;
 import com.fourreau.itwapp.task.GetContactTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.mikepenz.aboutlibraries.util.Util;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.inject.Inject;
 
@@ -89,42 +87,67 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
         buttonValidateAddApplicant.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-            if(editTextMails.getText().length() > 0) {
+                if(editTextMails.getText().toString().trim().length() > 0) {
+                    applicants.clear();
 
-                //default language en
-                String language = "en";
+                    //default language en
+                    String language = "en";
 
-                //get language
-                if(radioGroupLanguage.getCheckedRadioButtonId() == R.id.add_applicant_radio_fr)
-                {
-                    language = "fr";
+                    //get language
+                    if(radioGroupLanguage.getCheckedRadioButtonId() == R.id.add_applicant_radio_fr)
+                    {
+                        language = "fr";
+                    }
+
+                    //deadline
+                    long deadline = 0;
+                    try {
+                        String completeDate = addApplicanDateChoosen.getText().toString() + " " + addApplicanTimeChoosen.getText().toString();
+                        Date parsedDate = Utils.sdfFromString.parse(completeDate);
+                        deadline = parsedDate.getTime();
+                    }
+                    catch (ParseException e) {
+                        Timber.d("AddApplicantsActivity:ParseException with deadline: " + e.toString());
+                    }
+                    //get mails with split
+                    String[] mails = editTextMails.getText().toString().split(";");
+
+                    //check mails
+                    Pattern pattern = Pattern.compile(Utils.EMAIL_PATTERN);
+                    Boolean emailError = false;
+                    for(int i = 0; i < mails.length; i++) {
+                        Matcher matcher = pattern.matcher(mails[i]);
+                        //if email ok
+                        if(matcher.matches()) {
+                            Map<String, Object> param = new HashMap<String, Object>();
+                            param.put("mail", mails[i]);
+                            param.put("alert", true);
+                            param.put("interview", idInterview);
+                            param.put("lang", language);
+                            param.put("deadline", deadline);
+                            applicants.add(param);
+                        }
+                        else {
+                            emailError = true;
+                        }
+                    }
+
+                    if(emailError == false) {
+                        Timber.d("AddApplicantsActivity:applicants sent : " + applicants.toString());
+
+                        //launch task which add applicants
+                        CreateApplicantsTask mTask = new CreateApplicantsTask(AddApplicantActivity.this, applicantService, applicants);
+                        mTask.delegate = AddApplicantActivity.this;
+                        mTask.execute();
+                    }
+                    else {
+                        showAlertDialog(R.string.dialog_title_generic_error, R.string.dialog_title_add_applicant_contact_mail_error);
+                    }
                 }
-
-                //get mails with split
-                String[] mails = editTextMails.getText().toString().split(";");
-
-                for(int i = 0; i < mails.length; i++) {
-                    Map<String, Object> param = new HashMap<String, Object>();
-                    param.put("mail", mails[i]);
-                    param.put("alert", true);
-                    param.put("interview", idInterview);
-                    param.put("lang", language);
-                    param.put("deadline", 1409045626568L);
-                    applicants.add(param);
+                else {
+                    showAlertDialog(R.string.dialog_title_generic_error, R.string.activity_add_applicant_mails_error);
                 }
-
-
-                Timber.d("AddApplicantsActivity:applicants sent : " + applicants.toString());
-
-                //launch task which add applicants
-                CreateApplicantsTask mTask = new CreateApplicantsTask(AddApplicantActivity.this, applicantService, applicants);
-                mTask.delegate = AddApplicantActivity.this;
-                mTask.execute();
-            }
-            else {
-                showAlertDialog(R.string.dialog_title_generic_error, R.string.activity_add_applicant_mails_error);
-            }
-        }});
+            }});
     }
 
     /**
@@ -211,7 +234,7 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
      */
     @Override
     public void onDateSet(DatePicker view, int year, int monthOfYear,int dayOfMonth) {
-        addApplicanDateChoosen.setText(dayOfMonth + "/" + monthOfYear + "/" + year);
+        addApplicanDateChoosen.setText(String.format("%02d", dayOfMonth) + "/" + String.format("%02d", monthOfYear+1) + "/" + year);
     }
 
     /**
@@ -223,7 +246,7 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
      */
     @Override
     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-        addApplicanTimeChoosen.setText(hourOfDay + ":" + minute);
+        addApplicanTimeChoosen.setText(String.format("%02d", hourOfDay) + ":" + String.format("%02d", minute));
     }
 
     /**

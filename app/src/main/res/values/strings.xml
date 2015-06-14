@@ -142,6 +142,7 @@
     <string name="dialog_title_add_applicant_contact_loading">Retrieving contact</string>
     <string name="dialog_title_add_applicant_contact_no_result">No email associated with contact</string>
     <string name="dialog_title_add_applicant_contact_success">Contact added</string>
+    <string name="dialog_title_add_applicant_contact_mail_error">Incorrect mail field</string>
 
     <!--VideoResponse Activity-->
     <string name="title_activity_response_video">Video response</string>
@@ -157,5 +158,8 @@
     <string name="about_more_label">More</string>
     <string name="about_more1">If you like this app, please rate it.</string>
     <string name="about_more2">If you found errors in the app, please report them to me and the app will be updated as soon as possible. Thanks.</string>
+    <string name="about_projects_button">SEE THE LIST OF OPEN SOURCE PROJECTS USED</string>
+    <string name="title_activity_open_source_projects_used">OpenSourceProjectsUsed</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

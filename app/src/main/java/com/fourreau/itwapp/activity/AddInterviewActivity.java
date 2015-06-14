@@ -107,7 +107,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
                                         final View addView = layoutInflater.inflate(R.layout.question_row, null);
 
                                         //if content question is not null we can continue
-                                        if (editTextQuestionName.getText().length() > 0) {
+                                        if (editTextQuestionName.getText().toString().trim().length() > 0) {
                                             //get fields
                                             TextView textViewQuestionName = (TextView) addView.findViewById(R.id.textViewQuestionName);
                                             TextView textViewQuestionReadingTime = (TextView) addView.findViewById(R.id.textViewQuestionReadingTime);
@@ -165,7 +165,7 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
         buttonValidateAddInterview.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View arg0) {
-                if(editTextName.getText().length() > 0) {
+                if(editTextName.getText().toString().trim().length() > 0) {
                     //get questions container and get childs
                     LinearLayout linearLayout = (LinearLayout) findViewById(R.id.containerQuestions);
                     int childCount = linearLayout.getChildCount();

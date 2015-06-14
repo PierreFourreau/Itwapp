@@ -55,7 +55,7 @@ public class Contact {
         this.name = name;
         this.email = email;
         this.deadline = deadline;
-        if(language.equals(Language.EN)) {
+        if(language.equals(Language.EN.getLanguage())) {
             this.language = Language.EN;
         }
         else {

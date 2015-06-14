@@ -86,12 +86,16 @@
         </activity>
         <activity
             android:name=".activity.ResponseVideoActivity"
+            android:configChanges="orientation|screenSize"
             android:label="@string/title_activity_response_video"
-            android:parentActivityName=".activity.ApplicantDetailsActivity"
-            android:configChanges="orientation|screenSize">
+            android:parentActivityName=".activity.ApplicantDetailsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.fourreau.itwapp.activity.ApplicantDetailsActivity" />
+        </activity>
+        <activity
+            android:name=".activity.OpenSourceProjectsUsed"
+            android:label="@string/title_activity_open_source_projects_used" >
         </activity>
     </application>
 

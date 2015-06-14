@@ -33,7 +33,7 @@
     <string name="error_invalid_email">L\'email est incorrect</string>
     <string name="error_invalid_password">Le mot de passe est trop court</string>
     <string name="error_incorrect_password">Le mot de passe est incorrect</string>
-    <string name="error_field_required">Ce champs est requis</string>
+    <string name="error_field_required">Ce champ est requis</string>
     <string name="login_sign_up"><u>S\'inscrire</u></string>
 
 
@@ -49,7 +49,7 @@
 
     <!--Delete dialog-->
     <string name="dialog_title_delete_error">La suppression a échoué</string>
-    <string name="dialog_title_delete_success">La suppresion a été effectuée avec succès</string>
+    <string name="dialog_title_delete_success">La suppression a été effectuée avec succès</string>
     <string name="dialog_title_update_forbidden">La modification est interdite car il existe des candidats</string>
 
     <!--Alert messages-->
@@ -73,7 +73,7 @@
     <string name="activity_add_interview_callback">Lien de redirection (optionnel)</string>
     <string name="activity_add_interview_questions">Questions</string>
     <string name="activity_add_question_button">Ajouter</string>
-    <string name="activity_add_interview_name_error">Le champs nom est requis</string>
+    <string name="activity_add_interview_name_error">Le champ nom est requis</string>
     <string name="activity_add_interview_questions_error">Au moins une question est requise</string>
     <string name="activity_add_interview_success">L\'interview a été correctement crée</string>
 
@@ -81,7 +81,7 @@
     <string name="dialog_add_question_content">Contenu</string>
     <string name="dialog_add_question_reading_time">Temps de lecture</string>
     <string name="dialog_add_question_answer_time">Temps de réponse</string>
-    <string name="dialog_add_interview_question_content_error">Le champs contenu est requis</string>
+    <string name="dialog_add_interview_question_content_error">Le champ contenu est requis</string>
     <string-array name="question_time">
         <item>1 minute</item>
         <item>2 minutes</item>
@@ -138,12 +138,13 @@
     <string name="activity_add_applicant_language">Langage</string>
     <string name="activity_add_applicant_language_english">Anglais</string>
     <string name="activity_add_applicant_language_french">Français</string>
-    <string name="activity_add_applicant_mails_error">Le champs emails est requis</string>
+    <string name="activity_add_applicant_mails_error">Le champ emails est requis</string>
     <string name="dialog_title_add_applicant_error">La création a échoué</string>
     <string name="dialog_title_add_applicant_success">La création a été effectué avec succès</string>
     <string name="dialog_title_add_applicant_contact_loading">Récupération des contacts</string>
     <string name="dialog_title_add_applicant_contact_no_result">Aucun email associé à ce contact</string>
     <string name="dialog_title_add_applicant_contact_success">Contact ajouté</string>
+    <string name="dialog_title_add_applicant_contact_mail_error">Champ email incorrect</string>
 
     <!--VideoResponse Activity-->
     <string name="title_activity_response_video">Réponse vidéo</string>
@@ -158,6 +159,7 @@
     <string name="about_contact">fourreau.pierre@gmail.com</string>
     <string name="about_more_label">Plus</string>
     <string name="about_more1">Si vous aimez cette application, merci de la noter.</string>
-    <string name="about_more2">Si vous trouvez des erreurs sur l\'application, pouvez-vous me les repporter afin que je puisse les corriger le plus vite possible? Merci.</string>
+    <string name="about_more2">En cas de bug, merci de me signaler le problème pour qu\'une correction soit apportée dans les prochaines versions. Merci.</string>
+    <string name="about_projects_button">VOIR LA LISTE DES PROJETS OPEN SOURCE UTILISÉS</string>
 
 </resources>
