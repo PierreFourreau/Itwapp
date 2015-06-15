@@ -28,6 +28,7 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fourreau.itwapp.R;
@@ -35,6 +36,7 @@ import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.AuthenticationService;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +63,8 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
 
     private TextView linkSignUp;
 
+    private ImageView logo;
+
     @Inject
     AuthenticationService authenticationService;
 
@@ -68,6 +72,10 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        //set logo
+        logo = (ImageView) findViewById(R.id.logo_login);
+        Picasso.with(LoginActivity.this).load(R.drawable.logo_with_text).into(logo);
 
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
