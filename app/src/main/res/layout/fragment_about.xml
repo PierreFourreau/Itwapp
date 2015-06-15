@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/about_more2"/>
 
-            <Button
+            <com.gc.materialdesign.views.ButtonRectangle
                 android:id="@+id/see_projects_open_source_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

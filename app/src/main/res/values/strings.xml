@@ -160,8 +160,7 @@
     <string name="about_more_label">More</string>
     <string name="about_more1">If you like this app, please rate it.</string>
     <string name="about_more2">If you found errors in the app, please report them to me and the app will be updated as soon as possible. Thanks.</string>
-    <string name="about_projects_button">SEE THE LIST OF OPEN SOURCE PROJECTS USED</string>
-    <string name="title_activity_open_source_projects_used">OpenSourceProjectsUsed</string>
-    <string name="action_settings">Settings</string>
+    <string name="about_projects_button">Open source licenses</string>
+    <string name="title_activity_open_source_projects_used">Licences</string>
 
 </resources>

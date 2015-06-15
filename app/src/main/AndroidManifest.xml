@@ -94,8 +94,12 @@
                 android:value="com.fourreau.itwapp.activity.ApplicantDetailsActivity" />
         </activity>
         <activity
-            android:name=".activity.OpenSourceProjectsUsed"
-            android:label="@string/title_activity_open_source_projects_used" >
+            android:name=".activity.LicensesActivity"
+            android:label="@string/title_activity_open_source_projects_used"
+            android:parentActivityName=".activity.HomeActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.fourreau.itwapp.activity.HomeActivity" />
         </activity>
     </application>
 

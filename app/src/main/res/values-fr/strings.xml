@@ -161,6 +161,6 @@
     <string name="about_more_label">Plus</string>
     <string name="about_more1">Si vous aimez cette application, merci de la noter.</string>
     <string name="about_more2">En cas de bug, merci de me signaler le problème pour qu\'une correction soit apportée dans les prochaines versions. Merci.</string>
-    <string name="about_projects_button">VOIR LA LISTE DES PROJETS OPEN SOURCE UTILISÉS</string>
+    <string name="about_projects_button">Licenses open source</string>
 
 </resources>

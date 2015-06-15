@@ -31,9 +31,7 @@ import com.fourreau.itwapp.task.CreateApplicantsTask;
 import com.fourreau.itwapp.task.GetContactTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
-import com.mikepenz.aboutlibraries.util.Util;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Calendar;
