@@ -1,7 +1,9 @@
 package com.fourreau.itwapp.core;
 
 import android.app.Application;
+import android.util.Log;
 
+import com.crashlytics.android.Crashlytics;
 import com.fourreau.itwapp.BuildConfig;
 import com.fourreau.itwapp.core.module.AndroidModule;
 import com.fourreau.itwapp.core.module.ApplicantModule;
@@ -12,6 +14,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import dagger.ObjectGraph;
+import io.fabric.sdk.android.Fabric;
 import timber.log.Timber;
 
 /**
@@ -29,6 +32,7 @@ public class ItwApplication extends Application {
 
     @Override public void onCreate() {
         super.onCreate();
+        Fabric.with(this, new Crashlytics());
 
         //init logger
         if (BuildConfig.DEBUG) {
@@ -69,24 +73,23 @@ public class ItwApplication extends Application {
     }
 
     /** A tree which logs important information for crash reporting. */
-    private static class CrashReportingTree extends Timber.HollowTree {
-        @Override public void i(String message, Object... args) {
-//            Crashlytics.log(message);
-        }
+    private static class CrashReportingTree extends Timber.Tree {
+        @Override
+        protected void log(int priority, String tag, String message, Throwable t) {
+            if (priority == Log.VERBOSE || priority == Log.DEBUG) {
+                return;
+            }
 
-        @Override public void i(Throwable t, String message, Object... args) {
-            i(message, args); // Just add to the log.
-        }
+            // TODO e.g., Crashlytics.log(String.format(message, args));
+            Crashlytics.log(priority, tag, message);
 
-        @Override public void e(String message, Object... args) {
-            i("ERROR: " + message, args); // Just add to the log.
-        }
-
-        @Override public void e(Throwable t, String message, Object... args) {
-            e(message, args);
-
-            // TODO e.g., Crashlytics.logException(t);
-//            Crashlytics.logException(t);
+            if (t != null) {
+                if (priority == Log.ERROR) {
+                    Crashlytics.logException(t);
+                } else if (priority == Log.WARN) {
+                    Crashlytics.log(t.toString());
+                }
+            }
         }
     }
 }

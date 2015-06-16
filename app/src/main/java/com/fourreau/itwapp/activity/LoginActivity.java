@@ -121,7 +121,6 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
         mProgressView = findViewById(R.id.login_progress);
 
         ((ItwApplication)getApplication()).inject(this);
-
     }
 
     private void populateAutoComplete() {

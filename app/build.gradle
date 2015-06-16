@@ -1,6 +1,18 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.+'
+    }
+}
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
 
 repositories {
+    maven { url 'https://maven.fabric.io/public' }
     maven {
         url "https://oss.sonatype.org/content/repositories/snapshots/"
     }
@@ -17,7 +29,7 @@ dependencies {
     compile 'com.squareup.dagger:dagger:1.2.+'
     provided 'com.squareup.dagger:dagger-compiler:1.2.+'
     //timber
-    compile 'com.jakewharton.timber:timber:2.7.1'
+    compile 'com.jakewharton.timber:timber:3.0.1'
     //material design library
     compile 'com.github.navasmdc:MaterialDesign:1.+@aar'
     //nineoldandroids
@@ -28,6 +40,10 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     //parallax scroll
     compile 'com.github.nirhart:parallaxscroll:1.0'
+    //crashlytics
+    compile('com.crashlytics.sdk.android:crashlytics:2.3.2@aar') {
+        transitive = true;
+    }
 }
 
 android {
@@ -39,7 +55,7 @@ android {
         minSdkVersion 14
         targetSdkVersion 22
         versionCode 1
-        versionName "1.0"
+        versionName "1.0.0"
     }
     buildTypes {
         release {
@@ -58,7 +74,6 @@ android {
     lintOptions {
         disable 'InvalidPackage'
     }
-
 }
 
 
