@@ -13,7 +13,10 @@ import android.widget.FrameLayout;
 import com.fourreau.itwapp.R;
 import com.fourreau.itwapp.activity.HomeActivity;
 import com.fourreau.itwapp.activity.LicensesActivity;
+import com.fourreau.itwapp.core.ItwApplication;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 /**
  * Created by Pierre on 22/04/2015.
@@ -28,6 +31,11 @@ public class AboutFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getActivity().getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("AboutFragment");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         frameLayout = new FrameLayout(getActivity());
         view = inflater.inflate(R.layout.fragment_about, null);

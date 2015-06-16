@@ -29,6 +29,8 @@ import com.fourreau.itwapp.task.CreateInterviewTask;
 import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.gc.materialdesign.widgets.SnackBar;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -60,8 +62,13 @@ public class AddInterviewActivity extends ActionBarActivity implements CreateInt
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((ItwApplication) getApplication()).inject(this);
         setContentView(R.layout.activity_add_interview);
+        ((ItwApplication) getApplication()).inject(this);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("AddInterviewActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         //get fields
         editTextName = (EditText)findViewById(R.id.addInterviewName);

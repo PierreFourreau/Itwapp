@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="ga_sessionTimeout">300</integer>
+
+    <!-- Enable automatic Activity measurement -->
+    <bool name="ga_autoActivityTracking">true</bool>
+
+    <!-- The screen names that will appear in reports -->
+    <screenName name="com.fourreau.itwapp.activity.LoginActivity">
+        Itwapp LoginActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.AddApplicantActivity">
+        Itwapp AddApplicantActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.AddInterviewActivity">
+        Itwapp AddInterviewActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.ApplicantDetailsActivity">
+        Itwapp ApplicantDetailsActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.ApplicantsActivity">
+        Itwapp ApplicantsActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.LicensesActivity">
+        Itwapp LicensesActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.InterviewActivity">
+        Itwapp InterviewActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.EditInterviewActivity">
+        Itwapp EditInterviewActivity
+    </screenName>
+    <screenName name="com.fourreau.itwapp.activity.ResponseVideoActivity">
+        Itwapp ResponseVideoActivity
+    </screenName>
+
+    <screenName name="com.fourreau.itwapp.fragment.AllInterviewsFragment">
+        Itwapp AllInterviewsFragment
+    </screenName>
+    <screenName name="com.fourreau.itwapp.fragment.HelpFragment">
+        Itwapp HelpFragment
+    </screenName>
+    <screenName name="com.fourreau.itwapp.fragment.AboutFragment">
+        Itwapp AboutFragment
+    </screenName>
+
+    <string name="ga_trackingId">UA-39799031-4</string>
+</resources>

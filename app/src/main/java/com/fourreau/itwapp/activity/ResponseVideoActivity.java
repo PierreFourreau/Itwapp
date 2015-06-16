@@ -14,6 +14,9 @@ import android.widget.TextView;
 import android.widget.VideoView;
 
 import com.fourreau.itwapp.R;
+import com.fourreau.itwapp.core.ItwApplication;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import io.itwapp.models.Response;
 import timber.log.Timber;
@@ -31,6 +34,11 @@ public class ResponseVideoActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_response_video);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("ResponseVideoActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         //get url video from previous activity
         Bundle extras = getIntent().getExtras();

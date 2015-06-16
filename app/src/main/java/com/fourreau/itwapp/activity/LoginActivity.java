@@ -36,6 +36,8 @@ import com.fourreau.itwapp.core.ItwApplication;
 import com.fourreau.itwapp.service.AuthenticationService;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonRectangle;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -72,6 +74,11 @@ public class LoginActivity extends Activity implements LoaderCallbacks<Cursor> {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("LoginActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         //set logo
         logo = (ImageView) findViewById(R.id.logo_login);

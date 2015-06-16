@@ -23,6 +23,8 @@ import com.fourreau.itwapp.task.DeleteInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Inject;
@@ -48,8 +50,12 @@ public  class InterviewActivity extends ActionBarActivity implements InterviewOn
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((ItwApplication) getApplication()).inject(this);
-
         setContentView(R.layout.activity_interview);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("InterviewActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         initView();
 

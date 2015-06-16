@@ -33,6 +33,8 @@ import com.fourreau.itwapp.task.DeleteApplicantTask;
 import com.fourreau.itwapp.task.OneApplicantTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.widgets.Dialog;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 import com.google.common.base.Strings;
 import com.squareup.picasso.Picasso;
 
@@ -68,8 +70,12 @@ public class ApplicantDetailsActivity extends ActionBarActivity implements Appli
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicant_details);
-
         ((ItwApplication) getApplication()).inject(this);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("ApplicantDetailsActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         idApplicant = ((ItwApplication) this.getApplication()).getApplicantId();
 

@@ -29,6 +29,8 @@ import com.fourreau.itwapp.task.CreateInterviewTask;
 import com.fourreau.itwapp.task.OneInterviewTask;
 import com.fourreau.itwapp.task.UpdateInterviewTask;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -64,8 +66,12 @@ public class EditInterviewActivity extends ActionBarActivity implements Intervie
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ((ItwApplication) getApplication()).inject(this);
-
         setContentView(R.layout.activity_edit_interview);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("EditInterviewActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 

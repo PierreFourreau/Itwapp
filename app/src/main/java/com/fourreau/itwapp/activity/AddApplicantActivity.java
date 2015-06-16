@@ -31,6 +31,8 @@ import com.fourreau.itwapp.task.CreateApplicantsTask;
 import com.fourreau.itwapp.task.GetContactTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -65,8 +67,13 @@ public class AddApplicantActivity extends ActionBarActivity implements CreateApp
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((ItwApplication) getApplication()).inject(this);
         setContentView(R.layout.activity_add_applicant);
+        ((ItwApplication) getApplication()).inject(this);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("AddApplicantActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         idInterview = ((ItwApplication) this.getApplication()).getInterviewId();
 

@@ -28,6 +28,8 @@ import com.fourreau.itwapp.service.InterviewService;
 import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.fourreau.itwapp.util.Utils;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +62,11 @@ public class AllInterviewsFragment extends Fragment implements InterviewAllRespo
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
+        // Get tracker.
+        Tracker t = ((ItwApplication) getActivity().getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("AllInterviewsFragment");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
+
         frameLayout = new FrameLayout(getActivity());
         view = inflater.inflate(R.layout.fragment_interviews, null);
         frameLayout .addView(view);

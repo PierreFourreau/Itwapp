@@ -20,6 +20,8 @@ import com.fourreau.itwapp.service.ApplicantService;
 import com.fourreau.itwapp.task.AllApplicantsTask;
 import com.fourreau.itwapp.task.AllInterviewsTask;
 import com.gc.materialdesign.views.ButtonFloat;
+import com.google.android.gms.analytics.HitBuilders;
+import com.google.android.gms.analytics.Tracker;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,8 +52,12 @@ public class ApplicantsActivity extends ActionBarActivity implements ApplicantAl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_applicants);
-
         ((ItwApplication) getApplication()).inject(this);
+
+        // Get tracker.
+        Tracker t = ((ItwApplication) getApplication()).getTracker(ItwApplication.TrackerName.APP_TRACKER);
+        t.setScreenName("ApplicantsActivity");
+        t.send(new HitBuilders.ScreenViewBuilder().build());
 
         initView();
 
