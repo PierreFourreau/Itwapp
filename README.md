@@ -8,3 +8,5 @@ Use :
 - Dagger for dependencies
 - Crashlytics
 - Picasso
+- 
+Google play : https://play.google.com/store/apps/details?id=com.fourreau.itwapp
