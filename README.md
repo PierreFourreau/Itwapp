@@ -1,8 +1,7 @@
 # Itwapp
 Itwapp unofficial android application
 
-Use Itwapp api : https://github.com/PierreFourreau/readingchallenge-api
-
+Use Itwapp api : http://api.itwapp.io/
 Use : 
 - Timber for logging
 - Dagger for dependencies
